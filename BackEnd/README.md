@@ -8,7 +8,7 @@ git clone
 
 (Initial git setup to set up NEW repository)
 git init 
-git remote add origin https://github.com/Rezz88/HelloWorld-Final-Project.git
+git remote add origin https://github.com/Rezz88/HelloWorld-Final-Project.git or whatever GitHub
 
 (Daily git flow)
 git add . (or specific file)
