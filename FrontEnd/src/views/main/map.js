@@ -7,8 +7,9 @@ import {
   GoogleMap,
   Marker,
 } from "react-google-maps";
-// import { connect } from "tls";
+import { connect } from "tls";
 import markerImage from './images/heatDot.png';
+import markerHovered from './images/greenMarker.png';
 import personImage from './images/greenMarker.png';
 
 const PLACES_API_KEY = 'AIzaSyBA0wFPUwIo03AHcEf3pFarehPoQLzysCo';
@@ -38,10 +39,10 @@ const MyMapComponent = compose(
       }
     },
     onBarClick: props => (e, venueData) => {
-      console.log('hey', venueData);
+      // console.log('hey', venueData);
     },
     onMapClick: props => (e) => {
-      console.log(e.latLng.lat(), e.latLng.lng());
+      // console.log(e.latLng.lat(), e.latLng.lng());
       const lat = e.latLng.lat();
       const lng = e.latLng.lng();
       props.setMarker(lat, lng);
@@ -72,18 +73,19 @@ const MyMapComponent = compose(
     // Animation={'DROP'}
     />}
     {props.venues.length > 0 && props.venues.map((venue, idx) => 
-    <Marker 
-      ref={(ref) => this.marker = ref}
-      onMouseOver={() => console.log(this.marker.props)}
-      options={console.log(this.map)} 
+      <Marker 
+      onMouseOver={() => console.log(venue.name)}
+      // options={console.log(this.map)} 
       key={idx}
       position={{ lat: venue.geometry.location.lat(), lng: venue.geometry.location.lng()}} 
       onClick={ (e) => props.onBarClick(e, venue)}
       // style={{color: props.hoverBar === venue ? 'red' : "yellow"}}
       // onMouseEnter={() => props.onHoverBar(venue)}
-      icon={markerImage}
+      icon={venue.hover?markerHovered:markerImage}
       title={venue.name}
-    />)}
+    />
+    
+   )}
   </GoogleMap>
 }
 
@@ -123,13 +125,25 @@ class MyFancyComponent extends React.PureComponent {
   }
 
   setVenues = (venues) => {
-    console.log('in venues: ', venues)
+    // console.log('in venues: ', venues)
     this.setState({ venues });
   }
-
+  handleMouseOver = (event, venue, idx) => {
+    // console.log('hover event', venue, idx)
+    let newVenues = this.state.venues.slice();
+    newVenues[idx].hover = true;
+    this.setState({venues: newVenues})
+  }
+  handleMouseOut = (event, venue, idx) => {
+    // console.log('hover handleMouseOut', venue, idx)
+    let newVenues = this.state.venues.slice();
+    newVenues[idx].hover = false;
+    this.setState({venues: newVenues})
+  }
   render() {
     return (
       <div className='fancy'>
+      <button onClick={this.handleClick}>TESTING</button>
         <MyMapComponent
           zoom={this.state.zoom}
           marker={this.state.marker}
@@ -143,6 +157,8 @@ class MyFancyComponent extends React.PureComponent {
         />
         <BarListComponent
           venues={this.state.venues}
+          handleHover={this.handleMouseOver}
+          handleHoverOut={this.handleMouseOut}
           />
       </div>
 

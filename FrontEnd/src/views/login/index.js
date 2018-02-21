@@ -96,6 +96,12 @@ class Login extends Component {
                         value={password} 
                         onChange={(e)=> this.setInputValue('password', e.target.value)}>
                 </input>
+                re-type Password
+                <input  placeholder="Password" 
+                        type="password" 
+                        value={password} 
+                        onChange={(e)=> this.setInputValue('password', e.target.value)}>
+                </input>
                 Email
                 <input  placeholder="e-mail" 
                         value={email} 

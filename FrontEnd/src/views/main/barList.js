@@ -1,15 +1,24 @@
 import React from "react";
 
+
+
 class BarListComponent extends React.PureComponent {
   render() { 
+    
     return (
-      <div>
-        {this.props.venues.map(venue => 
+      
+      <ul>
+        {this.props.venues.map( (venue, idx) => 
         <li>        
-        <a href>{venue.name}</a>
+          <a 
+            onMouseEnter={ (e) => this.props.handleHover(e, venue, idx)}
+            onMouseOut={(e) => this.props.handleHoverOut(e, venue, idx)}
+            >
+            {venue.name}
+          </a>
         </li>
         )}
-      </div>
+      </ul>
     )
   }
 }
