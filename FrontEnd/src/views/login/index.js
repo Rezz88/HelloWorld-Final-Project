@@ -36,7 +36,7 @@ class Login extends Component {
     signingUp = () =>  {
         
         const { username , password, email} = this.state
-        this.props.history.push("/", {
+        this.props.history.push("/main", {
             username: username, 
             password: password,
             email: email,
@@ -47,7 +47,7 @@ class Login extends Component {
     loggingIn = () =>    {
 
         const { username , password } = this.state
-        this.props.history.push("/", {
+        this.props.history.push("/main", {
             username: username,
             password: password, 
             loggedIn: true

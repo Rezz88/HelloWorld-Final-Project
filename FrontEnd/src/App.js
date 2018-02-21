@@ -10,10 +10,10 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      loggedIn: true
     }
   }
 
+  
 
 
 
@@ -21,17 +21,14 @@ class App extends Component {
     return (
       <div>
         <Switch>
-          <Route path="/login" component={Login} />
           <Route path="/profile" component={Profile} />
           {/* <Route path="/profile" render={(routeProps) => { 
           return <Profile history={routeProps.history} />}} /> */}
 
           <Route path="/rate" component={Rate} />
-          <Route exact path="/" component={Main} />
+          <Route path="/main" component={Main} />
+          <Route exact path="/" component={Login} />
         </Switch>
-        <div>
-          <button onClick={() => this.setState({ loggedIn: false })}>Logout</button>
-        </div>
       </div>
     );
   }

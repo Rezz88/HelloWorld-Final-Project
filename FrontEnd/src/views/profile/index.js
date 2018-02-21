@@ -11,7 +11,9 @@ class Profile extends Component {
   render() {
     // Props to be passed down from app.js
     // const { display, username, gender, age, email } = this.props
-    console.log(this.props.location.state)
+    console.log('Profile page ', this.props.location.state)
+    //for now the state is undefined unless someone logs in
+    if (this.props.location.state!==undefined) {
     return (
       <div>
         Profile
@@ -31,16 +33,16 @@ class Profile extends Component {
           {/* {email} */}
         </div>
         <div>
-          <button onClick={() => this.props.history.push('/', this.props.location.state
-            // {
-            //   username: "Manny",
-            //   password: "hello112",
-            //   email: "MrFresh@gmail.com"
-            // }
+          <button onClick={() => this.props.history.push('/main', this.props.location.state
           )}>Bar Map</button>
         </div>
       </div>
-    );
+    );}
+    else {
+        return (
+        <div>Please login</div>
+        )
+      }
   }
 }
 

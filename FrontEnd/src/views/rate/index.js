@@ -9,15 +9,22 @@ class Rate extends Component {
     }
 
     render() {
-        console.log(this.props.location.state)
+        console.log('Rating page ', this.props.location.state)
+        //for now the state is undefined unless someone logs in
+        if (this.props.location.state!==undefined) {
         return (
             <div>
                 Rating page
                 <div>
-                    <button onClick={() => this.props.history.push("/", this.props.location.state)}>Bar Map </button>
+                    <button onClick={() => this.props.history.push("/main", this.props.location.state)}>Bar Map </button>
                 </div>
             </div>
-        );
+        );}
+        else {
+            return (
+            <div>Please login</div>
+            )
+          }
     }
 }
 
