@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router';
 // import { Link } from 'react-router-dom'; Not using link ATM
 import '../../App.css';
 
@@ -7,9 +8,6 @@ class Main extends Component {
     super();
     this.state = {}
   }
-
-
-
 
   render() {
     console.log(this.props)
@@ -30,7 +28,7 @@ class Main extends Component {
       )
     } else {
       return (
-        <div>Please login</div>
+        <Redirect to="/"/>
       )
     }
   }
