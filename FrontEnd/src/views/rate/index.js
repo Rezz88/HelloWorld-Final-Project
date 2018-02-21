@@ -3,14 +3,18 @@ import React, { Component } from 'react';
 import '../../App.css';
 
 class Rate extends Component {
+    constructor()   {
+        super();
+        this.state = {}
+    }
 
     render() {
-        console.log(this.props)
+        console.log(this.props.location.state)
         return (
             <div>
                 Rating page
                 <div>
-                    <button onClick={() => this.props.history.push("/")}>Bar Map </button>
+                    <button onClick={() => this.props.history.push("/", this.props.location.state)}>Bar Map </button>
                 </div>
             </div>
         );

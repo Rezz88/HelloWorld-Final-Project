@@ -1,70 +1,114 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 // import '../../App.css';
 
 
-// handleClick = () => {
-//     this.props.history.push('/');
-// }
 
 class Login extends Component {
     constructor()   {
         super();
         this.state = {
-            username: 'wash',
-            password: 'password'
+            username: '',
+            password: '',
+            email: '',
+            loggedIn: false,
+            signedUp: false,
         }
     }
+//right now I'm sending the whole state above
+    componentDidMount() {
+        // fetch('/sign-up', {
+        //     method: 'post',
+        //     body: JSON.stringify(this.state)
+        //     })
+        //     .then(x => x.text())
+        //     .then(x => JSON.parse(x))
+        //     .then(x => {})
+            //do I need anything back?
+        }
 
 
+    setInputValue =(key, value)=> {
+        this.setState({[key]: value})
+      }
 
+//can we/ how do we use cookies here to bypass the loggin state?
+    signingUp = () =>  {
+        
+        const { username , password, email} = this.state
+        this.props.history.push("/", {
+            username: username, 
+            password: password,
+            email: email,
+            loggedIn: true
+        });
+    }
 
+    loggingIn = () =>    {
 
+        const { username , password } = this.state
+        this.props.history.push("/", {
+            username: username,
+            password: password, 
+            loggedIn: true
+        });
+    }
+
+    signUp = () =>   {
+        const { username, password, email } = this.state
+        return(
+            <div>
+                Username
+                <input  placeholder="Username" 
+                        value={username} 
+                        onChange={(e)=> this.setInputValue('username', e.target.value)}>
+                </input>
+                Password
+                <input  placeholder="Password" 
+                        type="password" 
+                        value={password} 
+                        onChange={(e)=> this.setInputValue('password', e.target.value)}>
+                </input>
+                Email
+                <input  placeholder="e-mail" 
+                        value={email} 
+                        onChange={(e)=> this.setInputValue('email', e.target.value)}>
+                </input>
+                <button onClick={this.signingUp}>Sign-up</button>
+                <button onClick={()=>{this.setState({signedUp: true})}}>Already have an account?</button>
+            </div>
+        )
+    }
+
+    login = () =>    {
+        const { username, password } = this.state
+        return(
+            <div>
+                Username
+                <input  placeholder="Username" 
+                        value={username} 
+                        onChange={(e)=> this.setInputValue('username', e.target.value)}>
+                </input>
+                Password
+                <input  placeholder="Password" 
+                        type="password" 
+                        value={password} 
+                        onChange={(e)=> this.setInputValue('password', e.target.value)}>
+                </input>
+                <button type="submit" 
+                        onClick={this.loggingIn}>Login
+                </button>
+            </div>
+        )
+    }
 
     render() {
-        const { username, password, email } = this.state
-        
-        return (
-            <form action="/sing-up" method="post">
-                Username
-                <input placeholder="Username" value={username} onChange={(e)=> {this.setInputValue('username', e.target.value)}}></input>
-                Password
-                <input placeholder="Password" type="password" value={password} onChange={(e)=> this.setInputValue('password', e.target.value)}></input>
-                <button type="submit" >Submit</button>
-            </form>
-            
+        return(
+            <div>
+                {this.state.signedUp ? this.login() : this.signUp()}
+            </div>
+            );
 
-
-
-
-            // <div>
-            //     this is the login
-            //     <div>
-            //         <Link to="/"> main locations </Link>
-            //     </div>
-            //     <div>
-            //         <Link to="/profile"> profile </Link>
-            //     </div>
-            //     <div>
-            //             <div>
-            //                 <input placeholder="Username" ></input>
-            //             </div>
-            //             <div>
-            //                 <input placeholder="Password"></input>
-            //             </div>
-            //             <div>
-            //                 <input placeholder="Email"></input>
-            //             </div>
-            //             <button onClick>Sign up</button>
-            //             <button>Login</button>
-            //             {/* {this.state.list.map(x => <li>{x}</li>)} */}
-            //             <div>
-            //                 {}
-            //             </div>
-            //     </div>
-            // </div>
-
-        );
     }
 }
 
