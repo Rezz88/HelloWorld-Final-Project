@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router';
-import MyFancyComponent from './map';
+import MyFancyComponent from './map'
 // import { Link } from 'react-router-dom'; Not using link ATM
-import '../../App.css';
+// import { connect } from "tls"; NOT USED YET
+// import '../../App.css';
 
 class Main extends Component {
   constructor() {
     super();
-    this.state = {}
+    this.state = { hoverBar: null };
   }
 
   render() {
