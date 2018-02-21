@@ -7,7 +7,7 @@ import {
   GoogleMap,
   Marker,
 } from "react-google-maps";
-import { connect } from "tls";
+// import { connect } from "tls";
 import markerImage from './images/heatDot.png';
 import personImage from './images/greenMarker.png';
 
