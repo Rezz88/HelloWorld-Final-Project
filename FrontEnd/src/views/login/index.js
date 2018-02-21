@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
+<<<<<<< HEAD
 // import { Link } from 'react-router-dom';
+=======
+// import { Link } from 'react-router-dom'; Not using link ATM
+>>>>>>> 6993c4365a3f8bf2c7dd824cbd941c641ff36d4f
 // import '../../App.css';
 
 
@@ -27,6 +31,7 @@ class Login extends Component {
             //do I need anything back?
         }
 
+<<<<<<< HEAD
 
     setInputValue =(key, value)=> {
         this.setState({[key]: value})
@@ -55,6 +60,9 @@ class Login extends Component {
     }
 
     signUp = () =>   {
+=======
+    render() {
+>>>>>>> 6993c4365a3f8bf2c7dd824cbd941c641ff36d4f
         const { username, password, email } = this.state
         return(
             <div>

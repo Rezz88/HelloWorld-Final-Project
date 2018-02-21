@@ -29,6 +29,9 @@ class App extends Component {
           <Route path="/rate" component={Rate} />
           <Route exact path="/" component={Main} />
         </Switch>
+        <div>
+          <button onClick={() => this.setState({ loggedIn: false })}>Logout</button>
+        </div>
       </div>
     );
   }
