@@ -18,21 +18,11 @@ class Profile extends Component {
       return (
         <div>
           Profile
-        <div>Display Picture
-          {/* {display} */}
-          </div>
-          <div>
-            {"Username: " + username}
-          </div>
-          <div>Gender
-          {/* {"Gender: " + gender} */}
-          </div>
-          <div>Age
-          {/* {"Age: " + age} */}
-          </div>
-          <div>
-            {"E-mail: " + email}
-          </div>
+        <div>Display Picture{/* {display} */}</div>
+          <div>{"Username: " + username}</div>
+          <div>Gender{/* {"Gender: " + gender} */}</div>
+          <div>Age{/* {"Age: " + age} */}</div>
+          <div>{"E-mail: " + email}</div>
           <div>
             <button onClick={() => this.props.history.push('/main', this.props.location.state
             )}>Bar Map</button>
@@ -45,10 +35,10 @@ class Profile extends Component {
       );
     }
     else {
-        return (
-            <Redirect to="/"/>
-        )
-      }
+      return (
+        <Redirect to="/" />
+      )
+    }
   }
 }
 
