@@ -35,21 +35,21 @@ class Login extends Component {
         // .then(x => x.text())
         // .then(y => JSON.parse(y))
         // .then(z => {this.props.history.push("/main",z)})
-        var z = {
-            username: 'John', 
-            email: 'email',
-            loggedIn: true
-        }
+        // var z = {
+        //     username: 'John', 
+        //     email: 'email',
+        //     loggedIn: true
+        // }
 
-        if (z.loggedIn===true)  {
-            this.props.history.push("/main", z);   
-        } else {
-            this.props.history.push("/", {
-                username: 'John', 
-                email: 'email',
-                loggedIn: false
-            });
-        }
+        // if (z.loggedIn===true)  {
+        //     this.props.history.push("/main", z);   
+        // } else {
+        //     this.props.history.push("/", {
+        //         username: 'John', 
+        //         email: 'email',
+        //         loggedIn: false
+        //     });
+        // }
     }
 
         
