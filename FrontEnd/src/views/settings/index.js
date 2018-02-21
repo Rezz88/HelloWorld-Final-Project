@@ -15,7 +15,7 @@ class Settings extends Component {
         if (this.props.location.state !== undefined) {
             return (
                 <div>
-                    Bar Map
+                    Settings
                 <div>
                         <button onClick={() => this.props.history.push("/profile", this.props.location.state)}>Your Profile</button>
                     </div>
