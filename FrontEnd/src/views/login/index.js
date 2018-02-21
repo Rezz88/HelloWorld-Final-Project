@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom'; Not using link ATM
 // import '../../App.css';
 
 
@@ -15,11 +15,6 @@ class Login extends Component {
             password: 'password'
         }
     }
-
-
-
-
-
 
     render() {
         const { username, password, email } = this.state

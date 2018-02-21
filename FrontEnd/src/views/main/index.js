@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 // import { Link } from 'react-router-dom'; Not using link ATM
 import '../../App.css';
 
-class Locations extends Component {
+class Main extends Component {
 
   render() {
     console.log(this.props)
@@ -20,4 +20,4 @@ class Locations extends Component {
   }
 }
 
-export default Locations;
+export default Main;
