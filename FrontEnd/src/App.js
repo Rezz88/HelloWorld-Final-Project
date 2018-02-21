@@ -6,15 +6,23 @@ import Locations from './views/locations';
 import './App.css';
  
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      loggedIn: true
+    }
+  }
+
+
+
+
   render() {
     return (
-    <div>
+    <div> App
       <Switch>
         <Route path="/login" component={Login} />
         <Route path="/profile" component={Profile} />
         <Route exact path="/" component={Locations} />
-        
-
       </Switch>
     </div>
     );

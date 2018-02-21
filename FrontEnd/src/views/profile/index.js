@@ -8,7 +8,7 @@ class Profile extends Component {
       <div>
         profile
         <div>
-        <Link to="/"> to locations page </Link>
+            <Link to="/"> to locations page </Link>
         </div>
       </div>
     );
