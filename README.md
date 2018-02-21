@@ -20,3 +20,9 @@ git pull (stagging area must be cleared when you pull )
 FrontEnd
 npm install --save react-router-dom;
 npm install --save react-router;
+
+Maps!
+INSTALL
+npm install --save react-google-maps
+//?? maybe recompose if it doesnt work.. might be a dependent of react-google-maps
+// import { connect } from "tls"; NOT USED YET
