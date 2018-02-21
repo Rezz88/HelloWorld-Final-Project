@@ -10,43 +10,44 @@ class Profile extends Component {
 
   render() {
     // Props to be passed down from app.js
-    const { username, email } = this.props.location.state
     console.log('Profile page ', this.props.location.state)
     //for now the state is undefined unless someone logs in
-    if (this.props.location.state!==undefined) {
-    return (
-      <div>
-        Profile
+    if (this.props.location.state !== undefined) {
+      const { username, email } = this.props.location.state
+      return (
+        <div>
+          Profile
         <div>Display Picture
           {/* {display} */}
+          </div>
+          <div>
+            {"Username: " + username}
+          </div>
+          <div>Gender
+          {/* {"Gender: " + gender} */}
+          </div>
+          <div>Age
+          {/* {"Age: " + age} */}
+          </div>
+          <div>
+            {"E-mail: " + email}
+          </div>
+          <div>
+            <button onClick={() => this.props.history.push('/main', this.props.location.state
+            )}>Bar Map</button>
+          </div>
+          <div>
+            <button onClick={() => this.props.history.push('/settings', this.props.location.state
+            )}>Settings</button>
+          </div>
         </div>
-        <div>
-          {"Username: " + username}
-        </div>
-        <div>Gender
-          {/* {gender} */}
-        </div>
-        <div>Age
-          {/* {age} */}
-        </div>
-        <div>
-          {"E-mail: " + email}
-        </div>
-        <div>
-          <button onClick={() => this.props.history.push('/main', this.props.location.state
-          )}>Bar Map</button>
-        </div>
-        <div>
-          <button onClick={() => this.props.history.push('/settings', this.props.location.state
-          )}>Settings</button>
-        </div>
-      </div>
-    );}
+      );
+    }
     else {
-        return (
+      return (
         <div>Please login</div>
-        )
-      }
+      )
+    }
   }
 }
 

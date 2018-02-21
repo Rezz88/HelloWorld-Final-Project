@@ -12,17 +12,24 @@ class Settings extends Component {
         console.log(this.props)
         //props.location.state is the login information originated at login/index.js
         console.log(this.props.location.state)
-        return (
-            <div>
-                Bar Map
+        if (this.props.location.state !== undefined) {
+            return (
                 <div>
-                    <button onClick={() => this.props.history.push("/profile", this.props.location.state)}>Your Profile</button>
-                </div>
+                    Bar Map
                 <div>
-                    <button onClick={() => this.setState({ loggedIn: false })}>Logout</button>
+                        <button onClick={() => this.props.history.push("/profile", this.props.location.state)}>Your Profile</button>
+                    </div>
+                    <div>
+                        <button onClick={() => this.setState({ loggedIn: false })}>Logout</button>
+                    </div>
                 </div>
-            </div>
-        );
+            );
+
+        } else {
+            return (
+                <div>Please login</div>
+            )
+        }
     }
 }
 
