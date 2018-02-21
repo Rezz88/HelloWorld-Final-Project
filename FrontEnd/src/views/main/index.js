@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router';
 // import { Link } from 'react-router-dom'; Not using link ATM
 import '../../App.css';
 
@@ -30,7 +31,7 @@ import '../../App.css';
     )
     } else {
       return (
-      <div>Please login</div>
+        <Redirect to="/"/>
       )
     }
   }
