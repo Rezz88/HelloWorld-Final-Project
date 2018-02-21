@@ -28,6 +28,33 @@ class Login extends Component {
         }
 
 
+        //checking to see if they are logged in
+        //set up mock data to test get endpoint. object might include loggedIn state, username etc
+    componentWillMount()    {
+        // fetch('/')
+        // .then(x => x.text())
+        // .then(y => JSON.parse(y))
+        // .then(z => {this.props.history.push("/main",z)})
+        var z = {
+            username: 'John', 
+            email: 'email',
+            loggedIn: true
+        }
+
+        if (z.loggedIn===true)  {
+            this.props.history.push("/main", z);   
+        } else {
+            this.props.history.push("/", {
+                username: 'John', 
+                email: 'email',
+                loggedIn: false
+            });
+        }
+    }
+
+        
+
+
     setInputValue =(key, value)=> {
         this.setState({[key]: value})
       }
