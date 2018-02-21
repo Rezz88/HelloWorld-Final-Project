@@ -3,7 +3,8 @@ import { Switch, Route } from 'react-router';
 import Login from './views/login';
 import Profile from './views/profile'
 import Main from './views/main';
-import Rate from './views/rate';
+import Rating from './views/rating';
+import Settings from './views/settings'
 import './App.css';
 
 class App extends Component {
@@ -14,9 +15,6 @@ class App extends Component {
     }
   }
 
-
-
-
   render() {
     return (
       <div>
@@ -26,12 +24,10 @@ class App extends Component {
           {/* <Route path="/profile" render={(routeProps) => { 
           return <Profile history={routeProps.history} />}} /> */}
 
-          <Route path="/rate" component={Rate} />
+          <Route path="/ratings" component={Rating} />
+          <Route path="/settings" component={Settings} />
           <Route exact path="/" component={Main} />
         </Switch>
-        <div>
-          <button onClick={() => this.setState({ loggedIn: false })}>Logout</button>
-        </div>
       </div>
     );
   }
