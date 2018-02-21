@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom'; Not using link ATM
 import '../../App.css';
 
 class Profile extends Component {
@@ -27,7 +27,13 @@ class Profile extends Component {
           {/* {email} */}
         </div>
         <div>
-          <button onClick={() => this.props.history.push('/')}>Location Page</button>
+          <button onClick={() => this.props.history.push('/',
+            {
+              username: "Manny",
+              password: "hello112",
+              email: "MrFresh@gmail.com"
+            }
+          )}>Bar Map</button>
         </div>
       </div>
     );
