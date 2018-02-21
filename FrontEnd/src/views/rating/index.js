@@ -3,7 +3,7 @@ import { Redirect } from 'react-router';
 // import { Link } from 'react-router-dom'; Not using link ATM
 import '../../App.css';
 
-class Rate extends Component {
+class Rating extends Component {
     constructor()   {
         super();
         this.state = {}
@@ -29,4 +29,4 @@ class Rate extends Component {
     }
 }
 
-export default Rate;
+export default Rating;

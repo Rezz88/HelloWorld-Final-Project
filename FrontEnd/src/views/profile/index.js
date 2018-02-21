@@ -4,14 +4,14 @@ import { Redirect } from 'react-router';
 import '../../App.css';
 
 class Profile extends Component {
-    constructor()   {
-        super();
-        this.state = {}
-    }
+  constructor() {
+    super();
+    this.state = {}
+  }
 
   render() {
     // Props to be passed down from app.js
-    // const { display, username, gender, age, email } = this.props
+    const { username, email } = this.props.location.state
     console.log('Profile page ', this.props.location.state)
     //for now the state is undefined unless someone logs in
     if (this.props.location.state!==undefined) {
@@ -21,8 +21,8 @@ class Profile extends Component {
         <div>Display Picture
           {/* {display} */}
         </div>
-        <div>Username
-          {/* {username} */}
+        <div>
+          {"Username: " + username}
         </div>
         <div>Gender
           {/* {gender} */}
@@ -30,12 +30,16 @@ class Profile extends Component {
         <div>Age
           {/* {age} */}
         </div>
-        <div>E-mail
-          {/* {email} */}
+        <div>
+          {"E-mail: " + email}
         </div>
         <div>
           <button onClick={() => this.props.history.push('/main', this.props.location.state
           )}>Bar Map</button>
+        </div>
+        <div>
+          <button onClick={() => this.props.history.push('/settings', this.props.location.state
+          )}>Settings</button>
         </div>
       </div>
     );}

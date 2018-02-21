@@ -20,12 +20,12 @@ import '../../App.css';
     if (this.props.location.state!==undefined) {
     return (
       <div>
-        Bar Map
+        <h1>Bar Map </h1>
         <div>
           <button onClick={() => this.props.history.push("/profile", this.props.location.state)}>Your Profile</button>
         </div>
         <div>
-          <button onClick={() => this.props.history.push("/rate", this.props.location.state)}>Rate </button>
+          <button onClick={() => this.props.history.push("/ratings", this.props.location.state)}>Rating </button>
         </div>
       </div>
     )

@@ -9,7 +9,7 @@ app.use(bodyParser.raw({ type: '*/*', limit: '50mb' }))
 app.use(morgan('dev'));
 
 
-app.post('/signUp', async (req, res) => {
+app.post('/sign-up', async (req, res) => {
     res.send(await signup.signUp(JSON.parse(req.body.toString())));
 })
 
