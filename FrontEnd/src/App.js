@@ -11,7 +11,6 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      loggedIn: true
     }
   }
 
@@ -19,14 +18,14 @@ class App extends Component {
     return (
       <div>
         <Switch>
-          <Route path="/login" component={Login} />
           <Route path="/profile" component={Profile} />
           {/* <Route path="/profile" render={(routeProps) => { 
           return <Profile history={routeProps.history} />}} /> */}
-
+          
           <Route path="/ratings" component={Rating} />
           <Route path="/settings" component={Settings} />
-          <Route exact path="/" component={Main} />
+          <Route path="/main" component={Main} />
+          <Route exact path="/" component={Login} />
         </Switch>
       </div>
     );
