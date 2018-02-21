@@ -4,7 +4,7 @@ import { Redirect } from 'react-router';
 import '../../App.css';
 
 class Rating extends Component {
-    constructor()   {
+    constructor() {
         super();
         this.state = {}
     }
@@ -12,20 +12,20 @@ class Rating extends Component {
     render() {
         console.log('Rating page ', this.props.location.state)
         //for now the state is undefined unless someone logs in
-        if (this.props.location.state!==undefined) {
-        return (
-            <div>
-                Rating page
-                <div>
-                    <button onClick={() => this.props.history.push("/main", this.props.location.state)}>Bar Map </button>
-                </div>
-            </div>
-        );}
-        else {
+        if (this.props.location.state !== undefined) {
             return (
-                <Redirect to="/"/>
+                <div>
+                    Rating page
+                <div>
+                        <button onClick={() => this.props.history.push("/main", this.props.location.state)}>Bar Map </button>
+                    </div>
+                </div>
+            );
+        } else {
+            return (
+                <Redirect to="/" />
             )
-          }
+        }
     }
 }
 
