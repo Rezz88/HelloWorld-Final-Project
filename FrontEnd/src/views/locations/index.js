@@ -1,14 +1,19 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-// import '../../App.css';
+// import { Link } from 'react-router-dom'; Not using link ATM
+import '../../App.css';
 
 class Locations extends Component {
+
   render() {
+    console.log(this.props)
     return (
       <div>
-        main locations page
+        Bar Map
         <div>
-        <Link to="/profile"> profile </Link>
+          <button onClick={() => this.props.history.push("/profile")}>Your Profile</button>
+        </div>
+        <div>
+          <button onClick={() => this.props.history.push("/rate")}>Rate </button>
         </div>
       </div>
     );
