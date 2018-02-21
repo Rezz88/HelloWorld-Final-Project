@@ -22,20 +22,18 @@ const signUp = async (userInfo) => {
     if (!emailValidate(email)) {
         return ('Invalid email');
     }
-    var randomNumber = Math.floor(Math.random() * 10000000)
+    var randomNumber = Math.floor(Math.random() * 1000000000)
     var userID = "userID" + randomNumber
     const buildObj = () => {
-        var obj = {
-            userID: {
-                username,
-                email,
-                password,
-                sex,
-                age,
-                ratings: []
-            }
-        };
-
+        var obj = {};
+        obj[userID] = {
+            username,
+            email,
+            password,
+            sex,
+            age,
+            ratings: []
+        }
         addToFile(userDbPath, obj);
         console.log('test')
         return true
@@ -44,13 +42,16 @@ const signUp = async (userInfo) => {
     //creates new user with all info to be filled on the site 
     const response = await fs.readFile(userDbPath, { String })
         .then(async data => {
-            console.log('raw data: ', data)
+            //console.log(data)
             var result = JSON.parse(data.toString());
-            console.log(result);
+            console.log('this is result: ', result)
             let alreadyExist = false;
-            if (result.length) {
+            console.log('this is false: ', alreadyExist)
+            if (result) {
+                console.log('this is result again: ', result)
                 for (let id of Object.keys(result)) {
-                    if (result[id].username === username) {
+                    console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',result[id].username)
+                    if (result[id].username === username || result[id].email === email) {
                         alreadyExist = true;
                     }
                 }
@@ -64,8 +65,12 @@ const signUp = async (userInfo) => {
                 return await buildObj();
             }
         }).catch(err => err);
-    console.log(response)
-    return response;
+    console.log('this is the last respose: ',response)
+    if(response) {
+        return {response: response, userID: userID}
+    } else {
+        return response
+    }
 }
 
 const login = async (userInfo) => {
@@ -80,8 +85,9 @@ const login = async (userInfo) => {
     var userAndPassCheck = false;  //true if both password and username are correct
     for (let id of Object.keys(result)) {
         if (dbUser[id].username === attemptUsername && dbUser[id].password === attemptPass) {
+            let individualUserID = id;
             userAndPassCheck = true;
-            return userAndPassCheck;
+            return { loggedin: userAndPassCheck, userID: individualUserID };
         } else {
             return userAndPassCheck
         }
