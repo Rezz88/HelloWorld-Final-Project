@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router';
+import MyFancyComponent from './map';
 // import { Link } from 'react-router-dom'; Not using link ATM
 import '../../App.css';
 
@@ -24,6 +25,10 @@ class Main extends Component {
           <div>
             <button onClick={() => this.props.history.push("/ratings", this.props.location.state)}>Rating </button>
           </div>
+          <div style={{width: 600, height: 600}}>
+         <MyFancyComponent />
+         {/* <BarList hoverBar={this.state.hoverBar} setHoverBar={this.setHoverBar} /> */}
+         </div>
         </div>
       )
     } else {
