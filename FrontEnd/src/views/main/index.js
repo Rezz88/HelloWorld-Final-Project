@@ -3,15 +3,12 @@ import React, { Component } from 'react';
 import '../../App.css';
 
 class Main extends Component {
-<<<<<<< HEAD:FrontEnd/src/views/main/index.js
   constructor()   {
     super();
     this.state = {}
 }
 
   
-=======
->>>>>>> 6993c4365a3f8bf2c7dd824cbd941c641ff36d4f:FrontEnd/src/views/main/index.js
 
   render() {
     console.log(this.props)
