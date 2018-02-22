@@ -27,9 +27,9 @@ class Login extends Component {
                 email: email
             })
             })
-            .then(x => x.text())
-            .then(x => JSON.parse(x))
-            .then(x => {this.setState({response: x})})
+            // .then(x => x.text())
+            // .then(x => JSON.parse(x))
+            // .then(x => {this.setState({response: x})})
             //sending me a boolean true if good false if no good
         }
 
