@@ -10,7 +10,7 @@ addToFile = (toRead, toAdd) => {
     var data = JSON.parse(buff, (key, value) => {
         return value && value.type === 'Buffer' ? Buffer.from(value.data) : value;
     });
-    console.log('this is toAdd ',toAdd)
+    //console.log('this is toAdd ',toAdd)
     for (let key in toAdd) {
         data[key] = toAdd[key]
     }
