@@ -8,7 +8,7 @@ class Profile extends Component {
     super();
     this.state = {}
   }
- 
+
   render() {
     // Props to be passed down from app.js
     console.log('Profile page ', this.props.location.state)
