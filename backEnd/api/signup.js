@@ -17,6 +17,7 @@ const signUp = async (userInfo) => {
     var age = userInfo.age;
     var sex = userInfo.sex;
     var email = userInfo.email;
+    var barLocation = userInfo.barLocation
     console.log(userInfo)
     //test to see if legit email else fuck you 
     if (!emailValidate(email)) {
@@ -71,7 +72,6 @@ const signUp = async (userInfo) => {
     } else {
         return { response: false };
     }
-
 }
 
 const login = async (userInfo) => {

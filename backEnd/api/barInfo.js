@@ -7,7 +7,7 @@ const dbImagesPath = './database/images';
 
 const allInfo = async (barInfo) => {
     //sorts bar data coming in
-    var visitors = narInfo.barId
+    var visitors = barInfo.visitors; //should be an array of userID's
     var barId = barInfo.barId;
     var amount = barInfo.amount;
     var music = barInfo.music;
@@ -24,7 +24,7 @@ const allInfo = async (barInfo) => {
             gender
         }
         addToFile(dbBarsPath, obj);
-        console.log('test')
+        //console.log('test')
         return true
     };
 
@@ -32,7 +32,7 @@ const allInfo = async (barInfo) => {
     const response = await fs.readFile(dbBarsPath, { String })
         .then(async data => {
             var result = JSON.parse(data.toString());
-            var barExists = [];
+            var barExists = {};
             var barDoesNotExist = [];
             if (result) {
                 for (let id of Object.keys(result)) {
@@ -43,7 +43,7 @@ const allInfo = async (barInfo) => {
                     }
                 }
             } else {
-                return await buildObj();
+                await buildObj();
             }
         }).catch(err => err);
     if (response) {
