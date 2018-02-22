@@ -27,9 +27,9 @@ class Main extends Component {
             <button onClick={() => this.props.history.push("/ratings", this.props.location.state)}>Rating </button>
           </div>
           <div style={{width: 600, height: 600}}>
-         <MyFancyComponent />
-         {/* <BarList hoverBar={this.state.hoverBar} setHoverBar={this.setHoverBar} /> */}
-         </div>
+            <MyFancyComponent />
+            {/* <BarList hoverBar={this.state.hoverBar} setHoverBar={this.setHoverBar} /> */}
+          </div>
         </div>
       )
     } else {
