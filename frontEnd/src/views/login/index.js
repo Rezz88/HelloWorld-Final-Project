@@ -27,35 +27,58 @@ class Login extends Component {
         //         email: email
         //     })
         //     })
+            
         //     .then(x => x.text())
-        //     .then(x => JSON.parse(x))
-        //     .then(x => {this.setState({response: x})})
-        //     //sending me a boolean true if good false if no good
+        //     .then(x=>{console.log('componentdidmount ',x)})
+            // .then(x => JSON.parse(x))
+            // .then(x => {this.setState({response: x})})
+            //sending me a boolean true if good false if no good
+            //to test the emails and usernames
         }
 
 
         //checking to see if they are logged in
         //set up mock data to test get endpoint. object might include loggedIn state, username etc
+        //
     componentWillMount()    {
-        // fetch('/')
-        // .then(x => x.text())
-        // .then(y => JSON.parse(y))
-        // .then(z => {this.props.history.push("/main",z)})
-        // var z = {
+//mock data setup for login
+        //  var z = {
+        //     cookies: true,
         //     username: 'John', 
         //     email: 'email',
         //     loggedIn: true
         // }
-
-        // if (z.loggedIn===true)  {
-        //     this.props.history.push("/main", z);   
+        // if (z.cookies===true)  {
+        //     if(z.loggedIn===true)   {
+        //         this.props.history.push("/main", z);
+        //     } else {
+        //         this.props.history.push("/", z);
+        //     }
         // } else {
-        //     this.props.history.push("/", {
-        //         username: 'John', 
-        //         email: 'email',
-        //         loggedIn: false
-        //     });
+        //     this.props.history.push("/");
         // }
+
+
+
+        fetch('/cookie', {
+            method: "get",
+            credentials: "include"
+        })
+        .then(x => x.text())
+        .then(y => JSON.parse(y))
+        // .then(x=> {console.log('this is what youre getting for cookies!!',x); return x})
+        // .then(z => {this.props.history.push("/",z)})
+        .then(z => {
+            if (z.cookies===true)  {
+                if(z.loggedIn===true)   {
+                    this.props.history.push("/main", z);
+                } else {
+                    this.props.history.push("/", z);
+                }
+            } else {
+                this.props.history.push("/");
+            }})
+
     }
 
         
@@ -88,7 +111,7 @@ class Login extends Component {
     }
 
     signUp = () =>   {
-        const { username, password, email } = this.state
+        const { username, password, password1, email } = this.state
         return(
             <div>
                 Username
@@ -105,7 +128,7 @@ class Login extends Component {
                 re-type Password
                 <input  placeholder="Password" 
                         type="password" 
-                        value={password} 
+                        value={password1} 
                         onChange={(e)=> this.setInputValue('password', e.target.value)}>
                 </input>
                 Email

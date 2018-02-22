@@ -7,8 +7,9 @@ const dbImagesPath = './database/images';
 
 const allInfo = async (barInfo) => {
     //sorts bar data coming in
+    var visitors = narInfo.barId
     var barId = barInfo.barId;
-    var ratings = barInfo.rating;
+    var amount = barInfo.amount;
     var music = barInfo.music;
     var age = barInfo.age;
     var gender = barInfo.gender;
@@ -38,7 +39,7 @@ const allInfo = async (barInfo) => {
                     if (id === barId) {
                         barExists[id] = result[id];
                     } else {
-                        return await buildObj();
+                        await buildObj();
                     }
                 }
             } else {

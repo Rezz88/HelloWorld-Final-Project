@@ -13,14 +13,15 @@ app.use(morgan('dev'));
 app.use(cookieParser());
 
 
-app.get('/', (req, res) => {
+app.get('/cookie', (req, res) => {
     let allUsers = fileread('./database/userInfo.json');
     //console.log(req.cookies.uid)
-    if (req.cookies) {
+    //console.log('test1', req.cookies)
+    if (Object.keys(req.cookies).length !== 0) {
         let cookie = req.cookies.uid;
-        console.log('this is cookie: ', cookie)
+        //console.log('this is cookie: ', cookie)
         let currentUser = allUsers[cookie]
-        console.log('this is the current user blob!', currentUser)
+        //console.log('this is the current user blob!', currentUser)
         return res.send(currentUser)
     } else {
         return res.send({ cookies: false })
@@ -30,11 +31,11 @@ app.get('/', (req, res) => {
 app.post('/sign-up', async (req, res) => {
     const verify = await signup.signUp(JSON.parse(req.body.toString()));
     console.log("this is verify: ", verify);
-    if (!req.cookie && verify.uid) {
+    console.log("this is cookie", req.cookies)
+    if (Object.keys(req.cookies).length === 0 && verify.uid) {
         res.cookie('uid', verify.uid, { maxAge: 900000000 });
     }
-    //console.log(verify.response)
-    res.send(await verify)
+    console.log(verify.response)
     verify.response ? res.send(await { response: verify.response }) : res.send(await verify)
 })
 
@@ -42,7 +43,7 @@ app.post('/login', async (req, res) => {
     let loginInfo = await signup.login(JSON.parse(req.body.toString()))
     
     if(typeof(loginInfo) === "object") {
-        if(!req.cookie) {
+        if(Object.keys(req.cookies).length === 0) {
             console.log('this is login info: ',loginInfo.id)
             res.cookie('uid', loginInfo.id, { maxAge: 900000000 })
         }
