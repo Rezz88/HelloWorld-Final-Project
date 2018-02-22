@@ -1,6 +1,6 @@
-const { addToFile } = require('./tools');
+const { addToFile } = require('../tools');
 const fs = require('fs-extra');
-const tools = require('./tools')
+const tools = require('../tools')
 const userDbPath = './database/userInfo.json';
 const dbBarsPath = './database/BarsInfo.json';
 const dbImagesPath = './database/images';
@@ -22,11 +22,12 @@ const signUp = async (userInfo) => {
     if (!emailValidate(email)) {
         return ('Invalid email');
     }
-    var randomNumber = Math.floor(Math.random() * 1000000000)
+    var randomNumber = Math.floor(Math.random() * 100000000000)
     var userID = "userID" + randomNumber
     const buildObj = () => {
         var obj = {};
         obj[userID] = {
+            loggedIn: true,
             username,
             email,
             password,
@@ -36,7 +37,7 @@ const signUp = async (userInfo) => {
         }
         addToFile(userDbPath, obj);
         console.log('test')
-        return true
+        return userID
     };
 
     //creates new user with all info to be filled on the site 
@@ -44,13 +45,12 @@ const signUp = async (userInfo) => {
         .then(async data => {
             //console.log(data)
             var result = JSON.parse(data.toString());
-            console.log('this is result: ', result)
+            //console.log('this is result: ', result)
             let alreadyExist = false;
-            console.log('this is false: ', alreadyExist)
             if (result) {
-                console.log('this is result again: ', result)
+                //console.log('this is result again: ', result)
                 for (let id of Object.keys(result)) {
-                    console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',result[id].username)
+                    //console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', result[id].username)
                     if (result[id].username === username || result[id].email === email) {
                         alreadyExist = true;
                     }
@@ -65,17 +65,18 @@ const signUp = async (userInfo) => {
                 return await buildObj();
             }
         }).catch(err => err);
-    console.log('this is the last respose: ',response)
-    if(response) {
-        return {response: response, userID: userID}
+    //console.log('this is the last respose: ', response)
+    if (response) {
+        return {response: true, uid: userID}
     } else {
-        return response
+        return {response: false};
     }
+    
 }
 
 const login = async (userInfo) => {
     //sorts user data coming in
-    // console.log(userInfo)
+    console.log('this is user info! :  ',userInfo)
     var attemptUsername = userInfo.username;
     var attemptPass = userInfo.password;
     //checks to make sure username already exists in the db
@@ -83,17 +84,15 @@ const login = async (userInfo) => {
     dbUser = JSON.parse(dbUser.toString());
     // console.log(dbUser);
     var userAndPassCheck = false;  //true if both password and username are correct
-    for (let id of Object.keys(result)) {
+    for (let id of Object.keys(dbUser)) {
         if (dbUser[id].username === attemptUsername && dbUser[id].password === attemptPass) {
             let individualUserID = id;
             userAndPassCheck = true;
-            return { loggedin: userAndPassCheck, userID: individualUserID };
-        } else {
-            return userAndPassCheck
-        }
+            return {id : id, object: dbUser[id]};
+        } 
     }
+    return userAndPassCheck
 }
-
 
 module.exports = {
     login,
