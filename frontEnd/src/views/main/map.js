@@ -7,7 +7,7 @@ import {
   GoogleMap,
   Marker,
 } from "react-google-maps";
-import { connect } from "tls";
+// import { connect } from "tls";
 import markerImage from './images/heatDot.png';
 import markerHovered from './images/greenMarker.png';
 import personImage from './images/greenMarker.png';
@@ -39,7 +39,7 @@ const MyMapComponent = compose(
       }
     },
     onBarClick: props => (e, venueData) => {
-      // console.log('hey', venueData);
+       console.log('hey', venueData);
     },
     onMapClick: props => (e) => {
       // console.log(e.latLng.lat(), e.latLng.lng());
@@ -103,7 +103,6 @@ class MyFancyComponent extends React.PureComponent {
     //get user location
     //update state (this.setState) with location and pass props to MyMapComponent
     navigator.geolocation.getCurrentPosition((e) => {
-      console.log(e);
       this.setCenter(e.coords.latitude, e.coords.longitude);
     
     // seeHover = (e) => {
