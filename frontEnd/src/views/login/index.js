@@ -18,19 +18,19 @@ class Login extends Component {
     }
 //right now I'm sending the whole state above
     componentDidMount() {
-        const { username, password, email} = this.state
-        fetch('/sign-up', {
-            method: 'post',
-            body: JSON.stringify({
-                username: username,
-                password: password,
-                email: email
-            })
-            })
-            .then(x => x.text())
-            .then(x => JSON.parse(x))
-            .then(x => {this.setState({response: x})})
-            //sending me a boolean true if good false if no good
+        // const { username, password, email} = this.state
+        // fetch('/sign-up', {
+        //     method: 'post',
+        //     body: JSON.stringify({
+        //         username: username,
+        //         password: password,
+        //         email: email
+        //     })
+        //     })
+        //     .then(x => x.text())
+        //     .then(x => JSON.parse(x))
+        //     .then(x => {this.setState({response: x})})
+        //     //sending me a boolean true if good false if no good
         }
 
 
