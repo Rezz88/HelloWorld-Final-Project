@@ -36,7 +36,7 @@ const signUp = async (userInfo) => {
             ratings: []
         }
         addToFile(userDbPath, obj);
-        console.log('test')
+        //console.log('test')
         return userID
     };
 
@@ -67,29 +67,27 @@ const signUp = async (userInfo) => {
         }).catch(err => err);
     //console.log('this is the last respose: ', response)
     if (response) {
-        return {response: true, uid: userID}
+        return { response: true, uid: userID }
     } else {
-        return {response: false};
+        return { response: false };
     }
-    
+
 }
 
 const login = async (userInfo) => {
-    console.log('this is user info! :  ',userInfo)
+    console.log('this is user info! :  ', userInfo)
     var attemptUsername = userInfo.username;
     var attemptPass = userInfo.password;
     //checks to make sure username already exists in the db
     var dbUser = await fs.readFile(userDbPath, { String });
     dbUser = JSON.parse(dbUser.toString());
     // console.log(dbUser);
-    var userAndPassCheck = false;  //true if both password and username are correct
     for (let id of Object.keys(dbUser)) {
         if (dbUser[id].username === attemptUsername && dbUser[id].password === attemptPass) {
-            userAndPassCheck = true;
-            return {id : id, object: dbUser[id]};
-        } 
+            return { id: id, object: dbUser[id] };
+        }
     }
-    return userAndPassCheck
+    return { userAndPassCheck: false }
 }
 
 module.exports = {
