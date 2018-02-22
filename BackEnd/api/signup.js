@@ -75,7 +75,6 @@ const signUp = async (userInfo) => {
 }
 
 const login = async (userInfo) => {
-    //sorts user data coming in
     console.log('this is user info! :  ',userInfo)
     var attemptUsername = userInfo.username;
     var attemptPass = userInfo.password;
@@ -86,7 +85,6 @@ const login = async (userInfo) => {
     var userAndPassCheck = false;  //true if both password and username are correct
     for (let id of Object.keys(dbUser)) {
         if (dbUser[id].username === attemptUsername && dbUser[id].password === attemptPass) {
-            let individualUserID = id;
             userAndPassCheck = true;
             return {id : id, object: dbUser[id]};
         } 
