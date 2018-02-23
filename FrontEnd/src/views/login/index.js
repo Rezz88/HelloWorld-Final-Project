@@ -26,15 +26,15 @@ class Login extends Component {
     //         email: 'email',
     //         loggedIn: true
     //     }
-        if (z.cookies===true)  {
-            if(z.loggedIn===true)   {
-                this.props.history.push("/main", z);
-            } else {
-                this.props.history.push("/", z);
-            }
-        } else {
-            this.props.history.push("/");
-         }
+        // if (z.cookies===true)  {
+        //     if(z.loggedIn===true)   {
+        //         this.props.history.push("/main", z);
+        //     } else {
+        //         this.props.history.push("/", z);
+        //     }
+        // } else {
+        //     this.props.history.push("/");
+        //  }
         
         fetch('/cookie', {
             method: "get",
