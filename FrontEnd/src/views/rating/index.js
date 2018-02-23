@@ -9,6 +9,32 @@ class Rating extends Component {
         this.state = {}
     }
 
+    renderBarInfo = () => {
+        //Info will come from whatever bar they have selected
+        const { barName, barRatio, barAge, barNum } = this.props.location.state
+        return (
+            <div> Bar History
+                <div>{"barName: " + barName}</div>
+                <div>{"barRatio: " + barRatio}</div>
+                <div>{"barAge: " + barAge}</div>
+                <div>{"barNum: " + barNum}</div>
+            </div>
+        )
+    };
+
+    renderRating = () => {
+        //User will be able to render their rating
+    }
+
+    renderMainButton = () => {
+        return (
+            <div>
+                <button onClick={() =>
+                    this.props.history.push("/main", this.props.location.state)}>Bar Map </button>
+            </div>
+        )
+    };
+
     render() {
         console.log('Rating page ', this.props.location.state)
         //for now the state is undefined unless someone logs in
@@ -16,9 +42,7 @@ class Rating extends Component {
             return (
                 <div>
                     Rating page
-                <div>
-                        <button onClick={() => this.props.history.push("/main", this.props.location.state)}>Bar Map </button>
-                    </div>
+                    {this.renderMainButton()}
                 </div>
             );
         } else {

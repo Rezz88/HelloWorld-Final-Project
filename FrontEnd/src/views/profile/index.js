@@ -10,10 +10,10 @@ class Profile extends Component {
   }
 
   renderUserInfo = () => {
+    //Will be filled with user info from sign-up
     const { username, email } = this.props.location.state
     return (
-      <div>
-        Profile
+      <div> Profile
         <div>Display Picture{/* {display} */}</div>
         <div>{"Username: " + username}</div>
         <div>Gender{/* {"Gender: " + gender} */}</div>
@@ -28,7 +28,7 @@ class Profile extends Component {
       <div>
         <button onClick={
           () => this.props.history.push('/main', this.props.location.state
-        )}>Bar Map</button>
+          )}>Bar Map</button>
       </div>
     )
   };
@@ -38,14 +38,22 @@ class Profile extends Component {
       <div>
         <button onClick={
           () => this.props.history.push('/settings', this.props.location.state
-        )}>Settings</button>
+          )}>Settings</button>
       </div>
     )
   };
 
   renderBarHistory = () => {
     //Will be filled with user bar info
-    <div>Bar History{/* {"Bar History: " + history} */}</div>
+    const { barName, barRatio, barAge, barNum } = this.props.location.state
+    return (
+      <div> Bar History
+        <div>{"barName: " + barName}</div>
+        <div>{"barRatio: " + barRatio}</div>
+        <div>{"barAge: " + barAge}</div>
+        <div>{"barNum: " + barNum}</div>
+      </div>
+    )
   };
 
   render() {
