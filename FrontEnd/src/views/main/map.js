@@ -192,7 +192,7 @@ class MyFancyComponent extends React.PureComponent {
     this.setState({venueData: null, infoWindow: false});
   }
 
-
+  //talking to Bk Function
   fetchVenueData = (venueData) => {
     console.log(venueData)
     fetch('/bar-stats', {
