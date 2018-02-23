@@ -88,7 +88,9 @@ const MyMapComponent = compose(
         onMouseOver={() => console.log(venue.name)}
         key={idx}
         position={{ lat: venue.geometry.location.lat(), lng: venue.geometry.location.lng()}} 
-        icon={venue.hover?markerHovered:markerImage}
+        icon={
+          venue.hover?markerHovered:markerImage
+        }
         title={venue.name}
         onClick={ (e) => {
           props.onBarClick(e, venue);
@@ -101,7 +103,7 @@ const MyMapComponent = compose(
     />);}
    )}
   </GoogleMap>
-}
+} 
 
 )
 

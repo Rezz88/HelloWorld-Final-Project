@@ -10,12 +10,10 @@ class Settings extends Component {
     }
 
     logout = () =>  {
-        this.props.location.state = undefined;
+        this.props.location.state.loggedIn = false;
         console.log('logout = ' , this.props.location.state)
         this.props.history.push("/")
         
-
-
     }
 
     render() {

@@ -13,9 +13,11 @@ app.use(morgan('dev'));
 app.use(cookieParser());
 
 
-app.get('/cookie', (req, res) => {
+app.post('/cookie', (req, res) => {
     let allUsers = fileread('./database/userInfo.json');
-    //console.log(req.cookies.uid)
+    console.log('SimonTest')
+    console.log(req.headers)
+    //console.log('this is your uid if you have a cookie: ',req.cookies)
     console.log('test1', req.cookies)
     if (Object.keys(req.cookies).length !== 0) {
         let cookie = req.cookies.uid;
@@ -32,13 +34,17 @@ app.get('/cookie', (req, res) => {
 
 app.post('/sign-up', async (req, res) => {
     const verify = await signup.signUp(JSON.parse(req.body.toString()));
-    //console.log("this is verify: ", verify);
+   // verify = {}
+    //verify.uid = 'chimpanzee'
+    console.log("this is verify: ", verify);
     console.log("this is cookie", req.cookies)
-    if (Object.keys(req.cookies).length === 0 && verify.uid) {
-        res.cookie('uid', verify.uid, { maxAge: 900000000 });
+    if (verify.uid) {
+        res.cookie('uid', verify.uid, { maxAge: 9000000000 });
+        res.send('asd')
+        console.log();
     }
     //console.log(verify.response)
-    verify.response ? res.send(await { response: verify.response }) : res.send(await verify)
+    //verify.response ? res.send(await { response: verify.response }) : res.send(await verify)
 })
 
 app.post('/login', async (req, res) => {
