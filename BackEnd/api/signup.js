@@ -2,7 +2,7 @@ const { addToFile } = require('../tools');
 const fs = require('fs-extra');
 const tools = require('../tools')
 const userDbPath = './database/userInfo.json';
-const dbBarsPath = './database/BarsInfo.json';
+const dbBarsPath = './database/barsDb.json';
 const dbImagesPath = './database/images';
 
 
@@ -15,7 +15,7 @@ const signUp = async (userInfo) => {
     var username = userInfo.username;
     var password = userInfo.password;
     var age = userInfo.age;
-    var sex = userInfo.sex;
+    var gender = userInfo.gender;
     var email = userInfo.email;
     var barLocation = userInfo.barLocation
     console.log(userInfo)
@@ -32,9 +32,9 @@ const signUp = async (userInfo) => {
             username,
             email,
             password,
-            sex,
+            gender,
             age,
-            whatBar: ''
+            whatBar: 'none'
         }
         addToFile(userDbPath, obj);
         console.log('test')
@@ -42,7 +42,7 @@ const signUp = async (userInfo) => {
     };
 
     //creates new user with all info to be filled on the site 
-    const response = await fs.readFile(userDbPath, { String })
+    const response = fs.readFile(userDbPath, { String })
         .then(async data => {
             //console.log(data)
             var result = JSON.parse(data.toString());

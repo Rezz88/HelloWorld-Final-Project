@@ -2,3 +2,12 @@
   min-width:200px;
   text-align: center;
 }
+
+.bar-marker {
+  transition: all 0.2s ease-in-out;
+}
+
+.bar-marker:hover {
+  transform: scale(1.5);
+  filter: drop-shadow(0px 0px 10px blue);
+}

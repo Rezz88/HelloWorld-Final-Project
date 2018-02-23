@@ -6,16 +6,18 @@ import {
   withGoogleMap,
   GoogleMap,
   Marker,
+  OverlayView,
   InfoWindow
 } from "react-google-maps";
 // import { connect } from "tls";
 import markerImage from './images/heatDot.png';
 import markerHovered from './images/greenMarker.png';
-import personImage from './images/greenMarker.png';
+import personImage from './images/user.png';
 import testLogo from './images/firecircle.png';
 import myMapStyles from "./mapStyle/style.js";
 
 const PLACES_API_KEY = 'AIzaSyBA0wFPUwIo03AHcEf3pFarehPoQLzysCo';
+
 
 const MyMapComponent = compose(
 
@@ -35,6 +37,9 @@ const MyMapComponent = compose(
         },
         showBars: (radius) => {
           this.props.showBars(refs.map, radius);
+        },
+        onMapZoom: () => {
+          this.props.setZoom(refs.map.getZoom());
         }
       })
     },
@@ -42,15 +47,24 @@ const MyMapComponent = compose(
   withHandlers({
     
     onBarClick: props => (e, venueData) => {
-       console.log('hey', venueData);
+      //  props.userClickedBar(true);
+      //  console.log('hey', venueData);
+       //call fetch function and use it like this myFunction().then(data => do stuff)
+       props.fetchVenueData(venueData.place_id)
     },
     onMapClick: props => (e) => {
       // console.log(e.latLng.lat(), e.latLng.lng());
+      // if (props.clickedBar){return}
+      // props.userClickedBar(false)
       const lat = e.latLng.lat();
       const lng = e.latLng.lng();
       props.setMarker(lat, lng);
       props.setCenter(lat, lng);
+      console.log(props.zoom)
+      if (props.zoom > 15){ props.setZoom(props.zoom)}
+      else {
       props.setZoom(15);
+      }
     },
 
     
@@ -66,6 +80,7 @@ const MyMapComponent = compose(
     ref={props.onMapMounted}
     center={props.center}
     zoom={props.zoom}
+    onZoomChanged={props.onMapZoom}
     options={{streetViewControl: false, mapTypeControl: false, styles: myMapStyles}}
     onClick={props.onMapClick}
   >
@@ -81,26 +96,34 @@ const MyMapComponent = compose(
       onCloseClick={props.closeInfoWindow}>
         <div className="info-window">{props.venueData.name}</div>
       </InfoWindow>}
-    
     {props.venues.length > 0 && props.venues.map((venue, idx) => {
       return (
-      <Marker 
-        onMouseOver={() => console.log(venue.name)}
+      <OverlayView 
         key={idx}
+        mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
         position={{ lat: venue.geometry.location.lat(), lng: venue.geometry.location.lng()}} 
-        icon={
-          venue.hover?markerHovered:markerImage
-        }
-        title={venue.name}
-        onClick={ (e) => {
-          props.onBarClick(e, venue);
-          props.openInfoWindow(venue);
-          //fetch venue data using props.fetchVenue(venue) -> setState -> Rerender
-          }}
+        // icon={
+        //   (props.zoom <= 12 || venue.hover) ? markerHovered : markerImage
+        // }
+        // title={venue.name}
+        
         // options={console.log(this.map)} 
         // style={{color: props.hoverBar === venue ? 'red' : "yellow"}}
         // onMouseEnter={() => props.onHoverBar(venue)}
-    />);}
+      >
+        <div
+          // onMouseOver={() => console.log(venue.name)}
+          onClick={ (e) => {
+            //set clicked bar
+            props.userClickedBar(true)
+            props.onBarClick(e, venue);
+            props.openInfoWindow(venue);
+            //fetch venue data using props.fetchVenue(venue) -> setState -> Rerender
+          }}
+          className="bar-marker"
+            ><img src={(props.zoom <= 14 || venue.hover) ? markerImage : markerHovered} />
+        </div>
+      </OverlayView>);}
    )}
   </GoogleMap>
 } 
@@ -116,6 +139,7 @@ class MyFancyComponent extends React.PureComponent {
     infoWindow: false,
     venueData: null,
     barShowing: null,
+    clickedBar: false,
   }
 
 
@@ -150,7 +174,7 @@ class MyFancyComponent extends React.PureComponent {
         type: ['bar']
       }, (results, status) => {
         if (status === google.maps.places.PlacesServiceStatus.OK) {
-          console.log(results);
+          // console.log(results);
           this.setVenues(results);
         }
       });
@@ -167,10 +191,22 @@ class MyFancyComponent extends React.PureComponent {
   }
 
 
-  // fetchVenueData = (venue) => {
-  //   //fetch...
-  //   //setstate...
-  // }
+  fetchVenueData = (venueData) => {
+    fetch('/bar-stats', {
+      method: 'POST',
+      body: JSON.stringify(
+        venueData
+      )
+    })
+    .then(x => x.json())
+    .then(x => console.log(x))
+    //setstate...
+  }
+
+  userClickedBar = (val) => {
+    console.log(this.state.clickedBar)
+    this.setState({clickedBar: val})
+  }
 
   setCenter = (lat, lng) => {
     this.setState({center: { lat, lng }});
@@ -213,6 +249,7 @@ class MyFancyComponent extends React.PureComponent {
           infoWindow={this.state.infoWindow}
           venueData={this.state.venueData}
           barShowing={this.state.barShowing}
+          clickedBar={this.state.clickedBar}
           //functions
           onBarClick={this.barClick}
           setMarker={this.setMarker}
@@ -221,6 +258,8 @@ class MyFancyComponent extends React.PureComponent {
           openInfoWindow={this.openInfoWindow}
           closeInfoWindow={this.closeInfoWindow}
           showBars={this.showBars}
+          userClickedBar={this.userClickedBar}
+          fetchVenueData={this.fetchVenueData}
         />
         <BarListComponent
           //state
