@@ -14,6 +14,7 @@ class Login extends Component {
         }
     }
 
+<<<<<<< HEAD
     // componentDidMount() {
     //     const { username, password, email} = this.state
     //     fetch('/sign-up', {
@@ -30,6 +31,9 @@ class Login extends Component {
             //sending me a boolean true if good false if no good
             //to test the emails and usernames
         // }
+=======
+    componentDidMount() {
+>>>>>>> 9abbad943b87ad08bf51df0a1a04bda23093909a
 
         // }
 
@@ -61,7 +65,10 @@ class Login extends Component {
         .then(x => x.text())
         .then(y => JSON.parse(y))
         .then(x=> {console.log('this is what youre getting for cookies!!',x); return x})
+<<<<<<< HEAD
         .then(z => {this.props.history.push("/",z)})
+=======
+>>>>>>> 9abbad943b87ad08bf51df0a1a04bda23093909a
         .then(z => {
             if (z.cookies===true)  {
                 if(z.loggedIn===true)   {
