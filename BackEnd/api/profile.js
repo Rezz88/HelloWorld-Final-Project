@@ -11,11 +11,11 @@ profileAccess = (userInfo) => {
     const sex = userInfo.sex;
     const email = userInfo.email;
 
-    const response = await fs.readFile(userDbPath, { String })
-    .then( async data => {
-        const allUserInfo = JSON.parse(data.toString());
+//     const response = await fs.readFile(userDbPath, { String })
+//     .then( async data => {
+//         const allUserInfo = JSON.parse(data.toString());
 
-    })
+//     })
 }
 
 module.exports = {

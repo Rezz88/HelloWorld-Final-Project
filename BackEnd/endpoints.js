@@ -16,7 +16,7 @@ app.use(cookieParser());
 app.get('/cookie', (req, res) => {
     let allUsers = fileread('./database/userInfo.json');
     //console.log(req.cookies.uid)
-    //console.log('test1', req.cookies)
+    console.log('test1', req.cookies)
     if (Object.keys(req.cookies).length !== 0) {
         let cookie = req.cookies.uid;
         //console.log('this is cookie: ', cookie)
@@ -24,9 +24,11 @@ app.get('/cookie', (req, res) => {
         //console.log('this is the current user blob!', currentUser)
         return res.send(currentUser)
     } else {
+        console.log('you get no cookies')
         return res.send({ cookies: false })
     }
 })
+
 
 app.post('/sign-up', async (req, res) => {
     const verify = await signup.signUp(JSON.parse(req.body.toString()));
