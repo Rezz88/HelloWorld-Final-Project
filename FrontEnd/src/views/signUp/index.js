@@ -20,9 +20,11 @@ class SignUp extends Component {
       }
 
     signingUp = () =>  {
+        console.log('signing up')
         const { username, password, email} = this.state
         fetch('/sign-up', {
             method: 'post',
+            credentials: 'include',
             body: JSON.stringify({
                 username: username,
                 password: password,
@@ -30,17 +32,14 @@ class SignUp extends Component {
             })
             })
             .then(x => x.text())
-            .then(x => console.log(x))
-            /*.then(x => JSON.parse(x))
+            .then(x => JSON.parse(x))
             .then(x => {
             if (x.response===true)  { 
-                console.log( x)
                 this.signUpPass()
             } else {
-
                 console.log( x.response )
             }
-            })*/
+            })
             //if false display message to the user to use diff username or password
     }
 
@@ -56,7 +55,7 @@ class SignUp extends Component {
 
 
     signUp = () =>   {
-        const { username, password, password1, email } = this.state
+        const { username, password, email } = this.state
         return(
             <div>
                 Username

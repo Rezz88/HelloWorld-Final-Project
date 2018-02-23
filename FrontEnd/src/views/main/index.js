@@ -17,7 +17,7 @@ class Main extends Component {
     //props.location.state is the login information originated at login/index.js
     console.log('Main page ', this.props.location.state)
     //for now the state is undefined unless someone logs in
-    if (this.props.location.state !== undefined) {
+    if (this.props.location.state.loggedIn === true) {
       return (
         <div>
           <h1>Bar Map </h1>

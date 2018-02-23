@@ -20,7 +20,7 @@ class Settings extends Component {
         console.log(this.props)
         //props.location.state is the login information originated at login/index.js
         console.log('Settings page = ',this.props.location.state)
-        if (this.props.location.state !== undefined) {
+        if (this.props.location.state.loggedIn === true) {
             return (
                 <div>
                     Settings

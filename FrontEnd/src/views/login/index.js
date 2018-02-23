@@ -10,13 +10,10 @@ class Login extends Component {
             password: '',
             email: '',
             loggedIn: false,
-            createAccount: false,
-            showSignUp: false
         }
     }
 
-    componentDidMount() {
-        console.log('testfront')
+    componentWillMount() {
         fetch('/cookie', {
             method: "post",
             credentials: "include"
@@ -27,7 +24,11 @@ class Login extends Component {
         .then(z => {
             if (z.cookies===false)  {
                 this.props.history.push("/");
-            } else if (z.loggedIn===true) {
+            }
+            
+            
+            
+            if (z.loggedIn===true) {
                 this.props.history.push("/main", z);
             } else {
                 this.props.history.push("/", z);
@@ -63,7 +64,6 @@ class Login extends Component {
     }
 
     loginPass = (x) => {
-        const { username , password } = this.state
         this.props.history.push("/main", x);
     }
 
