@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 // import { Link } from 'react-router-dom'; Not using link ATM
 // import '../../App.css';
 
-
-
 class Login extends Component {
     constructor()   {
         super();
@@ -11,13 +9,13 @@ class Login extends Component {
             username: '',
             password: '',
             email: '',
-            response: undefined,
             loggedIn: false,
             signedUp: false,
         }
     }
-//right now I'm sending the whole state above
+
     componentDidMount() {
+<<<<<<< HEAD
         const { username, password, email} = this.state
         fetch('/sign-up', {
             method: 'post',
@@ -33,13 +31,16 @@ class Login extends Component {
             //sending me a boolean true if good false if no good
             //to test the emails and usernames
         }
+=======
+>>>>>>> b08218764585d8cd181eb09e439b103e880d9840
 
+        }
 
         //checking to see if they are logged in
         //set up mock data to test get endpoint. object might include loggedIn state, username etc
         //
     componentWillMount()    {
-//mock data setup for login
+    //mock data setup for login
         //  var z = {
         //     cookies: true,
         //     username: 'John', 
@@ -55,17 +56,21 @@ class Login extends Component {
         // } else {
         //     this.props.history.push("/");
         // }
-
-
-
+        
         fetch('/cookie', {
             method: "get",
             credentials: "include"
         })
+<<<<<<< HEAD
         // .then(x => x.text())
         // .then(y => JSON.parse(y))
         // .then(x=> {console.log('this is what youre getting for cookies!!',x); return x})
         // .then(z => {this.props.history.push("/",z)})
+=======
+        .then(x => x.text())
+        .then(y => JSON.parse(y))
+        .then(x=> {console.log('this is what youre getting for cookies!!',x); return x})
+>>>>>>> b08218764585d8cd181eb09e439b103e880d9840
         .then(z => {
             if (z.cookies===true)  {
                 if(z.loggedIn===true)   {
@@ -76,20 +81,36 @@ class Login extends Component {
             } else {
                 this.props.history.push("/");
             }})
-
     }
-
-        
-
 
     setInputValue =(key, value)=> {
         this.setState({[key]: value})
       }
 
-//can we/ how do we use cookies here to bypass the loggin state?
     signingUp = () =>  {
-        
-        const { username , password, email} = this.state
+        const { username, password, email} = this.state
+        fetch('/sign-up', {
+            method: 'post',
+            body: JSON.stringify({
+                username: username,
+                password: password,
+                email: email
+            })
+            })
+            .then(x => x.text())
+            .then(x => JSON.parse(x))
+            .then(x => {
+            if (x.response===true)  { 
+                this.signUpPass()
+            } else {
+                console.log('email in use response should be false = ', x.response )
+            }
+        })
+            //if false display message to the user to use diff username or password
+    }
+
+    signUpPass = () =>  {
+        const { username, password, email} = this.state
         this.props.history.push("/main", {
             username: username, 
             password: password,
@@ -99,13 +120,29 @@ class Login extends Component {
     }
 
     loggingIn = () =>    {
+        const { username, password } = this.state
+        fetch('/login', {
+            method: 'post',
+            body: JSON.stringify({
+                username: username,
+                password: password,
+            })
+            })
+            .then(x => x.text())
+            .then(x => JSON.parse(x))
+            .then(x => {
+            if (x.signIn===false)  { 
+                //do seomthing (tell them to try again)
+            } else {
+                this.loginPass(x);
+            }
+        })
+        
+    }
 
+    loginPass = (x) => {
         const { username , password } = this.state
-        this.props.history.push("/main", {
-            username: username,
-            password: password, 
-            loggedIn: true
-        });
+        this.props.history.push("/main", x);
     }
 
     signUp = () =>   {

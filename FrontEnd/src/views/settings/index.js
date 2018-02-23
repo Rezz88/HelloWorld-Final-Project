@@ -21,12 +21,12 @@ class Settings extends Component {
     render() {
         console.log(this.props)
         //props.location.state is the login information originated at login/index.js
-        console.log('settings page = ',this.props.location.state)
+        console.log('Settings page = ',this.props.location.state)
         if (this.props.location.state !== undefined) {
             return (
                 <div>
                     Settings
-                <div>
+                    <div>
                         <button onClick={() => this.props.history.push("/profile", this.props.location.state)}>Your Profile</button>
                     </div>
                     <div>
