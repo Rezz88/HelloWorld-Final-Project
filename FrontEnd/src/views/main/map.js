@@ -18,6 +18,7 @@ import myMapStyles from "./mapStyle/style.js";
 
 const PLACES_API_KEY = 'AIzaSyBA0wFPUwIo03AHcEf3pFarehPoQLzysCo';
 
+var placeID;
 
 const MyMapComponent = compose(
 
@@ -48,9 +49,10 @@ const MyMapComponent = compose(
     
     onBarClick: props => (e, venueData) => {
       //  props.userClickedBar(true);
-      //  console.log('hey', venueData);
+      placeID = venueData.place_id;
+      //  console.log('hey', venueData.place_id);
        //call fetch function and use it like this myFunction().then(data => do stuff)
-       props.fetchVenueData(venueData.place_id)
+       props.fetchVenueData(placeID)
     },
     onMapClick: props => (e) => {
       // console.log(e.latLng.lat(), e.latLng.lng());
@@ -192,6 +194,7 @@ class MyFancyComponent extends React.PureComponent {
 
 
   fetchVenueData = (venueData) => {
+    console.log(venueData)
     fetch('/bar-stats', {
       method: 'POST',
       body: JSON.stringify(
