@@ -33,7 +33,7 @@ app.get('/cookie', (req, res) => {
 app.post('/sign-up', async (req, res) => {
     const verify = await signup.signUp(JSON.parse(req.body.toString()));
     //console.log("this is verify: ", verify);
-    //console.log("this is cookie", req.cookies)
+    console.log("this is cookie", req.cookies)
     if (Object.keys(req.cookies).length === 0 && verify.uid) {
         res.cookie('uid', verify.uid, { maxAge: 900000000 });
     }
@@ -59,12 +59,17 @@ app.post('/profile', async (req, res) => {
     res.send(await profile.profileAccess(JSON.parse(req.body.toString())));
 })
 app.post('/check-in', (req, res) => {
-    res.send(barInfo.userCheckIn(req,res, JSON.parse(req.body.toString())));
+    console.log('this is cookies: ', req.cookies)
+    let userId = req.cookies.uid
+    res.send( barInfo.userCheckIn(userId, JSON.parse(req.body.toString())));
 })
 
 app.post('/bar-info', async (req, res) => {
     res.send(await barInfo.allInfo(JSON.parse(req.body.toString())));
 })
 
+app.post('/bar-stats', async (req, res) => {
+    res.send(await barInfo.barStats(JSON.parse(req.body.toString())));
+})
 
 app.listen(4000, console.log("We're a go!"))
