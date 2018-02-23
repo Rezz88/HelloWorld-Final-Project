@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 // import '../../App.css';
 
 class Login extends Component {
-    constructor()   {
+    constructor() {
         super();
         this.state = {
             username: '',
@@ -14,79 +14,54 @@ class Login extends Component {
         }
     }
 
-<<<<<<< HEAD
-    // componentDidMount() {
-    //     const { username, password, email} = this.state
-    //     fetch('/sign-up', {
-    //         method: 'post',
-    //         body: JSON.stringify({
-    //             username: username,
-    //             password: password,
-    //             email: email
-    //         })
-    //         })
-            // .then(x => x.text())
-            // .then(x => JSON.parse(x))
-            // .then(x => {this.setState({response: x})})
-            //sending me a boolean true if good false if no good
-            //to test the emails and usernames
-        // }
-=======
-    componentDidMount() {
->>>>>>> 9abbad943b87ad08bf51df0a1a04bda23093909a
+    componentDidMount() {}
+    // checking to see if they are logged in
+    // set up mock data to test get endpoint. object might include loggedIn state, username etc
 
-        // }
-
-        // checking to see if they are logged in
-        // set up mock data to test get endpoint. object might include loggedIn state, username etc
-        
-    componentWillMount()    {
-    // mock data setup for login
-    //      var z = {
-    //         cookies: true,
-    //         username: 'John', 
-    //         email: 'email',
-    //         loggedIn: true
-    //     }
-        if (z.cookies===true)  {
-            if(z.loggedIn===true)   {
+    componentWillMount() {
+        // mock data setup for login
+        //      var z = {
+        //         cookies: true,
+        //         username: 'John', 
+        //         email: 'email',
+        //         loggedIn: true
+        //     }
+        if (z.cookies === true) {
+            if (z.loggedIn === true) {
                 this.props.history.push("/main", z);
             } else {
                 this.props.history.push("/", z);
             }
         } else {
             this.props.history.push("/");
-         }
-        
+        }
+
         fetch('/cookie', {
             method: "get",
             credentials: "include"
         })
-        .then(x => x.text())
-        .then(y => JSON.parse(y))
-        .then(x=> {console.log('this is what youre getting for cookies!!',x); return x})
-<<<<<<< HEAD
-        .then(z => {this.props.history.push("/",z)})
-=======
->>>>>>> 9abbad943b87ad08bf51df0a1a04bda23093909a
-        .then(z => {
-            if (z.cookies===true)  {
-                if(z.loggedIn===true)   {
-                    this.props.history.push("/main", z);
+            .then(x => x.text())
+            .then(y => JSON.parse(y))
+            .then(x => { console.log('this is what youre getting for cookies!!', x); return x })
+            .then(z => {
+                if (z.cookies === true) {
+                    if (z.loggedIn === true) {
+                        this.props.history.push("/main", z);
+                    } else {
+                        this.props.history.push("/", z);
+                    }
                 } else {
-                    this.props.history.push("/", z);
+                    this.props.history.push("/");
                 }
-            } else {
-                this.props.history.push("/");
-            }})
+            })
     }
 
-    setInputValue =(key, value)=> {
-        this.setState({[key]: value})
-      }
+    setInputValue = (key, value) => {
+        this.setState({ [key]: value })
+    }
 
-    signingUp = () =>  {
-        const { username, password, email} = this.state
+    signingUp = () => {
+        const { username, password, email } = this.state
         fetch('/sign-up', {
             method: 'post',
             body: JSON.stringify({
@@ -94,30 +69,30 @@ class Login extends Component {
                 password: password,
                 email: email
             })
-            })
+        })
             .then(x => x.text())
             .then(x => JSON.parse(x))
             .then(x => {
-            if (x.response===true)  { 
-                this.signUpPass()
-            } else {
-                console.log('email in use response should be false = ', x.response )
-            }
-        })
-            //if false display message to the user to use diff username or password
+                if (x.response === true) {
+                    this.signUpPass()
+                } else {
+                    console.log('email in use response should be false = ', x.response)
+                }
+            })
+        //if false display message to the user to use diff username or password
     }
 
-    signUpPass = () =>  {
-        const { username, password, email} = this.state
+    signUpPass = () => {
+        const { username, password, email } = this.state
         this.props.history.push("/main", {
-            username: username, 
+            username: username,
             password: password,
             email: email,
             loggedIn: true
         });
     }
 
-    loggingIn = () =>    {
+    loggingIn = () => {
         const { username, password } = this.state
         fetch('/login', {
             method: 'post',
@@ -125,84 +100,84 @@ class Login extends Component {
                 username: username,
                 password: password,
             })
-            })
+        })
             .then(x => x.text())
             .then(x => JSON.parse(x))
             .then(x => {
-            if (x.signIn===false)  { 
-                //do seomthing (tell them to try again)
-            } else {
-                this.loginPass(x);
-            }
-        })
-        
+                if (x.signIn === false) {
+                    //do seomthing (tell them to try again)
+                } else {
+                    this.loginPass(x);
+                }
+            })
+
     }
 
     loginPass = (x) => {
-        const { username , password } = this.state
+        const { username, password } = this.state
         this.props.history.push("/main", x);
     }
 
-    signUp = () =>   {
+    signUp = () => {
         const { username, password, password1, email } = this.state
-        return(
+        return (
             <div>
                 Username
-                <input  placeholder="Username" 
-                        value={username} 
-                        onChange={(e)=> this.setInputValue('username', e.target.value)}>
+                <input placeholder="Username"
+                    value={username}
+                    onChange={(e) => this.setInputValue('username', e.target.value)}>
                 </input>
                 Password
-                <input  placeholder="Password" 
-                        type="password" 
-                        value={password} 
-                        onChange={(e)=> this.setInputValue('password', e.target.value)}>
+                <input placeholder="Password"
+                    type="password"
+                    value={password}
+                    onChange={(e) => this.setInputValue('password', e.target.value)}>
                 </input>
                 re-type Password
-                <input  placeholder="Password" 
-                        type="password" 
-                        value={password1} 
-                        onChange={(e)=> this.setInputValue('password', e.target.value)}>
+                <input placeholder="Password"
+                    type="password"
+                    value={password1}
+                    onChange={(e) => this.setInputValue('password', e.target.value)}>
                 </input>
                 Email
-                <input  placeholder="e-mail" 
-                        value={email} 
-                        onChange={(e)=> this.setInputValue('email', e.target.value)}>
+                <input placeholder="e-mail"
+                    value={email}
+                    onChange={(e) => this.setInputValue('email', e.target.value)}>
                 </input>
                 <button onClick={this.signingUp}>Sign-up</button>
-                <button onClick={()=>{this.setState({signedUp: true})}}>Already have an account?</button>
+                <button onClick={() => { this.setState({ signedUp: true }) }}>Already have an account?</button>
             </div>
         )
     }
 
-    login = () =>    {
+    login = () => {
         const { username, password } = this.state
-        return(
+        return (
             <div>
                 Username
-                <input  placeholder="Username" 
-                        value={username} 
-                        onChange={(e)=> this.setInputValue('username', e.target.value)}>
+                <input placeholder="Username"
+                    value={username}
+                    onChange={(e) => this.setInputValue('username', e.target.value)}>
                 </input>
                 Password
-                <input  placeholder="Password" 
-                        type="password" 
-                        value={password} 
-                        onChange={(e)=> this.setInputValue('password', e.target.value)}>
+                <input placeholder="Password"
+                    type="password"
+                    value={password}
+                    onChange={(e) => this.setInputValue('password', e.target.value)}>
                 </input>
-                <button type="submit" 
-                        onClick={this.loggingIn}>Login
+                <button type="submit"
+                    onClick={this.loggingIn}>Login
                 </button>
             </div>
         )
     }
 
     render() {
-        return(
+        return (
             <div>
                 {this.state.signedUp ? this.login() : this.signUp()}
             </div>
-            );
+        );
 
     }
 }

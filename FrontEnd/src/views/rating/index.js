@@ -24,7 +24,7 @@ class Rating extends Component {
 
     renderRating = () => {
         //User will be able to render their rating
-    }
+    };
 
     renderMainButton = () => {
         return (
