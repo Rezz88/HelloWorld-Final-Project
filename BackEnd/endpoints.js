@@ -43,13 +43,13 @@ app.post('/sign-up', async (req, res) => {
 
 app.post('/login', async (req, res) => {
     let loginInfo = await signup.login(JSON.parse(req.body.toString()))
-    
-    if(typeof(loginInfo) === "object") {
+    console.log(loginInfo)
+    if(loginInfo.userAndPassCheck) {
         if(Object.keys(req.cookies).length === 0) {
             //console.log('this is login info: ',loginInfo.id)
             res.cookie('uid', loginInfo.id, { maxAge: 900000000 })
         }
-        res.send(await loginInfo.object)
+        res.send(loginInfo.object)
     } else {
         res.send({signIn: false})
     }
