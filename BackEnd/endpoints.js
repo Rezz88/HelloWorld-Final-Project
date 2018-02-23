@@ -13,9 +13,11 @@ app.use(morgan('dev'));
 app.use(cookieParser());
 
 
-app.get('/cookie', (req, res) => {
+app.post('/cookie', (req, res) => {
     let allUsers = fileread('./database/userInfo.json');
-    //console.log(req.cookies.uid)
+    console.log('SimonTest')
+    console.log(req.headers)
+    //console.log('this is your uid if you have a cookie: ',req.cookies)
     console.log('test1', req.cookies)
     if (Object.keys(req.cookies).length !== 0) {
         let cookie = req.cookies.uid;
@@ -32,24 +34,28 @@ app.get('/cookie', (req, res) => {
 
 app.post('/sign-up', async (req, res) => {
     const verify = await signup.signUp(JSON.parse(req.body.toString()));
-    //console.log("this is verify: ", verify);
-    //console.log("this is cookie", req.cookies)
-    if (Object.keys(req.cookies).length === 0 && verify.uid) {
-        res.cookie('uid', verify.uid, { maxAge: 900000000 });
+   // verify = {}
+    //verify.uid = 'chimpanzee'
+    console.log("this is verify: ", verify);
+    console.log("this is cookie", req.cookies)
+    if (verify.uid) {
+        res.cookie('uid', verify.uid, { maxAge: 9000000000 });
+        res.send('asd')
+        console.log();
     }
-    //console.log(verify.response)
+    console.log(verify.response)
     verify.response ? res.send(await { response: verify.response }) : res.send(await verify)
 })
 
 app.post('/login', async (req, res) => {
     let loginInfo = await signup.login(JSON.parse(req.body.toString()))
-    
-    if(typeof(loginInfo) === "object") {
+    console.log(loginInfo)
+    if(loginInfo.userAndPassCheck) {
         if(Object.keys(req.cookies).length === 0) {
             //console.log('this is login info: ',loginInfo.id)
             res.cookie('uid', loginInfo.id, { maxAge: 900000000 })
         }
-        res.send(await loginInfo.object)
+        res.send(loginInfo.object)
     } else {
         res.send({signIn: false})
     }
@@ -59,12 +65,17 @@ app.post('/profile', async (req, res) => {
     res.send(await profile.profileAccess(JSON.parse(req.body.toString())));
 })
 app.post('/check-in', (req, res) => {
-    res.send(barInfo.userCheckIn(req,res, JSON.parse(req.body.toString())));
+    console.log('this is cookies: ', req.cookies)
+    let userId = req.cookies.uid
+    res.send( barInfo.userCheckIn(userId, JSON.parse(req.body.toString())));
 })
 
 app.post('/bar-info', async (req, res) => {
     res.send(await barInfo.allInfo(JSON.parse(req.body.toString())));
 })
 
+app.post('/bar-stats', async (req, res) => {
+    res.send(await barInfo.barStats(JSON.parse(req.body.toString())));
+})
 
 app.listen(4000, console.log("We're a go!"))

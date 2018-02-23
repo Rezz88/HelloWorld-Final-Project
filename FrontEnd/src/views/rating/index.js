@@ -55,7 +55,7 @@ class Rating extends Component {
     render() {
         console.log('Rating page ', this.props.location.state)
         //for now the state is undefined unless someone logs in
-        if (this.props.location.state !== undefined) {
+        if (this.props.location.state.loggedIn === true ) {
             return (
                 <div>
                     Rating page

@@ -10,19 +10,17 @@ class Settings extends Component {
     }
 
     logout = () =>  {
-        this.props.location.state = undefined;
+        this.props.location.state.loggedIn = false;
         console.log('logout = ' , this.props.location.state)
         this.props.history.push("/")
         
-
-
     }
 
     render() {
         console.log(this.props)
         //props.location.state is the login information originated at login/index.js
         console.log('Settings page = ',this.props.location.state)
-        if (this.props.location.state !== undefined) {
+        if (this.props.location.state.loggedIn === true) {
             return (
                 <div>
                     Settings
