@@ -83,8 +83,9 @@ const login = async (userInfo) => {
     var attemptPass = userInfo.password;
     //checks to make sure username already exists in the db
     var dbUser = await fs.readFile(userDbPath, { String });
+    console.log('where: ',dbUser.toString());
     dbUser = JSON.parse(dbUser.toString());
-    // console.log(dbUser);
+    console.log(dbUser);
     for (let id of Object.keys(dbUser)) {
         if (dbUser[id].username === attemptUsername && dbUser[id].password === attemptPass) {
             return { id: id, object: dbUser[id] };

@@ -40,11 +40,10 @@ app.post('/sign-up', async (req, res) => {
     console.log("this is cookie", req.cookies)
     if (verify.uid) {
         res.cookie('uid', verify.uid, { maxAge: 9000000000 });
-        res.send('asd')
         console.log();
     }
     //console.log(verify.response)
-    //verify.response ? res.send(await { response: verify.response }) : res.send(await verify)
+    verify.response ? res.send(await { response: verify.response }) : res.send(await verify)
 })
 
 app.post('/login', async (req, res) => {
