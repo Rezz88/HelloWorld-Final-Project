@@ -46,8 +46,7 @@ class Login extends Component {
         })
         .then(x => x.text())
         .then(y => JSON.parse(y))
-        // .then(x=> {console.log('this is what youre getting for cookies!!',x); return x})
-        .then(z => {this.props.history.push("/",z)})
+        .then(x=> {console.log('this is what youre getting for cookies!!',x); return x})
         .then(z => {
             if (z.cookies===true)  {
                 if(z.loggedIn===true)   {
