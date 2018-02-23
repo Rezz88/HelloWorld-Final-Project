@@ -11,6 +11,7 @@ class Main extends Component {
     this.state = { hoverBar: null };
   }
 
+
   render() {
     console.log(this.props)
     //props.location.state is the login information originated at login/index.js

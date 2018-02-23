@@ -1,5 +1,5 @@
 //FINAL-PROJECT README FILE
---
+==
 
 Git 
 --
@@ -15,9 +15,9 @@ git add . (or specific file)
 git commit -m (with detailed msg of changes ex - "Perez - Added editProfile function and removed error on main page" )
 git push (must have most recent pull, before you can push)
 git pull (stagging area must be cleared when you pull )
---
 
 FrontEnd
+--
 npm install --save react-router-dom;
 npm install --save react-router;
 
@@ -26,3 +26,4 @@ Maps
 npm install --save react-google-maps
 npm install --save recompose
 // import { connect } from "tls"; NOT USED YET
+
