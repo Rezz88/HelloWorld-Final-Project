@@ -55,7 +55,7 @@ class Login extends Component {
             .then(x => {
             if (x.signIn===false)  { 
                //for testing
-               this.loginPass({"loggedIn":true,"username":"gray","email":"gray@gmail.com","password":"black","ratings":[]});
+            //    this.loginPass({"loggedIn":true,"username":"gray","email":"gray@gmail.com","password":"black","ratings":[]});
             } else {
                 this.loginPass(x);
             }
