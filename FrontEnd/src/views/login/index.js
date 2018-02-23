@@ -15,24 +15,6 @@ class Login extends Component {
     }
 
     componentDidMount() {
-<<<<<<< HEAD
-        const { username, password, email} = this.state
-        fetch('/sign-up', {
-            method: 'post',
-            body: JSON.stringify({
-                username: username,
-                password: password,
-                email: email
-            })
-            })
-            // .then(x => x.text())
-            // .then(x => JSON.parse(x))
-            // .then(x => {this.setState({response: x})})
-            //sending me a boolean true if good false if no good
-            //to test the emails and usernames
-        }
-=======
->>>>>>> b08218764585d8cd181eb09e439b103e880d9840
 
         }
 
@@ -61,16 +43,9 @@ class Login extends Component {
             method: "get",
             credentials: "include"
         })
-<<<<<<< HEAD
-        // .then(x => x.text())
-        // .then(y => JSON.parse(y))
-        // .then(x=> {console.log('this is what youre getting for cookies!!',x); return x})
-        // .then(z => {this.props.history.push("/",z)})
-=======
         .then(x => x.text())
         .then(y => JSON.parse(y))
         .then(x=> {console.log('this is what youre getting for cookies!!',x); return x})
->>>>>>> b08218764585d8cd181eb09e439b103e880d9840
         .then(z => {
             if (z.cookies===true)  {
                 if(z.loggedIn===true)   {
