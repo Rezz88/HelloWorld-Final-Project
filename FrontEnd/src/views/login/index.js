@@ -18,7 +18,6 @@ class Login extends Component {
     }
 //right now I'm sending the whole state above
     componentDidMount() {
-<<<<<<< HEAD:FrontEnd/src/views/login/index.js
         const { username, password, email} = this.state
         fetch('/sign-up', {
             method: 'post',
@@ -29,20 +28,6 @@ class Login extends Component {
             })
             })
             // .then(x => x.text())
-=======
-        // const { username, password, email} = this.state
-        // fetch('/sign-up', {
-        //     method: 'post',
-        //     body: JSON.stringify({
-        //         username: username,
-        //         password: password,
-        //         email: email
-        //     })
-        //     })
-            
-        //     .then(x => x.text())
-        //     .then(x=>{console.log('componentdidmount ',x)})
->>>>>>> 5e773dfed4fd4988f89607c2f900e67039d05fd0:frontEnd/src/views/login/index.js
             // .then(x => JSON.parse(x))
             // .then(x => {this.setState({response: x})})
             //sending me a boolean true if good false if no good
@@ -77,8 +62,8 @@ class Login extends Component {
             method: "get",
             credentials: "include"
         })
-        .then(x => x.text())
-        .then(y => JSON.parse(y))
+        // .then(x => x.text())
+        // .then(y => JSON.parse(y))
         // .then(x=> {console.log('this is what youre getting for cookies!!',x); return x})
         // .then(z => {this.props.history.push("/",z)})
         .then(z => {
