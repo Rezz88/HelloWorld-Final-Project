@@ -15,13 +15,8 @@ app.use(cookieParser());
 
 app.get('/cookie', (req, res) => {
     let allUsers = fileread('./database/userInfo.json');
-<<<<<<< HEAD
-    //console.log('test0',req.cookies.uid)
-   // console.log('test1', req.cookies)
-=======
     //console.log(req.cookies.uid)
     console.log('test1', req.cookies)
->>>>>>> 4fc5ab2722dac30ff7cdf0b0177a7ccdf2e55f99
     if (Object.keys(req.cookies).length !== 0) {
         let cookie = req.cookies.uid;
         //console.log('this is cookie: ', cookie)
@@ -29,11 +24,7 @@ app.get('/cookie', (req, res) => {
         //console.log('this is the current user blob!', currentUser)
         return res.send(currentUser)
     } else {
-<<<<<<< HEAD
-        //console.log('there is nothing here')
-=======
         console.log('you get no cookies')
->>>>>>> 4fc5ab2722dac30ff7cdf0b0177a7ccdf2e55f99
         return res.send({ cookies: false })
     }
 })

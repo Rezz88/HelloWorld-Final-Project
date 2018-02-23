@@ -12,18 +12,11 @@ profileAccess = (userInfo) => {
     const sex = userInfo.sex;
     const email = userInfo.email;
 
-<<<<<<< HEAD
-    // const response = await fs.readFile(userDbPath, { String })
-    // .then( async data => {
-    //     const allUserInfo = JSON.parse(data.toString());
-    // })
-=======
 //     const response = await fs.readFile(userDbPath, { String })
 //     .then( async data => {
 //         const allUserInfo = JSON.parse(data.toString());
 
 //     })
->>>>>>> 4fc5ab2722dac30ff7cdf0b0177a7ccdf2e55f99
 }
 
 module.exports = {
