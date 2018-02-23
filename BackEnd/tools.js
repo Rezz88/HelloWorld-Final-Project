@@ -27,7 +27,7 @@ addToFile = (toRead, toAdd) => {
 
 function FileReadSync(filePath){
     var contents = fs.readFileSync(filePath);
-    return contents.toString();
+    return JSON.parse(contents.toString());
  }
  function FileWriteSync(filePath,content){
    fs.writeFileSync(filePath, content, 'utf8', function (err) {

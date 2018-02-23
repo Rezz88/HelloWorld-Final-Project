@@ -14,21 +14,22 @@ class Login extends Component {
         }
     }
 
-    componentDidMount() {
+    componentDidMount() {}
 
-        }
 
-        //checking to see if they are logged in
-        //set up mock data to test get endpoint. object might include loggedIn state, username etc
-        //
-    componentWillMount()    {
-    //mock data setup for login
-        //  var z = {
-        //     cookies: true,
-        //     username: 'John', 
-        //     email: 'email',
-        //     loggedIn: true
         // }
+
+        // checking to see if they are logged in
+        // set up mock data to test get endpoint. object might include loggedIn state, username etc
+        
+    componentWillMount()    {
+    // mock data setup for login
+    //      var z = {
+    //         cookies: true,
+    //         username: 'John', 
+    //         email: 'email',
+    //         loggedIn: true
+    //     }
         // if (z.cookies===true)  {
         //     if(z.loggedIn===true)   {
         //         this.props.history.push("/main", z);
@@ -37,7 +38,7 @@ class Login extends Component {
         //     }
         // } else {
         //     this.props.history.push("/");
-        // }
+        //  }
         
         fetch('/cookie', {
             method: "get",
@@ -45,7 +46,8 @@ class Login extends Component {
         })
         .then(x => x.text())
         .then(y => JSON.parse(y))
-        .then(x=> {console.log('this is what youre getting for cookies!!',x); return x})
+        // .then(x=> {console.log('this is what youre getting for cookies!!',x); return x})
+        .then(z => {this.props.history.push("/",z)})
         .then(z => {
             if (z.cookies===true)  {
                 if(z.loggedIn===true)   {

@@ -6,6 +6,7 @@ const dbBarsPath = './database/BarsInfo.json';
 const dbImagesPath = './database/images';
 
 profileAccess = (userInfo) => {
+    
     const password = userInfo.password;
     const age = userInfo.age;
     const sex = userInfo.sex;
