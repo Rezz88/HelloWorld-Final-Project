@@ -24,21 +24,21 @@ const signUp = async (userInfo) => {
         return ('Invalid email');
     }
     var randomNumber = Math.floor(Math.random() * 100000000000)
-    var userID = "userID" + randomNumber
+    var userId = "userId" + randomNumber
     const buildObj = () => {
         var obj = {};
-        obj[userID] = {
+        obj[userId] = {
             loggedIn: true,
             username,
             email,
             password,
             sex,
             age,
-            ratings: []
+            whatBar: ''
         }
         addToFile(userDbPath, obj);
-        //console.log('test')
-        return userID
+        console.log('test')
+        return userId
     };
 
     //creates new user with all info to be filled on the site 
@@ -53,6 +53,7 @@ const signUp = async (userInfo) => {
                 for (let id of Object.keys(result)) {
                     //console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', result[id].username)
                     if (result[id].username === username || result[id].email === email) {
+                        console.log('username/email exists!')
                         alreadyExist = true;
                     }
                 }
@@ -60,15 +61,17 @@ const signUp = async (userInfo) => {
                     // return 'User already exists';
                     return false;
                 } else {
+                    console.log('builds object now!!')
                     return await buildObj();
                 }
             } else {
+                console.log('builds object now!!')
                 return await buildObj();
             }
         }).catch(err => err);
     //console.log('this is the last respose: ', response)
     if (response) {
-        return { response: true, uid: userID }
+        return { response: true, uid: userId }
     } else {
         return { response: false };
     }

@@ -21,8 +21,8 @@ FrontEnd
 npm install --save react-router-dom;
 npm install --save react-router;
 
-Maps!
-INSTALL
+Maps
+--
 npm install --save react-google-maps
-//?? maybe recompose if it doesnt work.. might be a dependent of react-google-maps
+npm install --save recompose
 // import { connect } from "tls"; NOT USED YET
