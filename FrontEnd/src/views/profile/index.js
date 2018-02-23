@@ -60,7 +60,7 @@ class Profile extends Component {
     //Props to be passed down from app.js
     console.log('Profile page ', this.props.location.state)
     //For now the state is undefined unless someone logs in
-    if (this.props.location.state !== undefined) {
+    if (this.props.location.state.loggedIn === true) {
       return (
         <div>
           {this.renderUserInfo()}

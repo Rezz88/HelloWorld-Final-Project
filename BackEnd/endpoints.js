@@ -43,8 +43,8 @@ app.post('/sign-up', async (req, res) => {
         res.send('asd')
         console.log();
     }
-    //console.log(verify.response)
-    //verify.response ? res.send(await { response: verify.response }) : res.send(await verify)
+    console.log(verify.response)
+    verify.response ? res.send(await { response: verify.response }) : res.send(await verify)
 })
 
 app.post('/login', async (req, res) => {
