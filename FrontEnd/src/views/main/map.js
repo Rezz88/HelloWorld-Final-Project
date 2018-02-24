@@ -87,9 +87,9 @@ const MyMapComponent = compose(
     >
     </Marker>}
     {props.infoWindow && <InfoWindow
-      position={{ 
-        lat: props.venueData.geometry.location.lat(), 
-        lng: props.venueData.geometry.location.lng() 
+      position={{
+        lat: props.venueData.geometry.location.lat(),
+        lng: props.venueData.geometry.location.lng()
       }}
       onCloseClick={props.closeInfoWindow}>
       <div className="info-window">
@@ -108,9 +108,9 @@ const MyMapComponent = compose(
           <div
             // onMouseOver={() => console.log(venue.name)}
             onClick={() =>props.fetchVenueData(venue)}
-            onMouseEnter={() => props.fetchVenueData(venue)} 
+            onMouseEnter={() => props.fetchVenueData(venue)}
             onMouseLeave={() => props.closeInfoWindow()}
-            
+
             className="bar-marker"
           ><img src={(props.zoom <= 14 || venue.hover) ? markerImage : markerHovered} />
           </div>
@@ -157,7 +157,7 @@ class MyFancyComponent extends React.PureComponent {
     if (!location) {
       location = await this.getUserLocation();
     }
-    console.log(this.props, location);
+
     const google = window.google;
     var service = new google.maps.places.PlacesService(map.context.__SECRET_MAP_DO_NOT_USE_OR_YOU_WILL_BE_FIRED);
     service.nearbySearch({
@@ -172,11 +172,11 @@ class MyFancyComponent extends React.PureComponent {
     });
   }
 
-  toggleInfoWindow = (venue) => { 
+  toggleInfoWindow = (venue) => {
     const { venueData, infoWindow } = this.state;
     if (venueData && venue.name === venueData.name) {
       this.setState({ infoWindow: !infoWindow });
-    } else { 
+    } else {
       this.fetchVenueData(venue);
     }
   }

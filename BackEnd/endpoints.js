@@ -20,9 +20,9 @@ app.post('/cookie', (req, res) => {
     console.log('test1', req.cookies)
     if (Object.keys(req.cookies).length !== 0) {
         let cookie = req.cookies.uid;
-        
+
         console.log('this is cookie: ', cookie)
-        
+
         if(allUsers[cookie]){
             let currentUser = allUsers[cookie]
             console.log('this is the current user blob!', currentUser)
@@ -107,4 +107,4 @@ app.get('/bar-stats/:id', async (req, res) => {
     }
 })
 
-app.listen(4000, console.log("We're a go!"))
+app.listen(4001, console.log("We're a go!"))
