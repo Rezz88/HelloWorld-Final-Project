@@ -33,10 +33,20 @@ class Main extends Component {
     this.state = { hoverBar: null };
   }
 
-  barInfo = () => {
-    //Function will take the bar info and push the info to the rating page
-  };
+  componentDidMount = () => {
+    this.props.location.state.bar = [
 
+      {name: "Fredo",
+       age: 29,
+       gender: "Male"
+      },
+
+      {name: "Annie",
+       age: 27,
+       gender: "Female"
+      }
+    ]
+  };
 
   render() {
     console.log(this.props)
