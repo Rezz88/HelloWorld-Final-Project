@@ -20,15 +20,12 @@ class App extends Component {
     return (
       <div>
         <Switch>
+          <Route exact path="/" component={Login} />
+          <Route path="/signUp" component ={SignUp}/>
           <Route path="/profile" component={Profile} />
-          {/* <Route path="/profile" render={(routeProps) => { 
-          return <Profile history={routeProps.history} />}} /> */}
+          <Route path="/main" component={Main} />
           <Route path="/ratings" component={Rating} />
           <Route path="/settings" component={Settings} />
-          <Route path="/main" component={Main} />
-          <Route path="/signUp" component ={SignUp}/>
-          <Route exact path="/" component={Login} />
-
         </Switch>
       </div>
     );

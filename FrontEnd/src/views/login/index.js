@@ -19,18 +19,15 @@ class Login extends Component {
             method: "post",
             credentials: "include"
         })
-        .then(x => x.text())
-        .then(y => JSON.parse(y))
-        .then(x=> {console.log('this is what youre getting for cookies!!',x); return x})
-        .then(z => {
-            if (z.cookies===false)  {
-                this.props.history.push("/");
-            }
-            if (z.loggedIn===true) {
-                this.props.history.push("/main", z);
+        .then(response => response.json())
+        .then(data => {
+            if (data.loggedIn) {
+                this.props.history.push('/main', data);
             } else {
-                this.props.history.push("/", z);
+                this.props.history.push('/', data);
             }
+        }).catch((err) => {
+            console.log(err);
         })
         .catch(e => console.log(e));
     }
@@ -49,16 +46,15 @@ class Login extends Component {
                 password: password,
                 loggedIn: true
             })
-            })
-            .then(x => x.text())
-            .then(x => console.log(x))
-            .then(x => JSON.parse(x))
-            .then(x => {
-            if (x.signIn===false)  { 
-                this.setState({error: 'error'})
+        }).then(response => response.json())
+        .then(data => {
+            if (!data.signIn) {
+                this.setState({ error: 'error' })
             } else {
-                this.loginPass(x);
+                this.loginPass(data);
             }
+        }).catch((err) => {
+            console.log(err);
         })
     }
 
@@ -71,17 +67,17 @@ class Login extends Component {
         return(
             <div>
                 Username
-                <input  placeholder="Username" 
-                        value={username} 
+                <input  placeholder="Username"
+                        value={username}
                         onChange={(e)=> this.setInputValue('username', e.target.value)}>
                 </input>
                 Password
-                <input  placeholder="Password" 
-                        type="password" 
-                        value={password} 
+                <input  placeholder="Password"
+                        type="password"
+                        value={password}
                         onChange={(e)=> this.setInputValue('password', e.target.value)}>
                 </input>
-                <button type="submit" 
+                <button type="submit"
                         onClick={this.loggingIn}>Login
                 </button>
                 <button onClick={this.signUp}>create an account</button>

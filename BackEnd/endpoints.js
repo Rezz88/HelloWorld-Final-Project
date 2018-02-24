@@ -20,9 +20,9 @@ app.post('/cookie', (req, res) => {
     console.log('test1', req.cookies)
     if (Object.keys(req.cookies).length !== 0) {
         let cookie = req.cookies.uid;
-        
+
         console.log('this is cookie: ', cookie)
-        
+
         if(allUsers[cookie]){
             let currentUser = allUsers[cookie]
             console.log('this is the current user blob!', currentUser)
@@ -47,7 +47,6 @@ app.post('/cookie', (req, res) => {
 
 app.post('/sign-up', async (req, res) => {
     const verify = await signup.signUp(JSON.parse(req.body.toString()));
-    
     //verify.uid = 'chimpanzee'
     // console.log("this is verify: ", verify);
     // console.log("this is cookie", req.cookies)
@@ -62,15 +61,16 @@ app.post('/sign-up', async (req, res) => {
 
 app.post('/login', async (req, res) => {
     let loginInfo = await signup.login(JSON.parse(req.body.toString()))
-    console.log('this is loginInfo',loginInfo.userAndPassCheck)
-    if(loginInfo.userAndPassCheck) {
+    console.log('this is loginInfo', loginInfo)
+    console.log('this is possible cookies: ', req.cookies.uid)
+    if(!loginInfo.error) {
         if(!req.cookies.uid) {
-            //console.log('this is login info: ',loginInfo.id)
+            console.log("you're about to create some cookies")
             res.cookie('uid', loginInfo.id, { maxAge: 900000000 })
         }
         res.send(loginInfo.object)
     } else {
-        res.send({ signIn: false })
+        res.send({ error: loginInfo.error })
     }
 })
 
@@ -88,7 +88,7 @@ app.post('/logout', (req, res) => {
     console.log('temporary database: ', tempDb);
     tempDb[userId].loggedIn = false;
     tools.FileWriteSync(tempDb);
-    res.send('User Has Logged Out!');
+    res.send({status: 'User Has Logged Out!'});
 })
 
 app.post('/bar-info', async (req, res) => {
@@ -107,4 +107,4 @@ app.get('/bar-stats/:id', async (req, res) => {
     }
 })
 
-app.listen(4000, console.log("We're a go!"))
+app.listen(4001, console.log("We're a go!"))

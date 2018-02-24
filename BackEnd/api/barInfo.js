@@ -27,7 +27,7 @@ const allInfo = async (barInfo) => {
         return true
     };
 
-    //creates new user with all info to be filled on the site 
+    //creates new user with all info to be filled on the site
     try {
         const data = await fs.readFile(dbBarsPath, { String })
         var result = JSON.parse(data.toString());
@@ -84,7 +84,7 @@ barStats = (barId) => {
         if (userDb[id].whatBar === barId) {
             allAges.push(Number(userDb[id].age))
             maleToFemale.push(userDb[id].gender)
-        } 
+        }
     }
     let femaleCounter = 0;
     let maleCounter = 0;
@@ -92,7 +92,7 @@ barStats = (barId) => {
     if(allAges.length) {
         let average = (array) => array.reduce((a, b) => a + b) / array.length;
         meanAge = Math.floor(average(allAges));
-    } 
+    }
      //average of the ages in a bar
     for (var i = 0; i < maleToFemale.length; i++) {
         maleToFemale[i].toLowerCase() === "female" ? femaleCounter++ : maleCounter++
@@ -102,8 +102,8 @@ barStats = (barId) => {
     }
     let ratio = percentage(femaleCounter, maleCounter);
     return { people: allAges.length, averageAge: meanAge, ratio: ratio }
-    //ask if its better to do this real time by constantly writing to file or 
-    //to calculate it one by one, and never store the file 
+    //ask if its better to do this real time by constantly writing to file or
+    //to calculate it one by one, and never store the file
     //
 }
 
@@ -113,4 +113,4 @@ module.exports = {
     barStats
 }
 
-//use categories to sort bars and their biggest category 
+//use categories to sort bars and their biggest category
