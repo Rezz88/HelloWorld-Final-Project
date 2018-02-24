@@ -10,6 +10,7 @@ class Login extends Component {
             password: '',
             email: '',
             loggedIn: false,
+            error: ''
         }
     }
 
@@ -25,22 +26,17 @@ class Login extends Component {
             if (z.cookies===false)  {
                 this.props.history.push("/");
             }
-            
-            
-            
             if (z.loggedIn===true) {
                 this.props.history.push("/main", z);
             } else {
                 this.props.history.push("/", z);
             }
         })
-
     }
 
     setInputValue =(key, value)=> {
         this.setState({[key]: value})
       }
-
 
     loggingIn = () =>    {
         const { username, password } = this.state
@@ -49,19 +45,18 @@ class Login extends Component {
             body: JSON.stringify({
                 username: username,
                 password: password,
+                loggedIn: true
             })
             })
             .then(x => x.text())
             .then(x => { console.log(x); return JSON.parse(x); })
             .then(x => {
             if (x.signIn===false)  { 
-               //for testing
-               this.loginPass({"loggedIn":true,"username":"gray","email":"gray@gmail.com","password":"black","ratings":[]});
+                this.setState({error: 'error'})
             } else {
                 this.loginPass(x);
             }
         })
-        
     }
 
     loginPass = (x) => {
@@ -87,6 +82,7 @@ class Login extends Component {
                         onClick={this.loggingIn}>Login
                 </button>
                 <button onClick={this.signUp}>create an account</button>
+                <div>{this.state.error}</div>
             </div>
         )
     }
@@ -94,15 +90,12 @@ class Login extends Component {
         this.props.history.push("/signUp");
     }
 
-
     render() {
-        
         return(
             <div>
                 {this.login()}
             </div>
-            );
-
+        );
     }
 }
 

@@ -10,7 +10,7 @@ class SignUp extends Component {
             password: '',
             email: '',
             loggedIn: false,
-            createAccount: true
+            error: ''
         }
     }
 
@@ -28,7 +28,8 @@ class SignUp extends Component {
             body: JSON.stringify({
                 username: username,
                 password: password,
-                email: email
+                email: email,
+                loggedIn: true
             })
             })
             .then(x => x.text())
@@ -37,7 +38,9 @@ class SignUp extends Component {
             if (x.response===true)  { 
                 this.signUpPass()
             } else {
-                console.log( x.response )
+                // if I don't send the right data the response I get
+                //throws an error on the page, not what I want to happen below
+                this.setState({error: 'error'})
             }
             })
             //if false display message to the user to use diff username or password
@@ -82,6 +85,7 @@ class SignUp extends Component {
                 </input>
                 <button onClick={this.signingUp}>Sign-up</button>
                 <button onClick={this.login}>Already have an account?</button>
+                <div>{this.state.error}</div>
             </div>
         )
     }

@@ -10,10 +10,17 @@ class Settings extends Component {
     }
 
     logout = () =>  {
+        console.log('logout before fetch = ', this.props.location.state)
+        fetch('/logout',    {
+            method: 'post',
+            credentials: 'include',
+            body: JSON.stringify({
+                loggedIn: false
+            })
+            })
         this.props.location.state.loggedIn = false;
         console.log('logout = ' , this.props.location.state)
         this.props.history.push("/")
-        
     }
 
     render() {
@@ -32,7 +39,6 @@ class Settings extends Component {
                     </div>
                 </div>
             );
-
         } else {
             return (
                 <Redirect to="/"/>
