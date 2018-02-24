@@ -32,6 +32,7 @@ class Login extends Component {
                 this.props.history.push("/", z);
             }
         })
+        .catch(e => console.log(e));
     }
 
     setInputValue =(key, value)=> {
@@ -50,12 +51,8 @@ class Login extends Component {
             })
             })
             .then(x => x.text())
-<<<<<<< HEAD
             .then(x => console.log(x))
             .then(x => JSON.parse(x))
-=======
-            .then(x => { console.log(x); return JSON.parse(x); })
->>>>>>> 7a8ffac9f2dcbd338cfe35341eecc0c214ebec05
             .then(x => {
             if (x.signIn===false)  { 
                 this.setState({error: 'error'})
