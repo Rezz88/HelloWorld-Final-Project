@@ -11,6 +11,10 @@ class Main extends Component {
     this.state = { hoverBar: null };
   }
 
+  barInfo = () => {
+    //Function will take the bar info and push the info to the rating page
+  };
+
 
   render() {
     console.log(this.props)
