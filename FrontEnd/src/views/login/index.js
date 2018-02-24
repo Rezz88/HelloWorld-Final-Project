@@ -10,13 +10,11 @@ class Login extends Component {
             password: '',
             email: '',
             loggedIn: false,
-            createAccount: false,
-            showSignUp: false
+            error: ''
         }
     }
 
-    componentDidMount() {
-        console.log('testfront')
+    componentWillMount() {
         fetch('/cookie', {
             method: "post",
             credentials: "include"
@@ -27,19 +25,18 @@ class Login extends Component {
         .then(z => {
             if (z.cookies===false)  {
                 this.props.history.push("/");
-            } else if (z.loggedIn===true) {
+            }
+            if (z.loggedIn===true) {
                 this.props.history.push("/main", z);
             } else {
                 this.props.history.push("/", z);
             }
         })
-
     }
 
     setInputValue =(key, value)=> {
         this.setState({[key]: value})
       }
-
 
     loggingIn = () =>    {
         const { username, password } = this.state
@@ -49,14 +46,19 @@ class Login extends Component {
             body: JSON.stringify({
                 username: username,
                 password: password,
+                loggedIn: true
             })
             })
             .then(x => x.text())
+<<<<<<< HEAD
             .then(x => console.log(x))
             .then(x => JSON.parse(x))
+=======
+            .then(x => { console.log(x); return JSON.parse(x); })
+>>>>>>> 7a8ffac9f2dcbd338cfe35341eecc0c214ebec05
             .then(x => {
             if (x.signIn===false)  { 
-                //do seomthing (tell them to try again)
+                this.setState({error: 'error'})
             } else {
                 this.loginPass(x);
             }
@@ -64,7 +66,6 @@ class Login extends Component {
     }
 
     loginPass = (x) => {
-        const { username , password } = this.state
         this.props.history.push("/main", x);
     }
 
@@ -87,6 +88,7 @@ class Login extends Component {
                         onClick={this.loggingIn}>Login
                 </button>
                 <button onClick={this.signUp}>create an account</button>
+                <div>{this.state.error}</div>
             </div>
         )
     }
@@ -94,15 +96,12 @@ class Login extends Component {
         this.props.history.push("/signUp");
     }
 
-
     render() {
-        
         return(
             <div>
                 {this.login()}
             </div>
-            );
-
+        );
     }
 }
 

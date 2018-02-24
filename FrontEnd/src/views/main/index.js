@@ -11,13 +11,17 @@ class Main extends Component {
     this.state = { hoverBar: null };
   }
 
+  barInfo = () => {
+    //Function will take the bar info and push the info to the rating page
+  };
+
 
   render() {
     console.log(this.props)
     //props.location.state is the login information originated at login/index.js
     console.log('Main page ', this.props.location.state)
     //for now the state is undefined unless someone logs in
-    if (this.props.location.state !== undefined) {
+    if (this.props.location.state.loggedIn === true) {
       return (
         <div>
           <h1>Bar Map </h1>

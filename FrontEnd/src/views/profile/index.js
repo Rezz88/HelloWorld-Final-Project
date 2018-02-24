@@ -11,13 +11,14 @@ class Profile extends Component {
 
   renderUserInfo = () => {
     //Will be filled with user info from sign-up
-    const { username, email } = this.props.location.state
+    const { username, email, gender, age } = this.props.location.state
     return (
-      <div> Profile
+      <div>
+        <h4>Profile</h4>
         <div>Display Picture{/* {display} */}</div>
         <div>{"Username: " + username}</div>
-        <div>Gender{/* {"Gender: " + gender} */}</div>
-        <div>Age{/* {"Age: " + age} */}</div>
+        <div>{"Gender: " + gender}</div>
+        <div>{"Age: " + age}</div>
         <div>{"E-mail: " + email}</div>
       </div>
     )
@@ -47,7 +48,8 @@ class Profile extends Component {
     //Will be filled with user bar info
     const { barName, barRatio, barAge, barNum } = this.props.location.state
     return (
-      <div> Bar History
+      <div> 
+        <h4>Bar History</h4>
         <div>{"barName: " + barName}</div>
         <div>{"barRatio: " + barRatio}</div>
         <div>{"barAge: " + barAge}</div>
@@ -60,7 +62,7 @@ class Profile extends Component {
     //Props to be passed down from app.js
     console.log('Profile page ', this.props.location.state)
     //For now the state is undefined unless someone logs in
-    if (this.props.location.state !== undefined) {
+    if (this.props.location.state.loggedIn === true) {
       return (
         <div>
           {this.renderUserInfo()}
