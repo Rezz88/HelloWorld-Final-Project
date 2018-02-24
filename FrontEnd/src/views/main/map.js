@@ -104,14 +104,6 @@ const MyMapComponent = compose(
         key={idx}
         mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
         position={{ lat: venue.geometry.location.lat(), lng: venue.geometry.location.lng()}} 
-        // icon={
-        //   (props.zoom <= 12 || venue.hover) ? markerHovered : markerImage
-        // }
-        // title={venue.name}
-        
-        // options={console.log(this.map)} 
-        // style={{color: props.hoverBar === venue ? 'red' : "yellow"}}
-        // onMouseEnter={() => props.onHoverBar(venue)}
       >
         <div
           // onMouseOver={() => console.log(venue.name)}
@@ -202,13 +194,15 @@ class MyFancyComponent extends React.PureComponent {
       )
     })
     .then(x => x.json())
-    .then(x => console.log(x))
+    // .then(x => console.log(x))
+    //********TO FIX for the info window to display Bar Data */
+    // .then(x => this.setState({infoWindow: x}))
     //setstate...
   }
 
-  userClickedBar = (val) => {
+  userClickedBar = () => {
     console.log(this.state.clickedBar)
-    this.setState({clickedBar: val})
+    this.setState({marker: null})
   }
 
   setCenter = (lat, lng) => {
@@ -227,18 +221,21 @@ class MyFancyComponent extends React.PureComponent {
     // console.log('in venues: ', venues)
     this.setState({ venues });
   }
+
   handleMouseOver = (event, venue, idx) => {
     // console.log('hover event', venue, idx)
     let newVenues = this.state.venues.slice();
     newVenues[idx].hover = true;
     this.setState({venues: newVenues})
   }
+
   handleMouseOut = (event, venue, idx) => {
     // console.log('hover handleMouseOut', venue, idx)
     let newVenues = this.state.venues.slice();
     newVenues[idx].hover = false;
     this.setState({venues: newVenues})
   }
+
   render() {
     return (
       <div className='fancy'>
@@ -267,9 +264,12 @@ class MyFancyComponent extends React.PureComponent {
         <BarListComponent
           //state
           venues={this.state.venues}
+          infoWindow={this.state.infoWindow}
           //functions
           handleHover={this.handleMouseOver}
           handleHoverOut={this.handleMouseOut}
+          openInfoWindow={this.openInfoWindow}
+          closeInfoWindow={this.closeInfoWindow}
           />
       </div>
 

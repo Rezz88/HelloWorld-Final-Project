@@ -14,7 +14,9 @@ class BarListComponent extends React.PureComponent {
             onMouseEnter={ (e) => this.props.handleHover(e, venue, idx)}
             onMouseOut={(e) => this.props.handleHoverOut(e, venue, idx)}
             >
-            {venue.name}
+            <button onClick={() =>
+              this.props.infoWindow ? this.props.closeInfoWindow() :  this.props.openInfoWindow(venue)}>
+            {venue.name}</button>
           </a>
         </li>
         )}
