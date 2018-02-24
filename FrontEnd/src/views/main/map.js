@@ -1,5 +1,6 @@
 import BarListComponent from './barList'
 import React from "react";
+import styled from 'styled-components';
 import { compose, withProps, withHandlers, withStateHandlers, lifecycle } from "recompose"
 import {
   withScriptjs,
@@ -20,6 +21,42 @@ import myMapStyles from "./mapStyle/style.js";
 const PLACES_API_KEY = 'AIzaSyBA0wFPUwIo03AHcEf3pFarehPoQLzysCo';
 
 var placeID;
+
+const StyledInfoWindow = styled.div`
+  
+`;
+
+const Icon = styled.img`
+  width: 25%;
+  height: 25%;
+`;
+
+const PeopleMetric = styled.div`
+  border: 1px solid red;
+  padding: .5rem;
+`;
+
+const Bar = styled.div`
+  width: ${({ capacityRatio }) => capacityRatio}%;
+  height: .5rem;
+  background-color: ${({ capacityRatio }) => {
+    if(capacityRatio < 25) {
+      return 'green';
+    }
+    if(capacityRatio > 25 && capacityRatio > 50) {
+      return 'yellow';
+    }
+    if(capacityRatio > 50 && capacityRatio < 75) {
+      return 'orange';
+    }
+    if(capacityRatio > 75 && capacityRatio <101) {
+      return 'red';
+    }
+    if (capacityRatio >100) {
+      return 'black';
+    } 
+  }};
+`;
 
 const MyMapComponent = compose(
 
@@ -73,8 +110,10 @@ const MyMapComponent = compose(
 )((props) => {
   return <GoogleMap
     ref={props.onMapMounted}
-    center={props.center}
-    zoom={props.zoom}
+    // center={props.center}
+    center={ {lat: 45.49914093562442, lng: -73.57023796767328}}
+    // zoom={props.zoom}
+    zoom={14}
     onZoomChanged={props.onMapZoom}
     options={{ streetViewControl: false, mapTypeControl: false, styles: myMapStyles }}
     onClick={props.onMapClick}
@@ -92,11 +131,17 @@ const MyMapComponent = compose(
         lng: props.venueData.geometry.location.lng() 
       }}
       onCloseClick={props.closeInfoWindow}>
-      <div className="info-window">
+      <StyledInfoWindow>
+        <Icon src={props.venueData.icon} alt='icon' />
         <div>Name: {props.venueData.name}</div>
-        <div>People: {props.venueData.people || ''}</div>
+        <PeopleMetric>
+          <div style={{ border: '1px solid whitesmoke', width: '100%' }}>
+            <Bar capacityRatio={props.venueData.people && 300 / props.venueData.people } />
+          </div>
+          <div>People: {props.venueData.people || ''}</div>
         <div>AgeAvg: {props.venueData.averageAge}</div>
-      </div>
+        </PeopleMetric>
+      </StyledInfoWindow>
     </InfoWindow>}
     {props.venues.length > 0 && props.venues.map((venue, idx) => {
       return (
@@ -107,7 +152,7 @@ const MyMapComponent = compose(
         >
           <div
             // onMouseOver={() => console.log(venue.name)}
-            onClick={() =>props.fetchVenueData(venue)}
+            onClick={() => console.log(venue)}
             onMouseEnter={() => props.fetchVenueData(venue)} 
             onMouseLeave={() => props.closeInfoWindow()}
             
@@ -138,16 +183,18 @@ class MyFancyComponent extends React.PureComponent {
   componentDidMount() {
     //get user location
     //update state (this.setState) with location and pass props to MyMapComponent
-    this.getUserLocation()
-      .then(coords => this.setCenter(coords.lat, coords.lng));
+    // this.getUserLocation()
+    //   .then(coords => this.setCenter(coords.lat, coords.lng));
   }
 
   getUserLocation = () => {
-    return new Promise((resolve, reject) => {
-      navigator.geolocation.getCurrentPosition((e) => {
-        resolve({ lat: e.coords.latitude, lng: e.coords.longitude });
-      });
-    });
+  
+    // {lat: 45.49914093562442, lng: -73.57023796767328}
+    // // return new Promise((resolve, reject) => {
+    // //   navigator.geolocation.getCurrentPosition((e) => {
+    // //     resolve({ lat: e.coords.latitude, lng: e.coords.longitude });
+    // //   });
+    // // });
   }
 
   showBars = async (map, radius) => {
@@ -189,14 +236,11 @@ class MyFancyComponent extends React.PureComponent {
 
   //talking to Bk Function
   fetchVenueData = (venueData) => {
-    console.log(venueData);
     fetch(`/bar-stats/${venueData.place_id}`, {
       method: 'Get',
     }).then((response) => response.json())
       .then(data => {
-        console.log(data);
         if (Object.keys(data).length) {
-          console.log('data', data);
           this.setState({ infoWindow: true, venueData: { ...venueData, ...data } });
         } else {
           console.log('venue', venueData);

@@ -78,15 +78,9 @@ barStats = (barId) => {
     console.log("all users:", userDb)
     //when users will check out of a bar, i need to reset it to "none" again. Not for this project but overall
     for (let id of Object.keys(userDb)) { 
-<<<<<<< HEAD
         // if (userDb[id].whatBar === "none") {
         //     break
         // } //add false if any other bar doesnt exist
-=======
-        if (userDb[id].whatBar === "none") {
-            break
-        } //add false if any other bar doesnt exist
->>>>>>> 86cf877a8a74108b79e2c00714d9f3aca3aeb599
         if (userDb[id].whatBar === barId) {
             allAges.push(Number(userDb[id].age))
             maleToFemale.push(userDb[id].gender)
@@ -94,17 +88,12 @@ barStats = (barId) => {
     }
     let femaleCounter = 0;
     let maleCounter = 0;
-<<<<<<< HEAD
     let meanAge;
     if(allAges.length) {
         let average = (array) => array.reduce((a, b) => a + b) / array.length;
         meanAge = Math.floor(average(allAges));
     } 
      //average of the ages in a bar
-=======
-    let average = (array) => array.reduce((a, b) => a + b) / array.length;
-    let meanAge = Math.floor(average(allAges)); //average of the ages in a bar
->>>>>>> 86cf877a8a74108b79e2c00714d9f3aca3aeb599
     for (var i = 0; i < maleToFemale.length; i++) {
         maleToFemale[i].toLowerCase() === "female" ? femaleCounter++ : maleCounter++
     }
