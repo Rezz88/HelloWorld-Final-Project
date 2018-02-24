@@ -94,8 +94,10 @@ app.post('/bar-info', async (req, res) => {
     res.send(await barInfo.allInfo(JSON.parse(req.body.toString())));
 })
 
-app.post('/bar-stats', async (req, res) => {
-    res.send(await barInfo.barStats(JSON.parse(req.body.toString())));
+app.get('/bar-stats/:id', async (req, res) => {
+    const bar = await barInfo.barStats(req.params.id);
+    console.log(bar);
+    res.send(bar);
 })
 
 app.listen(4000, console.log("We're a go!"))
