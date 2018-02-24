@@ -17,16 +17,16 @@ class Rating extends Component {
     componentWillMount = () => {
         //Will generate statics of bar
         //MockData
-        this.props.location.state = {
-            username: "Admin",
-            gender: "Male",
-            age: 29,
-            email: "admin1@gmail.com",
-            barName: "The Ol'Drunkard", 
-            barRatio: "3-1",
-            barAge: 23,
-            barNum: 16,
-         }
+        // this.props.location.state = {
+        //     username: "Admin",
+        //     gender: "Male",
+        //     age: 29,
+        //     email: "admin1@gmail.com",
+        //     barName: "The Ol'Drunkard", 
+        //     barRatio: "3-1",
+        //     barAge: 23,
+        //     barNum: 16,
+        //  }
     };
 
     renderBarInfo = () => {

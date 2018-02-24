@@ -14,26 +14,26 @@ class Login extends Component {
     }
 
     componentWillMount() {
-        fetch('/cookie', {
-            method: "post",
-            credentials: "include"
-        })
-        .then(x => x.text())
-        .then(y => JSON.parse(y))
-        .then(x=> {console.log('this is what youre getting for cookies!!',x); return x})
-        .then(z => {
-            if (z.cookies===false)  {
-                this.props.history.push("/");
-            }
+        // fetch('/cookie', {
+        //     method: "post",
+        //     credentials: "include"
+        // })
+        // .then(x => x.text())
+        // .then(y => JSON.parse(y))
+        // .then(x=> {console.log('this is what youre getting for cookies!!',x); return x})
+        // .then(z => {
+        //     if (z.cookies===false)  {
+        //         this.props.history.push("/");
+        //     }
             
             
             
-            if (z.loggedIn===true) {
-                this.props.history.push("/main", z);
-            } else {
-                this.props.history.push("/", z);
-            }
-        })
+        //     if (z.loggedIn===true) {
+        //         this.props.history.push("/main", z);
+        //     } else {
+        //         this.props.history.push("/", z);
+        //     }
+        // })
 
     }
 
