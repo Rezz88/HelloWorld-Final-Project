@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router';
 import MyFancyComponent from './map'
-// import { Link } from 'react-router-dom'; Not using link ATM
+import { Link } from 'react-router-dom';
 // import { connect } from "tls"; NOT USED YET
 // import '../../App.css';
 
@@ -11,10 +11,20 @@ class Main extends Component {
     this.state = { hoverBar: null };
   }
 
-  barInfo = () => {
-    //Function will take the bar info and push the info to the rating page
-  };
+  componentDidMount = () => {
+    this.props.location.state.bar = [
 
+      {name: "Fredo",
+       age: 29,
+       gender: "Male"
+      },
+
+      {name: "Annie",
+       age: 27,
+       gender: "Female"
+      }
+    ]
+  };
 
   render() {
     console.log(this.props)
