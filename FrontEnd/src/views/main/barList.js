@@ -7,16 +7,14 @@ class BarListComponent extends React.PureComponent {
     
     return (
       
-      <ul>
+      <ul className="bar-list">
         {this.props.venues.map( (venue, idx) => 
-        <li>        
+        <li className="bar-item" key={idx}>        
           <a 
             onMouseEnter={ (e) => this.props.handleHover(e, venue, idx)}
             onMouseOut={(e) => this.props.handleHoverOut(e, venue, idx)}
             >
-            <button onClick={() =>
-              this.props.infoWindow ? this.props.closeInfoWindow() :  this.props.openInfoWindow(venue)}>
-            {venue.name}</button>
+            <button onClick={() => this.props.toggleInfoWindow(venue)}>{venue.name}</button>
           </a>
         </li>
         )}

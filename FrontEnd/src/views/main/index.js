@@ -31,7 +31,7 @@ class Main extends Component {
           <div>
             <button onClick={() => this.props.history.push("/ratings", this.props.location.state)}>Rating </button>
           </div>
-          <div style={{width: 600, height: 600}}>
+          <div>
             <MyFancyComponent />
             {/* <BarList hoverBar={this.state.hoverBar} setHoverBar={this.setHoverBar} /> */}
           </div>

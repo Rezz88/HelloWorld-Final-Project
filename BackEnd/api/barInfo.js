@@ -76,9 +76,9 @@ barStats = (barId) => {
     const userDb = tools.FileReadSync(userDbPath);
     //when users will check out of a bar, i need to reset it to "none" again. Not for this project but overall
     for (let id of Object.keys(userDb)) {
-        if (userDb[id].whatBar === "none") {
-            break
-        }
+        // if (userDb[id].whatBar === "none") {
+        //     break
+        // }
         if (userDb[id].whatBar === barId) {
             allAges.push(Number(userDb[id].age))
             maleToFemale.push(userDb[id].gender)
@@ -86,8 +86,8 @@ barStats = (barId) => {
     }
     let femaleCounter = 0;
     let maleCounter = 0;
-    let average = (array) => array.reduce((a, b) => a + b) / array.length;
-    let meanAge = average(allAges); //average of the ages in a bar
+    let average = (array) => array.reduce((a, b) =>  ((a + b) / array.length));
+    let meanAge = allAges.length ?  average(allAges) : 0; //average of the ages in a bar
     for (var i = 0; i < maleToFemale.length; i++) {
         maleToFemale[i].toLowerCase() === "female" ? femaleCounter++ : maleCounter++
     }

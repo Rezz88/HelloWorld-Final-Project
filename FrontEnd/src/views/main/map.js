@@ -7,7 +7,8 @@ import {
   GoogleMap,
   Marker,
   OverlayView,
-  InfoWindow
+  InfoWindow,
+  SearchBox
 } from "react-google-maps";
 // import { connect } from "tls";
 import markerImage from './images/heatDot.png';
@@ -46,14 +47,7 @@ const MyMapComponent = compose(
     },
   }),
   withHandlers({
-    
-    onBarClick: props => (e, venueData) => {
-      //  props.userClickedBar(true);
-      placeID = venueData.place_id;
-      //  console.log('hey', venueData.place_id);
-       //call fetch function and use it like this myFunction().then(data => do stuff)
-       props.fetchVenueData(placeID)
-    },
+
     onMapClick: props => (e) => {
       // console.log(e.latLng.lat(), e.latLng.lng());
       // if (props.clickedBar){return}
@@ -62,18 +56,17 @@ const MyMapComponent = compose(
       const lng = e.latLng.lng();
       props.setMarker(lat, lng);
       props.setCenter(lat, lng);
-      console.log(props.zoom)
-      if (props.zoom > 15){ props.setZoom(props.zoom)}
+      if (props.zoom > 15) { props.setZoom(props.zoom) }
       else {
-      props.setZoom(15);
+        props.setZoom(15);
       }
     },
 
-    
+
     // seeHover: props => (e) => {
     //   console.log(e);
     // }
-  
+
   }),
   withScriptjs,
   withGoogleMap
@@ -83,44 +76,49 @@ const MyMapComponent = compose(
     center={props.center}
     zoom={props.zoom}
     onZoomChanged={props.onMapZoom}
-    options={{streetViewControl: false, mapTypeControl: false, styles: myMapStyles}}
+    options={{ streetViewControl: false, mapTypeControl: false, styles: myMapStyles }}
     onClick={props.onMapClick}
   >
-    {props.marker && <Marker 
-    position={props.marker} 
-    onClick={() => { props.showBars(500); }} 
-    icon={personImage}
+    {props.marker && <Marker
+      position={props.marker}
+      onClick={() => { props.showBars(500); }}
+      icon={personImage}
     // Animation={'DROP'}
     >
     </Marker>}
-      {props.infoWindow && <InfoWindow
-      position={{ lat: props.venueData.geometry.location.lat(), lng: props.venueData.geometry.location.lng()}}
+    {props.infoWindow && <InfoWindow
+      position={{ 
+        lat: props.venueData.geometry.location.lat(), 
+        lng: props.venueData.geometry.location.lng() 
+      }}
       onCloseClick={props.closeInfoWindow}>
-        <div className="info-window">{props.venueData.name}</div>
-      </InfoWindow>}
+      <div className="info-window">
+        <div>Name: {props.venueData.name}</div>
+        <div>People: {props.venueData.people || ''}</div>
+        <div>AgeAvg: {props.venueData.averageAge}</div>
+      </div>
+    </InfoWindow>}
     {props.venues.length > 0 && props.venues.map((venue, idx) => {
       return (
-      <OverlayView 
-        key={idx}
-        mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
-        position={{ lat: venue.geometry.location.lat(), lng: venue.geometry.location.lng()}} 
-      >
-        <div
-          // onMouseOver={() => console.log(venue.name)}
-          onClick={ (e) => {
-            //set clicked bar
-            props.userClickedBar(true)
-            props.onBarClick(e, venue);
-            props.openInfoWindow(venue);
-            //fetch venue data using props.fetchVenue(venue) -> setState -> Rerender
-          }}
-          className="bar-marker"
-            ><img src={(props.zoom <= 14 || venue.hover) ? markerImage : markerHovered} />
-        </div>
-      </OverlayView>);}
-   )}
+        <OverlayView
+          key={idx}
+          mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
+          position={{ lat: venue.geometry.location.lat(), lng: venue.geometry.location.lng() }}
+        >
+          <div
+            // onMouseOver={() => console.log(venue.name)}
+            onClick={() =>props.fetchVenueData(venue)}
+            onMouseEnter={() => props.fetchVenueData(venue)} 
+            onMouseLeave={() => props.closeInfoWindow()}
+            
+            className="bar-marker"
+          ><img src={(props.zoom <= 14 || venue.hover) ? markerImage : markerHovered} />
+          </div>
+        </OverlayView>);
+    }
+    )}
   </GoogleMap>
-} 
+}
 
 )
 
@@ -141,7 +139,7 @@ class MyFancyComponent extends React.PureComponent {
     //get user location
     //update state (this.setState) with location and pass props to MyMapComponent
     this.getUserLocation()
-    .then(coords => this.setCenter(coords.lat, coords.lng));
+      .then(coords => this.setCenter(coords.lat, coords.lng));
   }
 
   getUserLocation = () => {
@@ -154,63 +152,78 @@ class MyFancyComponent extends React.PureComponent {
 
   showBars = async (map, radius) => {
     const { marker, center } = this.state;
-    this.setState({barShowing: true })
+    this.setState({ barShowing: true })
     let location = marker ? marker : center;
-    if(!location) {
+    if (!location) {
       location = await this.getUserLocation();
     }
     console.log(this.props, location);
     const google = window.google;
     var service = new google.maps.places.PlacesService(map.context.__SECRET_MAP_DO_NOT_USE_OR_YOU_WILL_BE_FIRED);
     service.nearbySearch({
-        location,
-        radius: radius,
-        type: ['bar']
-      }, (results, status) => {
-        if (status === google.maps.places.PlacesServiceStatus.OK) {
-          // console.log(results);
-          this.setVenues(results);
-        }
-      });
+      location,
+      radius: radius,
+      type: ['bar']
+    }, (results, status) => {
+      if (status === google.maps.places.PlacesServiceStatus.OK) {
+        // console.log(results);
+        this.setVenues(results);
+      }
+    });
   }
 
-  openInfoWindow = (venue) => { 
-    // venue,
-    this.setState({infoWindow: true, venueData: venue})
-  };
-  
-  
+  toggleInfoWindow = (venue) => { 
+    const { venueData, infoWindow } = this.state;
+    if (venueData && venue.name === venueData.name) {
+      this.setState({ infoWindow: !infoWindow });
+    } else { 
+      this.fetchVenueData(venue);
+    }
+  }
+
+
+
   closeInfoWindow = () => {
-    this.setState({venueData: null, infoWindow: false});
+    this.setState({ infoWindow: false });
   }
 
   //talking to Bk Function
   fetchVenueData = (venueData) => {
-    console.log(venueData)
-    fetch('/bar-stats', {
-      method: 'POST',
-      body: JSON.stringify(
-        venueData
-      )
-    })
-    .then(x => x.json())
-    // .then(x => console.log(x))
+    fetch(`/bar-stats/${venueData.place_id}`, {
+      method: 'Get',
+    }).then((response) => response.json())
+      .then(data => {
+        console.log(data);
+        if (Object.keys(data).length) {
+          console.log('data', data);
+          this.setState({ infoWindow: true, venueData: { ...venueData, ...data } });
+        } else {
+          console.log('venue', venueData);
+          this.setState({ infoWindow: true, venueData });
+        }
+        return;
+      })
+      .catch((err) => {
+        console.log('error', err);
+      });
+    };
+
+
     //********TO FIX for the info window to display Bar Data */
     // .then(x => this.setState({infoWindow: x}))
     //setstate...
-  }
 
   userClickedBar = () => {
     console.log(this.state.clickedBar)
-    this.setState({marker: null})
+    this.setState({ marker: null })
   }
 
   setCenter = (lat, lng) => {
-    this.setState({center: { lat, lng }});
+    this.setState({ center: { lat, lng } });
   }
 
   setMarker = (lat, lng) => {
-    this.setState({ marker: { lat, lng }});
+    this.setState({ marker: { lat, lng } });
   }
 
   setZoom = (zoom) => {
@@ -226,50 +239,49 @@ class MyFancyComponent extends React.PureComponent {
     // console.log('hover event', venue, idx)
     let newVenues = this.state.venues.slice();
     newVenues[idx].hover = true;
-    this.setState({venues: newVenues})
+    this.setState({ venues: newVenues })
   }
 
   handleMouseOut = (event, venue, idx) => {
     // console.log('hover handleMouseOut', venue, idx)
     let newVenues = this.state.venues.slice();
     newVenues[idx].hover = false;
-    this.setState({venues: newVenues})
+    this.setState({ venues: newVenues })
   }
 
   render() {
     return (
-      <div className='fancy'>
-      <button onClick={this.handleClick}>TESTING</button>
-        <MyMapComponent
-          //state
-          zoom={this.state.zoom}
-          marker={this.state.marker}
-          center={this.state.center}
-          venues={this.state.venues}
-          infoWindow={this.state.infoWindow}
-          venueData={this.state.venueData}
-          barShowing={this.state.barShowing}
-          clickedBar={this.state.clickedBar}
-          //functions
-          onBarClick={this.barClick}
-          setMarker={this.setMarker}
-          setZoom={this.setZoom}
-          setCenter={this.setCenter}
-          openInfoWindow={this.openInfoWindow}
-          closeInfoWindow={this.closeInfoWindow}
-          showBars={this.showBars}
-          userClickedBar={this.userClickedBar}
-          fetchVenueData={this.fetchVenueData}
-        />
-        <BarListComponent
-          //state
-          venues={this.state.venues}
-          infoWindow={this.state.infoWindow}
-          //functions
-          handleHover={this.handleMouseOver}
-          handleHoverOut={this.handleMouseOut}
-          openInfoWindow={this.openInfoWindow}
-          closeInfoWindow={this.closeInfoWindow}
+      <div className='container'>
+        <div className='map-content'>
+          <MyMapComponent
+            //state
+            zoom={this.state.zoom}
+            marker={this.state.marker}
+            center={this.state.center}
+            venues={this.state.venues}
+            infoWindow={this.state.infoWindow}
+            venueData={this.state.venueData}
+            barShowing={this.state.barShowing}
+            clickedBar={this.state.clickedBar}
+            //functions
+            onBarClick={this.barClick}
+            setMarker={this.setMarker}
+            setZoom={this.setZoom}
+            setCenter={this.setCenter}
+            closeInfoWindow={this.closeInfoWindow}
+            showBars={this.showBars}
+            userClickedBar={this.userClickedBar}
+            fetchVenueData={this.fetchVenueData}
+          />
+        </div>
+          <BarListComponent
+            //state
+            venues={this.state.venues}
+            infoWindow={this.state.infoWindow}
+            //functions
+            handleHover={this.handleMouseOver}
+            handleHoverOut={this.handleMouseOut}
+            toggleInfoWindow={this.toggleInfoWindow}
           />
       </div>
 
