@@ -37,8 +37,9 @@ class SignUp extends Component {
             })
             })
             .then(x => x.text())
+            .then(x=> {console.log(typeof(x)); return x})
             .then(x => JSON.parse(x))
-            .then(x=> {console.log('this is the response',x); return x})
+            .then(x=> {console.log('this is the response1',x); return x})
             //response fails if there is an error in the sign up
             .then(x => {
             if (x.response===true)  { 
