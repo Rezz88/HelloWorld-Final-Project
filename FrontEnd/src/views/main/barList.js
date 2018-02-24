@@ -1,4 +1,5 @@
 import React from "react";
+import { Button } from '../styles';
 
 
 
@@ -14,7 +15,7 @@ class BarListComponent extends React.PureComponent {
             onMouseEnter={ (e) => this.props.handleHover(e, venue, idx)}
             onMouseOut={(e) => this.props.handleHoverOut(e, venue, idx)}
             >
-            <button onClick={() => this.props.toggleInfoWindow(venue)}>{venue.name}</button>
+            <Button onClick={() => this.props.toggleInfoWindow(venue)}>{venue.name}</Button>
           </a>
         </li>
         )}
