@@ -47,7 +47,7 @@ app.post('/cookie', (req, res) => {
 
 app.post('/sign-up', async (req, res) => {
     const verify = await signup.signUp(JSON.parse(req.body.toString()));
-   // verify = {}
+    
     //verify.uid = 'chimpanzee'
     // console.log("this is verify: ", verify);
     // console.log("this is cookie", req.cookies)
@@ -70,7 +70,7 @@ app.post('/login', async (req, res) => {
         }
         res.send(loginInfo.object)
     } else {
-        res.send({signIn: false})
+        res.send({ signIn: false })
     }
 })
 
@@ -80,15 +80,25 @@ app.post('/profile', async (req, res) => {
 app.post('/check-in', (req, res) => {
     console.log('this is cookies: ', req.cookies)
     let userId = req.cookies.uid
-    res.send( barInfo.userCheckIn(userId, JSON.parse(req.body.toString())));
+    res.send(barInfo.userCheckIn(userId, JSON.parse(req.body.toString())));
+})
+app.post('/logout', (req, res) => {
+    let userId = req.cookies.uid
+    var tempDb = tools.FileReadSync(userDbPath);
+    console.log('temporary database: ', tempDb);
+    tempDb[userId].loggedIn = false;
+    tools.FileWriteSync(tempDb);
+    res.send('User Has Logged Out!');
 })
 
 app.post('/bar-info', async (req, res) => {
     res.send(await barInfo.allInfo(JSON.parse(req.body.toString())));
 })
 
-app.post('/bar-stats', async (req, res) => {
-    res.send(await barInfo.barStats(JSON.parse(req.body.toString())));
+app.get('/bar-stats/:id', async (req, res) => {
+    const bar = await barInfo.barStats(req.params.id);
+    console.log(bar);
+    res.send(bar);
 })
 
 app.listen(4000, console.log("We're a go!"))
