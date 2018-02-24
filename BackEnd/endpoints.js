@@ -15,12 +15,7 @@ app.use(cookieParser());
 
 app.post('/cookie', (req, res) => {
     let allUsers = fileread('./database/userInfo.json');
-<<<<<<< HEAD
-    //console.log('SimonTest')
-    //console.log(req.headers)
-=======
     console.log('SimonTest')
->>>>>>> 7a8ffac9f2dcbd338cfe35341eecc0c214ebec05
     //console.log('this is your uid if you have a cookie: ',req.cookies)
     console.log('test1', req.cookies)
     if (Object.keys(req.cookies).length !== 0) {
@@ -52,37 +47,25 @@ app.post('/cookie', (req, res) => {
 
 app.post('/sign-up', async (req, res) => {
     const verify = await signup.signUp(JSON.parse(req.body.toString()));
-    
     //verify.uid = 'chimpanzee'
     // console.log("this is verify: ", verify);
     // console.log("this is cookie", req.cookies)
     if (verify.uid) {
         res.cookie('uid', verify.uid, { maxAge: 9000000000 });
-<<<<<<< HEAD
-    }
-    //console.log(verify.response)
-=======
         // res.send('asd')
         // console.log();
     }
     // console.log(verify.response)
->>>>>>> 7a8ffac9f2dcbd338cfe35341eecc0c214ebec05
     verify.response ? res.send(await { response: verify.response }) : res.send(await verify)
 })
 
 app.post('/login', async (req, res) => {
     let loginInfo = await signup.login(JSON.parse(req.body.toString()))
-<<<<<<< HEAD
-    if (typeof (loginInfo) === "object") {
-        if (Object.keys(req.cookies).length === 0) {
-            res.cookie('uid', loginInfo.id, { maxAge: 9000000000 })
-=======
     console.log('this is loginInfo',loginInfo.userAndPassCheck)
     if(loginInfo.userAndPassCheck) {
         if(!req.cookies.uid) {
             //console.log('this is login info: ',loginInfo.id)
             res.cookie('uid', loginInfo.id, { maxAge: 900000000 })
->>>>>>> 7a8ffac9f2dcbd338cfe35341eecc0c214ebec05
         }
         res.send(loginInfo.object)
     } else {
