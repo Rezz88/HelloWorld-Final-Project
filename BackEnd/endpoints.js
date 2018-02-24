@@ -96,10 +96,15 @@ app.post('/bar-info', async (req, res) => {
 })
 
 app.get('/bar-stats/:id', async (req, res) => {
-    console.log('>>>>>>>>>>>>', req.params.id)
-    const bar = await barInfo.barStats(req.params.id);
-    console.log(bar);
-    res.send(bar);
+    try {
+        console.log(req.params);
+        const bar = await barInfo.barStats(req.params.id);
+        console.log(bar);
+        res.send(bar);
+    }
+    catch(e) {
+        console.log('shitting the bed: ', e);
+    }
 })
 
 app.listen(4000, console.log("We're a go!"))

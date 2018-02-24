@@ -189,6 +189,7 @@ class MyFancyComponent extends React.PureComponent {
 
   //talking to Bk Function
   fetchVenueData = (venueData) => {
+    console.log(venueData);
     fetch(`/bar-stats/${venueData.place_id}`, {
       method: 'Get',
     }).then((response) => response.json())

@@ -32,6 +32,7 @@ class Login extends Component {
                 this.props.history.push("/", z);
             }
         })
+        .catch(e => console.log(e));
     }
 
     setInputValue =(key, value)=> {
