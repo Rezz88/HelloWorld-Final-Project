@@ -61,15 +61,16 @@ app.post('/sign-up', async (req, res) => {
 
 app.post('/login', async (req, res) => {
     let loginInfo = await signup.login(JSON.parse(req.body.toString()))
-    console.log('this is loginInfo',loginInfo.userAndPassCheck)
-    if(loginInfo.userAndPassCheck) {
+    console.log('this is loginInfo', loginInfo)
+    console.log('this is possible cookies: ', req.cookies.uid)
+    if(!loginInfo.error) {
         if(!req.cookies.uid) {
-            //console.log('this is login info: ',loginInfo.id)
+            console.log("you're about to create some cookies")
             res.cookie('uid', loginInfo.id, { maxAge: 900000000 })
         }
         res.send(loginInfo.object)
     } else {
-        res.send({ signIn: false })
+        res.send({ error: loginInfo.error })
     }
 })
 
@@ -87,7 +88,7 @@ app.post('/logout', (req, res) => {
     console.log('temporary database: ', tempDb);
     tempDb[userId].loggedIn = false;
     tools.FileWriteSync(tempDb);
-    res.send('User Has Logged Out!');
+    res.send({status: 'User Has Logged Out!'});
 })
 
 app.post('/bar-info', async (req, res) => {
@@ -95,6 +96,7 @@ app.post('/bar-info', async (req, res) => {
 })
 
 app.get('/bar-stats/:id', async (req, res) => {
+    console.log('>>>>>>>>>>>>', req.params.id)
     const bar = await barInfo.barStats(req.params.id);
     console.log(bar);
     res.send(bar);

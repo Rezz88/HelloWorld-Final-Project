@@ -22,7 +22,7 @@ const signUp = async (userInfo) => {
     console.log(userInfo)
     //test to see if legit email else fuck you 
     if (!emailValidate(email)) {
-        return ('Invalid email');
+        return ({error: "invalid email"});
     }
     var randomNumber = Math.floor(Math.random() * 100000000000)
     var userId = "userId" + randomNumber
@@ -49,18 +49,22 @@ const signUp = async (userInfo) => {
             var result = JSON.parse(data.toString());
             //console.log('this is result: ', result)
             let alreadyExist = false;
+            let errors;
             if (result) {
                 //console.log('this is result again: ', result)
                 for (let id of Object.keys(result)) {
                     //console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', result[id].username)
-                    if (result[id].username === username || result[id].email === email) {
-                        console.log('username/email exists!')
+                    if (result[id].username === username) {
+                        error = "Username Already Exists"
+                        alreadyExist = true;
+                    } else if (result[id].email === email) {
+                        error = "Email Already in Use"
                         alreadyExist = true;
                     }
                 }
                 if (alreadyExist) {
                     // return 'User already exists';
-                    return false;
+                    return {error: errors};
                 } else {
                     console.log('builds object now!!')
                     return await buildObj();
@@ -70,11 +74,11 @@ const signUp = async (userInfo) => {
                 return await buildObj();
             }
         }).catch(err => err);
-    //console.log('this is the last respose: ', response)
+    console.log('this is the last respose: ', response)
     if (response) {
         return { response: true, uid: userId }
     } else {
-        return { response: false };
+        return { error: errors };
     }
 }
 
@@ -89,12 +93,17 @@ const login = async (userInfo) => {
     //console.log(dbUser);
     for (let id of Object.keys(dbUser)) {
         if (dbUser[id].username === attemptUsername && dbUser[id].password === attemptPass) {
-            dbUser[id].loggedIn = false;
+            console.log('this is user logging in: ',dbUser[id])
+            dbUser[id].loggedIn = true;
             FileWriteSync(userDbPath, JSON.stringify(dbUser));
             return { id: id, object: dbUser[id] };
+        } else if (dbUser[id].username !== attemptUsername && dbUser[id].password === attemptPass) {
+            return {error: "Incorrect Username"}
+        } else if (dbUser[id].username === attemptUsername && dbUser[id].password !== attemptPass) {
+            return {error: "Incorrect Password for This User"}
         }
     }
-    return { userAndPassCheck: false }
+    return {error: "Incorrect Username"}
 }
 
 module.exports = {
