@@ -45,12 +45,14 @@ class Login extends Component {
         const { username, password } = this.state
         fetch('/login', {
             method: 'post',
+            credentials: "include",
             body: JSON.stringify({
                 username: username,
                 password: password,
             })
             })
             .then(x => x.text())
+            .then(x => console.log(x))
             .then(x => JSON.parse(x))
             .then(x => {
             if (x.signIn===false)  { 
@@ -59,7 +61,6 @@ class Login extends Component {
                 this.loginPass(x);
             }
         })
-        
     }
 
     loginPass = (x) => {

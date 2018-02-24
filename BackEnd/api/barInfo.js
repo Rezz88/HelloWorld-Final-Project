@@ -75,24 +75,26 @@ barStats = (barId) => {
     //let usersInBar = [];
     const userDb = tools.FileReadSync(userDbPath);
     //when users will check out of a bar, i need to reset it to "none" again. Not for this project but overall
-    for (let id of Object.keys(userDb)) {
+    for (let id of Object.keys(userDb)) { 
         if (userDb[id].whatBar === "none") {
             break
-        }
+        } //add false if any other bar doesnt exist
         if (userDb[id].whatBar === barId) {
             allAges.push(Number(userDb[id].age))
             maleToFemale.push(userDb[id].gender)
+        } else {
+
         }
     }
     let femaleCounter = 0;
     let maleCounter = 0;
     let average = (array) => array.reduce((a, b) => a + b) / array.length;
-    let meanAge = average(allAges); //average of the ages in a bar
+    let meanAge = Math.floor(average(allAges)); //average of the ages in a bar
     for (var i = 0; i < maleToFemale.length; i++) {
         maleToFemale[i].toLowerCase() === "female" ? femaleCounter++ : maleCounter++
     }
     let percentage = (a, b) => {
-        return { malePercent: b * 100 / (a + b), femalePercent: a * 100 / (a + b) }
+        return { malePercent: Math.floor(b * 100 / (a + b)), femalePercent: Math.floor(a * 100 / (a + b)) }
     }
     let ratio = percentage(femaleCounter, maleCounter);
     return { people: allAges.length, averageAge: meanAge, ratio: ratio }
@@ -106,3 +108,5 @@ module.exports = {
     userCheckIn,
     barStats
 }
+
+//use categories to sort bars and their biggest category 
