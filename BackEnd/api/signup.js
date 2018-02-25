@@ -39,46 +39,51 @@ const signUp = async (userInfo) => {
         }
         addToFile(userDbPath, obj);
         console.log('test')
-        return userId
     };
 
     //creates new user with all info to be filled on the site 
-    const response = fs.readFile(userDbPath, { String })
+    let verify = false;
+    let errors;
+    const response = await fs.readFile(userDbPath, { String })  //strange to put await and use .then however the data was compiled from two people and this was the fastest solution
         .then(async data => {
             //console.log(data)
             var result = JSON.parse(data.toString());
             //console.log('this is result: ', result)
-            let alreadyExist = false;
-            let errors;
+            let alreadyExist = false; 
             if (result) {
                 //console.log('this is result again: ', result)
                 for (let id of Object.keys(result)) {
-                    //console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>', result[id].username)
                     if (result[id].username === username) {
-                        error = "Username Already Exists"
+                        console.log("test1")
+                        errors = "Username Already Exists"
                         alreadyExist = true;
                     } else if (result[id].email === email) {
-                        error = "Email Already in Use"
+                        console.log("test2")
+                        errors = "Email Already in Use"
                         alreadyExist = true;
                     }
                 }
                 if (alreadyExist) {
-                    // return 'User already exists';
-                    return {error: errors};
+                    return 'User already exists';
+                    return false;
                 } else {
+                    verify = true
                     console.log('builds object now!!')
                     return await buildObj();
                 }
             } else {
-                console.log('builds object now!!')
+                verify = true
+                console.log('builds object now!!1')
                 return await buildObj();
             }
         }).catch(err => err);
-    console.log('this is the last respose: ', response)
-    if (response) {
+    console.log('this is the last respose: ', errors)
+    if (verify) {
         return { response: true, uid: userId }
-    } else {
+    } else if (errors != undefined) {
         return { error: errors };
+    } else {
+        return {error: "404 signup broken"}
     }
 }
 
