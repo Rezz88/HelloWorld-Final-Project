@@ -59,7 +59,10 @@ To start:
 
 ``` git pull --rebase origin master```
 
-5. **If you have conflicts make sure you fix them before you push!!!**
+5. **If you have conflicts make sure you fix them before you push! if you do fix them in your IDE, save changes**
+
+```git add -A && git rebase --continue```
+
 6. Once you fixed your conflicts and or have no conflicts push your new branch to github
 
 ```git push origin <branch name>```
