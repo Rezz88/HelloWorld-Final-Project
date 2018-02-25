@@ -4,9 +4,11 @@
 Git
 --
 (Initial git setup to copy from existing repoistory)
+
 git clone
 
 (Initial git setup to set up NEW repository)
+
 git init
 
 git remote add origin https://github.com/Rezz88/HelloWorld-Final-Project.git or whatever GitHub
