@@ -32,7 +32,7 @@ When you first clone:
 To start:
 ```npm run start```
 
-###Git Workflow
+### Git Workflow
 
 ![alt text](https://media.giphy.com/media/l4hLWYhVo0gHgGTwk/giphy.gif)
 
