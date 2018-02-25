@@ -47,9 +47,10 @@ class Login extends Component {
                 loggedIn: true
             })
         }).then(response => response.json())
+        .then(data=> {console.log(data); return data})
         .then(data => {
             if (!data.signIn) {
-                this.setState({ error: 'error' })
+                this.setState({ error: data.error })
             } else {
                 this.loginPass(data);
             }
@@ -58,8 +59,8 @@ class Login extends Component {
         })
     }
 
-    loginPass = (x) => {
-        this.props.history.push("/main", x);
+    loginPass = (data) => {
+        this.props.history.push("/main", data);
     }
 
     login = () =>    {
