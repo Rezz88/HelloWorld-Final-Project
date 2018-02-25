@@ -1,13 +1,13 @@
 //FINAL-PROJECT README FILE
 ==
 
-Git 
+Git
 --
 (Initial git setup to copy from existing repoistory)
 git clone
 
 (Initial git setup to set up NEW repository)
-git init 
+git init
 git remote add origin https://github.com/Rezz88/HelloWorld-Final-Project.git or whatever GitHub
 
 (Daily git flow)
@@ -18,12 +18,52 @@ git pull (stagging area must be cleared when you pull )
 
 FrontEnd
 --
-npm install --save react-router-dom;
-npm install --save react-router;
+When you first clone:
+```npm install```
 
-Maps
+To start:
+```npm run start```
+
+BackEnd
 --
-npm install --save react-google-maps
-npm install --save recompose
-// import { connect } from "tls"; NOT USED YET
+When you first clone:
+```npm install```
+
+To start:
+```npm run start```
+
+#Git Workflow
+![alt text](https://media.giphy.com/media/l4hLWYhVo0gHgGTwk/giphy.gif)
+
+1. Checkout the master branch before working on new feature and pull latest changes.
+
+```git checkout master && git pull origin master```
+
+2. Now your ready to checkout a new branch to begin working on a new feature
+
+```git checkout -b <branch name>```
+
+3. Once your ready git add and commit your changes.
+
+```git add -A```
+
+```git commit -m '<commit message>'```
+
+4. Now we're ready to add the latest changes to our branch from master.
+
+``` git pull --rebase master <branch name>```
+
+5. **If you have conflicts make sure you fix them before you push!!!**
+6. Once you fixed your conflicts and or have no conflicts push your new branch to github
+
+```git push origin <branch name>```
+
+7. Go to github and create a new pull request to master
+![alt text](./newpull.png);
+
+8. Make sure the base branch is master and there's no conflicts
+![alt text](./pull.png);
+
+9. When everything is good merge your branch into master
+![alt text](./good.png);
 
