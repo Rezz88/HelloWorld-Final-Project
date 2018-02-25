@@ -32,7 +32,8 @@ When you first clone:
 To start:
 ```npm run start```
 
-#Git Workflow
+###Git Workflow
+
 ![alt text](https://media.giphy.com/media/l4hLWYhVo0gHgGTwk/giphy.gif)
 
 1. Checkout the master branch before working on new feature and pull latest changes.
