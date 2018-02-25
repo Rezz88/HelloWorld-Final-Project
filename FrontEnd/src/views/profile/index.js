@@ -34,16 +34,6 @@ class Profile extends Component {
     )
   };
 
-  renderSettingsButton = () => {
-    return (
-      <div>
-        <button onClick={
-          () => this.props.history.push('/settings', this.props.location.state
-          )}>Settings</button>
-      </div>
-    )
-  };
-
   renderBarHistory = () => {
     //Will be filled with user bar info
     const { barName, barRatio, barAge, barNum } = this.props.location.state
@@ -58,6 +48,20 @@ class Profile extends Component {
     )
   };
 
+  logout = () => {
+    console.log('logout before fetch = ', this.props.location.state)
+    fetch('/logout', {
+        method: 'post',
+        credentials: 'include',
+        body: JSON.stringify({
+            loggedIn: false
+        })
+    })
+    this.props.location.state.loggedIn = false;
+    console.log('logout = ', this.props.location.state)
+    this.props.history.push("/")
+};
+
   render() {
     //Props to be passed down from app.js
     console.log('Profile page ', this.props.location.state)
@@ -67,8 +71,10 @@ class Profile extends Component {
         <div>
           {this.renderUserInfo()}
           {this.renderProfileButton()}
-          {this.renderSettingsButton()}
           {this.renderBarHistory()}
+          <div>
+            <button onClick={this.logout}>Logout</button>
+          </div>
         </div>
       );
     }
