@@ -13,9 +13,10 @@ export const mediaSizes = {
 };
 
 export const Button = styled.div`
-  background-color: red;
+  background-color: whitesmoke;
   border-radius: 5px;
   padding: 8px;
+  box-shadow: ${constants.boxShadow};
 `;
 
 export const MainHeader = styled.h1`

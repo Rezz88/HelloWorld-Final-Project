@@ -32,11 +32,11 @@ const Icon = styled.img`
 `;
 
 const PeopleMetric = styled.div`
-  border: 1px solid red;
   padding: .5rem;
+  padding-left: 0;
 `;
 
-const Bar = styled.div`
+const BarCapacity = styled.div`
   width: ${({ capacityRatio }) => capacityRatio}%;
   height: .5rem;
   background-color: ${({ capacityRatio }) => {
@@ -56,6 +56,51 @@ const Bar = styled.div`
       return 'black';
     } 
   }};
+`;
+
+// width: ${({averageAge}) => {
+const BarAvgAge = styled.div`
+  width: ${({averageAge}) => {
+    if (averageAge < 20) {
+      return '15%'
+    }
+    if (averageAge > 21 && averageAge < 28) {
+      return '30%'
+    }
+    if (averageAge > 28 && averageAge < 35) {
+      return '60%'
+    }
+    if (averageAge > 35) {
+      return '85%'
+    }
+  }};
+  height: .5rem;  
+  background-color: ${({ averageAge }) => {
+    if (averageAge < 20){
+      return 'red';
+    }
+    if (averageAge > 21 && averageAge < 28) {
+      return 'blue';
+    }
+    if (averageAge > 28 && averageAge < 35) {
+      return 'green';
+    }
+    if (averageAge > 35) {
+      return 'grey'
+    }
+  }};
+`;
+
+const BarWrapper = styled.div`
+   border: '1px solid whitesmoke'; 
+   width: '100%';
+`;
+
+const TitleWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  font-weight: bold;
 `;
 
 const MyMapComponent = compose(
@@ -110,10 +155,10 @@ const MyMapComponent = compose(
 )((props) => {
   return <GoogleMap
     ref={props.onMapMounted}
-    // center={props.center}
-    center={ {lat: 45.49914093562442, lng: -73.57023796767328}}
-    // zoom={props.zoom}
-    zoom={14}
+    center={props.center}
+    // center={ {lat: 45.49914093562442, lng: -73.57023796767328}}
+    // zoom={14}
+    zoom={props.zoom}
     onZoomChanged={props.onMapZoom}
     options={{ streetViewControl: false, mapTypeControl: false, styles: myMapStyles }}
     onClick={props.onMapClick}
@@ -132,15 +177,25 @@ const MyMapComponent = compose(
       }}
       onCloseClick={props.closeInfoWindow}>
       <StyledInfoWindow>
-        <Icon src={props.venueData.icon} alt='icon' />
-        <div>Name: {props.venueData.name}</div>
-        <PeopleMetric>
-          <div style={{ border: '1px solid whitesmoke', width: '100%' }}>
-            <Bar capacityRatio={props.venueData.people && 300 / props.venueData.people } />
-          </div>
-          <div>People: {props.venueData.people || ''}</div>
-        <div>AgeAvg: {props.venueData.averageAge}</div>
-        </PeopleMetric>
+        <TitleWrapper>
+          <Icon src={props.venueData.icon} alt='icon' />
+          <div>{props.venueData.name}</div>
+        </TitleWrapper>
+        {
+          props.venueData.people !== 0 ?
+          <PeopleMetric>
+            <BarWrapper>
+              <BarCapacity capacityRatio={props.venueData.people && 300 / props.venueData.people } />
+            </BarWrapper>
+            <div>People: {props.venueData.people || ''}</div>
+            <BarWrapper>
+              <BarAvgAge averageAge={props.venueData.averageAge}/>
+            </BarWrapper>
+          <div>AgeAvg: {props.venueData.averageAge || ''}</div>
+          </PeopleMetric>
+          :
+          <div>*No whatslit users</div>
+        }
       </StyledInfoWindow>
     </InfoWindow>}
     {props.venues.length > 0 && props.venues.map((venue, idx) => {
@@ -181,20 +236,20 @@ class MyFancyComponent extends React.PureComponent {
 
 
   componentDidMount() {
-    //get user location
-    //update state (this.setState) with location and pass props to MyMapComponent
-    // this.getUserLocation()
-    //   .then(coords => this.setCenter(coords.lat, coords.lng));
+    // get user location
+    // update state (this.setState) with location and pass props to MyMapComponent
+    this.getUserLocation()
+      .then(coords => this.setCenter(coords.lat, coords.lng));
   }
 
   getUserLocation = () => {
   
     // {lat: 45.49914093562442, lng: -73.57023796767328}
-    // // return new Promise((resolve, reject) => {
-    // //   navigator.geolocation.getCurrentPosition((e) => {
-    // //     resolve({ lat: e.coords.latitude, lng: e.coords.longitude });
-    // //   });
-    // // });
+    return new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition((e) => {
+        resolve({ lat: e.coords.latitude, lng: e.coords.longitude });
+      });
+    });
   }
 
   showBars = async (map, radius) => {
