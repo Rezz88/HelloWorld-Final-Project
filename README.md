@@ -52,7 +52,7 @@ To start:
 
 4. Now we're ready to add the latest changes to our branch from master.
 
-``` git pull --rebase master <branch name>```
+``` git pull --rebase origin master```
 
 5. **If you have conflicts make sure you fix them before you push!!!**
 6. Once you fixed your conflicts and or have no conflicts push your new branch to github
