@@ -46,7 +46,7 @@ class SignUp extends Component {
             } else {
                 // if I don't send the right data the response I get
                 //throws an error on the page, not what I want to happen below
-                this.setState({error: 'error'})
+                this.setState({error: x.error})
             }
             })
             //if false display message to the user to use diff username or password
