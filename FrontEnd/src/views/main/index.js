@@ -75,6 +75,9 @@ class Main extends Component {
             </NavBar>
           </FixedWrapper>
           <MainMap/>
+          <NavBar>
+              <MainHeader>WhatsLit</MainHeader>
+          </NavBar>
         </Wrapper>
       )
     } else {

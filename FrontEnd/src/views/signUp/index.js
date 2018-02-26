@@ -1,4 +1,13 @@
 import React, { Component } from 'react';
+import {  MainHeader, 
+    constants, 
+    mediaSizes, 
+    NavBar,
+    Wrapper,
+    FixedWrapper,
+    NavButton,
+    NavButtonWrapper
+     } from '../styles';
 // import { Link } from 'react-router-dom'; Not using link ATM
 import '../../App.css';
 
@@ -128,12 +137,18 @@ class SignUp extends Component {
             
     render() {
         return (
-            <div>
-                    {this.signUp()}
-                </div>
+    <Wrapper>
+        <FixedWrapper>
+        <NavBar>
+        <MainHeader>WhatsLit</MainHeader>
+        </NavBar>
+        {this.signUp()}
+        </FixedWrapper>
+    </Wrapper>
                 );
     
         }
     }
     
 export default SignUp;
+
