@@ -71,7 +71,7 @@ class SignUp extends Component {
     signUp = () => {
         const { username, password, password1, email, age, gender } = this.state
         return (
-            <div className="center-text">
+            <div className="login-screen">
                 <div>
                     <h4>Sign-Up</h4>
                     <input placeholder="Username"

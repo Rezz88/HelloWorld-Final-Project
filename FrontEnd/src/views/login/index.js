@@ -66,7 +66,7 @@ class Login extends Component {
     login = () => {
         const { username, password } = this.state
         return (
-            <div className="center-text" >
+            <div className="login-screen" >
                 <div>
                 <h4>Login</h4>
                 <input placeholder="Username"
