@@ -1,15 +1,27 @@
 import React, { Component } from 'react';
-import {  MainHeader, 
-    constants, 
-    mediaSizes, 
+import styled from 'styled-components';
+import {
+    MainHeader,
+    constants,
+    mediaSizes,
     NavBar,
-    Wrapper,
-    FixedWrapper,
     NavButton,
     NavButtonWrapper
-     } from '../styles';
+} from '../styles';
 // import { Link } from 'react-router-dom'; Not using link ATM
 import '../../App.css';
+
+const Wrapper = styled.div`
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+`;
+
+const LoginWrapper = styled.div`
+     flex: 1;
+     background: url(https://cdn.mtlblog.com/uploads/272655_030b5a01fc8b7c76d3587ead4e8f04ffbb0acdc6.jpg);
+     background-size: cover;
+`;
 
 class SignUp extends Component {
     constructor() {
@@ -82,7 +94,7 @@ class SignUp extends Component {
         return (
             <div className="login-screen">
                 <div>
-                    <h4>Sign-Up</h4>
+                    <h3 className="login-text">Sign-Up</h3>
                     <input placeholder="Username"
                         value={username}
                         onChange={(e) => this.setInputValue('username', e.target.value)}>
@@ -110,45 +122,41 @@ class SignUp extends Component {
                         value={age}
                         onChange={(e) => this.setInputValue('age', e.target.value)}>
                     </input>
-                    </div>
-                    <form>
-                        <input type="radio"
-                            name="gender"
-                            value="male"
-                            onClick={(e) => this.setInputValue('gender', e.target.value)} />
-                        Male
-                    <input type="radio"
-                            name="gender"
-                            value="female"
-                            onClick={(e) => this.setInputValue('gender', e.target.value)} />
-                        Female
-                    </form>
-                    <button className="button-size" onClick={this.signingUp}>Submit</button>
-                    <button className="button-size" onClick={this.login}>Already have an account?</button>
-                    <div>{this.state.error}</div>
                 </div>
-                )
-            }
-        
-    login = () =>    {
-                    this.props.history.push("/");
-                }
-            
-            
+                <form className="login-text">
+                    <input type="radio"
+                        name="gender"
+                        value="male"
+                        onClick={(e) => this.setInputValue('gender', e.target.value)} />
+                    <a>Male</a>
+                    <input type="radio"
+                        name="gender"
+                        value="female"
+                        onClick={(e) => this.setInputValue('gender', e.target.value)} />
+                    <a>Female</a>
+                </form>
+                <button className="button-size" onClick={this.signingUp}>Submit</button>
+                <button className="button-size" onClick={this.login}>Already have an account?</button>
+                <div className="login-text" >{this.state.error}</div>
+            </div>
+        )
+    }
+
+    login = () => {
+        this.props.history.push("/");
+    }
+
+
     render() {
         return (
-    <Wrapper>
-        <FixedWrapper>
-        <NavBar>
-        <MainHeader>WhatsLit</MainHeader>
-        </NavBar>
-        {this.signUp()}
-        </FixedWrapper>
-    </Wrapper>
-                );
-    
-        }
+            <Wrapper>
+                <NavBar>
+                    <MainHeader>WhatsLit</MainHeader>
+                </NavBar>
+                <LoginWrapper>{this.signUp()}</LoginWrapper>
+            </Wrapper>
+        );
     }
-    
-export default SignUp;
+}
 
+export default SignUp;
