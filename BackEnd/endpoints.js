@@ -77,11 +77,12 @@ app.post('/check-in', (req, res) => {
     let userId = req.cookies.uid
     res.send(barInfo.userCheckIn(userId, JSON.parse(req.body.toString())));
 })
-app.post('/logout', (req, res) => {
+app.get('/logout', (req, res) => {
     let userId = req.cookies.uid
     var tempDb = tools.FileReadSync(userDbPath);
-    console.log('temporary database: ', tempDb);
+    console.log('temporary database: ', tempDb[userId]);
     tempDb[userId].loggedIn = false;
+    console.log('temporary database after: ', tempDb[userId]);
     tools.FileWriteSync(tempDb);
     res.send({status: 'User Has Logged Out!'});
 })
