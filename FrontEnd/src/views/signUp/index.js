@@ -114,8 +114,8 @@ class SignUp extends Component {
                             onClick={(e) => this.setInputValue('gender', e.target.value)} />
                         Female
                     </form>
-                    <button onClick={this.signingUp}>Submit</button>
-                    <button onClick={this.login}>Already have an account?</button>
+                    <button className="button-size" onClick={this.signingUp}>Submit</button>
+                    <button className="button-size" onClick={this.login}>Already have an account?</button>
                     <div>{this.state.error}</div>
                 </div>
                 )

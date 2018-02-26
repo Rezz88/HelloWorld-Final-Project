@@ -82,11 +82,11 @@ class Login extends Component {
                 </input>
                 </div>
                 <div>
-                <button type="submit"
+                <button className="button-size" type="submit"
                     onClick={this.loggingIn}>Login
                 </button>
                 </div>
-                <button onClick={this.signUp}>Sign-up</button>
+                <button className="button-size" onClick={this.signUp}>Sign-up</button>
                 <div>{this.state.error}</div>
             </div>
         )
