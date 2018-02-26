@@ -33,10 +33,11 @@ class Profile extends Component {
         return barHistory.map(item => {
             // console.log(product)
             return (
-              <div>
+              <div> 
                 <div>Venue: {item.barname}</div>
                 <div>Average age: {item.averageAge}</div>
                 <div>Attendance: {item.attendance}</div>
+                <div>-</div>
               </div>
             )
 
@@ -60,12 +61,12 @@ class Profile extends Component {
     )
   };
 
-  renderProfileButton = () => {
+  renderMainButton = () => {
     return (
       <div>
         <button onClick={
           () => this.props.history.push('/main', this.props.location.state
-          )}>Bar Map</button>
+          )}>Back to Map</button>
       </div>
     )
   };
@@ -113,8 +114,9 @@ class Profile extends Component {
     if (this.props.location.state.loggedIn === true) {
       return (
         <div>
+          {this.renderMainButton()}
           {this.renderUserInfo()}
-          {this.renderProfileButton()}
+          <h4>Bar History</h4>
           {this.renderBarHistory()}
           {this.renderLogout()}
         </div>
