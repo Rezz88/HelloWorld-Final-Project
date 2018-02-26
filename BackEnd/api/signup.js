@@ -22,7 +22,7 @@ const signUp = async (userInfo) => {
     console.log(userInfo)
     //test to see if legit email else fuck you 
     if (!emailValidate(email)) {
-        return ({error: "invalid email"});
+        return ({error: "Invalid E-mail"});
     }
     var randomNumber = Math.floor(Math.random() * 100000000000)
     var userId = "userId" + randomNumber
