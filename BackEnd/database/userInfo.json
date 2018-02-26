@@ -9898,5 +9898,14 @@
         "gender": "Male",
         "whatBar": "ChIJza_cylkayUwRwrnA0q721F4",
         "loggedIn": true
+    },
+    "userId69104371957": {
+        "loggedIn": true,
+        "username": "admin",
+        "email": "admin@gmail.com",
+        "password": "0000",
+        "gender": "male",
+        "age": "36",
+        "whatBar": "none"
     }
 }
