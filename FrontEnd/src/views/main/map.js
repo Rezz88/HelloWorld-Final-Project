@@ -1,4 +1,5 @@
 import BarListComponent from './barList'
+import SortComponent from './filter'
 import React from "react";
 import styled from 'styled-components';
 import { constants, mediaSizes } from '../styles.js'
@@ -26,6 +27,7 @@ const PLACES_API_KEY = 'AIzaSyBA0wFPUwIo03AHcEf3pFarehPoQLzysCo';
 
 const StyledInfoWindow = styled.div`
   background-color: whitesmoke;
+  max-width: 200px;
 `;
 
 const Icon = styled.img`
@@ -45,10 +47,10 @@ const BarCapacity = styled.div`
     if (capacityRatio < 25) {
       return 'green';
     }
-    if (capacityRatio > 25 && capacityRatio > 50) {
+    if (capacityRatio > 25 && capacityRatio <= 50) {
       return 'yellow';
     }
-    if (capacityRatio > 50 && capacityRatio < 75) {
+    if (capacityRatio > 50 && capacityRatio <= 75) {
       return 'orange';
     }
     if (capacityRatio > 75 && capacityRatio < 101) {
@@ -66,7 +68,7 @@ const BarAvgAge = styled.div`
     if (averageAge < 20) {
       return '15%'
     }
-    if (averageAge > 21 && averageAge < 28) {
+    if (averageAge > 21 && averageAge <= 28) {
       return '30%'
     }
     if (averageAge > 28 && averageAge < 35) {
@@ -81,7 +83,7 @@ const BarAvgAge = styled.div`
     if (averageAge < 20) {
       return 'red';
     }
-    if (averageAge > 21 && averageAge < 28) {
+    if (averageAge > 21 && averageAge <= 28) {
       return 'blue';
     }
     if (averageAge > 28 && averageAge < 35) {
@@ -218,7 +220,7 @@ const MyMapComponent = compose(
           props.venueData.people !== 0 ?
             <PeopleMetric>
               <BarWrapper>
-                <BarCapacity capacityRatio={props.venueData.people && 300 / props.venueData.people} />
+                <BarCapacity capacityRatio={props.venueData.people &&  (props.venueData.people / 80) *100} />
               </BarWrapper>
               <div>People: {props.venueData.people || ''}</div>
               <BarWrapper>
@@ -271,7 +273,8 @@ class MyFancyComponent extends React.PureComponent {
     venueData: null,
     barShowing: null,
     clickedBar: false,
-    mapState: true,
+    mapState: false,
+    userLoc: null,
   }
 
 
@@ -287,7 +290,9 @@ class MyFancyComponent extends React.PureComponent {
     // {lat: 45.49914093562442, lng: -73.57023796767328}
     return new Promise((resolve, reject) => {
       navigator.geolocation.getCurrentPosition((e) => {
-        resolve({ lat: e.coords.latitude, lng: e.coords.longitude });
+        let loc = { lat: e.coords.latitude, lng: e.coords.longitude };
+        this.setState({userLoc: loc})
+        resolve(loc);
       });
     });
   }
@@ -295,7 +300,6 @@ class MyFancyComponent extends React.PureComponent {
   showBars = async (map, radius) => {
     const { marker, center } = this.state;
     this.setState({ barShowing: true })
-    console.log(this.state.venues);
     let location = marker ? marker : center;
     if (!location) {
       location = await this.getUserLocation();
@@ -394,6 +398,10 @@ class MyFancyComponent extends React.PureComponent {
     return (
       <Container>
         <MapContent>
+          <SortComponent
+            //state
+            venues={this.state.venues}
+          />
         <div><button onClick={this.toggleMap}>Toggle Map</button></div>
           <MyMapComponent
             //state
@@ -422,6 +430,7 @@ class MyFancyComponent extends React.PureComponent {
           //state
           venues={this.state.venues}
           infoWindow={this.state.infoWindow}
+          userLoc={this.state.userLoc}
           //functions
           handleHover={this.handleMouseOver}
           handleHoverOut={this.handleMouseOut}
