@@ -4,16 +4,21 @@ import { Redirect } from 'react-router';
 import MainMap from './map'
 import { MainHeader, constants, mediaSizes } from '../styles';
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  height: 100vh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+`;
 
 const FixedWrapper = styled.div`
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  z-index: 100;
-  margin-bottom: 4rem;
 `;
+// position: fixed;
+// left: 0;
+// right: 0;
+// top: 0;
+// z-index: 100;
+// margin-bottom: 4rem;
 
 const NavBar = styled.div`
   display: flex;
@@ -70,8 +75,8 @@ class Main extends Component {
             <NavBar>
               <MainHeader>WhatsLit</MainHeader>
               <NavButtonWrapper>
-                <NavButton onClick={() => this.props.history.push("/profile", this.props.location.state)}>Your Profile</NavButton>
                 <NavButton onClick={() => this.props.history.push("/ratings", this.props.location.state)}>Rating </NavButton>
+                <NavButton onClick={() => this.props.history.push("/profile", this.props.location.state)}>Your Profile</NavButton>
               </NavButtonWrapper>
             </NavBar>
           </FixedWrapper>

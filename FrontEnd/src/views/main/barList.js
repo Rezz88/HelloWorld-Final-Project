@@ -4,7 +4,6 @@ import { Button } from '../styles';
 
 const BarList = styled.div`
   flex: 1;
-  max-height: 400px;
   overflow-y: scroll;
   text-align: center;
 `;

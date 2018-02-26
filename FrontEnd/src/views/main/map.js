@@ -1,7 +1,7 @@
 import BarListComponent from './barList'
 import React from "react";
 import styled from 'styled-components';
-import { constants } from '../styles.js'
+import { constants, mediaSizes } from '../styles.js'
 import { compose, withProps, withHandlers, withStateHandlers, lifecycle } from "recompose"
 import {
   withScriptjs,
@@ -16,12 +16,13 @@ import {
 import markerImage from './images/heatDot.png';
 import markerHovered from './images/greenMarker.png';
 import personImage from './images/user.png';
+import darkUser from './images/darkUser.png'
 import testLogo from './images/firecircle.png';
-import myMapStyles from "./mapStyle/style.js";
+import darkMapStyles from "./mapStyle/dark.js";
+import lightStyles from "./mapStyle/light.js"
 
 const PLACES_API_KEY = 'AIzaSyBA0wFPUwIo03AHcEf3pFarehPoQLzysCo';
 
-var placeID;
 
 const StyledInfoWindow = styled.div`
   background-color: whitesmoke;
@@ -92,16 +93,25 @@ const BarAvgAge = styled.div`
   }};
 `;
 
+const GenderWrapper = styled.div`
+display: flex;
+align-items: center;
+font-size: 18px;
+font-weight: bold;
+background: blue;
+`;
+
 const Ratio = styled.div`
   width: ${({ genderRatio }) => genderRatio}%;
   height: .5rem;
-  background-color: 'pink';
+  background-color: pink;
 `;
 
 
 const BarWrapper = styled.div`
-   border: '1px solid black'; 
-   width: '100%';
+  box-shadow: 0px 0px 0px 1px black;
+  width: 95%;
+  margin: 5px auto;
 `;
 
 const TitleWrapper = styled.div`
@@ -109,6 +119,22 @@ const TitleWrapper = styled.div`
   align-items: center;
   font-size: 18px;
   font-weight: bold;
+`;
+
+const Container = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  @media(min-width: ${mediaSizes.sm}px) {
+    flex-direction: row;
+  }
+`
+
+const MapContent = styled.div`
+  width: 100%;
+  @media(min-width: ${mediaSizes.sm}px) {
+    width: 60%;
+  }
 `;
 
 const MyMapComponent = compose(
@@ -140,8 +166,7 @@ const MyMapComponent = compose(
 
     onMapClick: props => (e) => {
       // console.log(e.latLng.lat(), e.latLng.lng());
-      // if (props.clickedBar){return}
-      // props.userClickedBar(false)
+      // if (props.clickedBar){return};
       const lat = e.latLng.lat();
       const lng = e.latLng.lng();
       props.setMarker(lat, lng);
@@ -163,13 +188,18 @@ const MyMapComponent = compose(
     // center={ {lat: 45.49914093562442, lng: -73.57023796767328}}
     // zoom={14}
     onZoomChanged={props.onMapZoom}
-    options={{ streetViewControl: false, mapTypeControl: false, styles: myMapStyles }}
+    options={{ streetViewControl: false, mapTypeControl: false, 
+      
+      styles: props.mapState ? lightStyles : darkMapStyles
+    
+    }}
     onClick={props.onMapClick}
   >
     {props.marker && <Marker
       position={props.marker}
       onClick={() => { props.showBars(500); }}
-      icon={personImage}
+      icon={
+        props.mapState ?  darkUser : personImage}
     // Animation={'DROP'}
     >
     </Marker>}
@@ -195,9 +225,9 @@ const MyMapComponent = compose(
                 <BarAvgAge averageAge={props.venueData.averageAge} />
               </BarWrapper>
               <div>AgeAvg: {props.venueData.averageAge || ''}</div>
-              <BarWrapper>
+              <GenderWrapper>
                 <Ratio genderRatio={props.venueData.ratio.femalePercent} />
-              </BarWrapper>
+              </GenderWrapper>
               <div>Gender Ratio: {props.venueData.ratio.femalePercent || ''}</div>
             </PeopleMetric>
             :
@@ -216,7 +246,7 @@ const MyMapComponent = compose(
             // onMouseOver={() => console.log(venue.name)}
             // onClick={() => props.infoWindow && props.venueDate.name === venue.name
             // ? props.closeInfoWindow() : props.fetchVenueData(venue) }
-            onClick={() => console.log(props.venueData)}
+            onClick={() => props.barClick()}
             onMouseEnter={() => props.fetchVenueData(venue)}
             onMouseLeave={() => props.closeInfoWindow()}
 
@@ -241,6 +271,7 @@ class MyFancyComponent extends React.PureComponent {
     venueData: null,
     barShowing: null,
     clickedBar: false,
+    mapState: true,
   }
 
 
@@ -293,8 +324,6 @@ class MyFancyComponent extends React.PureComponent {
     }
   }
 
-
-
   closeInfoWindow = () => {
     this.setState({ infoWindow: false });
   }
@@ -317,8 +346,13 @@ class MyFancyComponent extends React.PureComponent {
       });
   };
 
-  userClickedBar = () => {
+  barClick = () => {
+    this.setState({ clickedBar : true })
     this.setState({ marker: null })
+  }
+  
+  mapClick = () => {
+    this.setState({clickedBar: false})
   }
 
   setCenter = (lat, lng) => {
@@ -352,10 +386,15 @@ class MyFancyComponent extends React.PureComponent {
     this.setState({ venues: newVenues })
   }
 
+  toggleMap = () => {
+    this.setState({ mapState: !this.state.mapState })
+  }
+
   render() {
     return (
-      <div className='container'>
-        <div className='map-content'>
+      <Container>
+        <MapContent>
+        <div><button onClick={this.toggleMap}>Toggle Map</button></div>
           <MyMapComponent
             //state
             zoom={this.state.zoom}
@@ -366,17 +405,19 @@ class MyFancyComponent extends React.PureComponent {
             venueData={this.state.venueData}
             barShowing={this.state.barShowing}
             clickedBar={this.state.clickedBar}
+            mapState={this.state.mapState}
             //functions
-            onBarClick={this.barClick}
+            barClick={this.barClick}
+            mapClick={this.mapClick}
             setMarker={this.setMarker}
             setZoom={this.setZoom}
             setCenter={this.setCenter}
             closeInfoWindow={this.closeInfoWindow}
             showBars={this.showBars}
-            userClickedBar={this.userClickedBar}
             fetchVenueData={this.fetchVenueData}
+            toggleMap={this.toggleMap}
           />
-        </div>
+        </MapContent>
         <BarListComponent
           //state
           venues={this.state.venues}
@@ -386,7 +427,7 @@ class MyFancyComponent extends React.PureComponent {
           handleHoverOut={this.handleMouseOut}
           toggleInfoWindow={this.toggleInfoWindow}
         />
-      </div>
+      </Container>
 
     )
   }
