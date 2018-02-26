@@ -71,7 +71,6 @@ class Main extends Component {
               <MainHeader>WhatsLit</MainHeader>
               <NavButtonWrapper>
                 <NavButton onClick={() => this.props.history.push("/profile", this.props.location.state)}>Your Profile</NavButton>
-                <NavButton onClick={() => this.props.history.push("/ratings", this.props.location.state)}>Rating </NavButton>
               </NavButtonWrapper>
             </NavBar>
           </FixedWrapper>

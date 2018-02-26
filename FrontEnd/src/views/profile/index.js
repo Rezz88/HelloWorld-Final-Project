@@ -1,5 +1,14 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router';
+import {  MainHeader, 
+          constants, 
+          mediaSizes, 
+          NavBar,
+          Wrapper,
+          FixedWrapper,
+          NavButton,
+          NavButtonWrapper
+           } from '../styles';
 // import { Link } from 'react-router-dom'; Not using link ATM
 import '../../App.css';
 
@@ -64,9 +73,9 @@ class Profile extends Component {
   renderMainButton = () => {
     return (
       <div>
-        <button onClick={
+        <NavButton onClick={
           () => this.props.history.push('/main', this.props.location.state
-          )}>Back to Map</button>
+          )}>Back to Map</NavButton>
       </div>
     )
   };
@@ -102,7 +111,7 @@ class Profile extends Component {
   renderLogout = () => {
     return (
       <div>
-        <button onClick={this.logout}>Logout</button>
+        <NavButton onClick={this.logout}>Logout</NavButton>
       </div>
     )
   };
@@ -113,13 +122,22 @@ class Profile extends Component {
     //For now the state is undefined unless someone logs in
     if (this.props.location.state.loggedIn === true) {
       return (
-        <div>
-          {this.renderMainButton()}
-          {this.renderUserInfo()}
-          <h4>Bar History</h4>
-          {this.renderBarHistory()}
-          {this.renderLogout()}
-        </div>
+<Wrapper>
+<FixedWrapper>
+  <NavBar>
+    <MainHeader>WhatsLit</MainHeader>
+    <NavButtonWrapper>
+    {this.renderMainButton()}
+    {this.renderLogout()}
+    </NavButtonWrapper>
+  </NavBar>
+  <div>
+    {this.renderUserInfo()}
+    <h4>Bar History</h4>
+    {this.renderBarHistory()}
+  </div>
+</FixedWrapper>
+</Wrapper>
       );
     }
     else {
