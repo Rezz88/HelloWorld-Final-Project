@@ -22,7 +22,7 @@ const signUp = async (userInfo) => {
     console.log(userInfo)
     //test to see if legit email else fuck you 
     if (!emailValidate(email)) {
-        return ({error: "Invalid E-mail"});
+        return ({ error: "Invalid E-mail" });
     }
     var randomNumber = Math.floor(Math.random() * 100000000000)
     var userId = "userId" + randomNumber
@@ -49,7 +49,7 @@ const signUp = async (userInfo) => {
             //console.log(data)
             var result = JSON.parse(data.toString());
             //console.log('this is result: ', result)
-            let alreadyExist = false; 
+            let alreadyExist = false;
             if (result) {
                 //console.log('this is result again: ', result)
                 for (let id of Object.keys(result)) {
@@ -83,7 +83,7 @@ const signUp = async (userInfo) => {
     } else if (errors != undefined) {
         return { error: errors };
     } else {
-        return {error: "404 signup broken"}
+        return { error: "404 signup broken" }
     }
 }
 
@@ -98,20 +98,31 @@ const login = async (userInfo) => {
     //console.log(dbUser);
     for (let id of Object.keys(dbUser)) {
         if (dbUser[id].username === attemptUsername && dbUser[id].password === attemptPass) {
-            console.log('this is user logging in: ',dbUser[id])
+            console.log('this is user logging in: ', dbUser[id])
             dbUser[id].loggedIn = true;
             FileWriteSync(userDbPath, JSON.stringify(dbUser));
             return { id: id, object: dbUser[id] };
         } else if (dbUser[id].username !== attemptUsername && dbUser[id].password === attemptPass) {
-            return {error: "Incorrect Username"}
+            return { error: "Incorrect Username" }
         } else if (dbUser[id].username === attemptUsername && dbUser[id].password !== attemptPass) {
-            return {error: "Incorrect Password for This User"}
+            return { error: "Incorrect Password for This User" }
         }
     }
-    return {error: "Incorrect Username"}
+    return { error: "Incorrect Username" }
+}
+
+const logout = async (id) => {
+    //console.log('this is user info! :  ', userInfo)
+    var dbUser = await fs.readFile(userDbPath, { String });
+    dbUser = JSON.parse(dbUser.toString());
+    dbUser[id].loggedIn = false;
+    console.log(dbUser[id].loggedIn)
+    FileWriteSync(userDbPath, JSON.stringify(dbUser));
+    return "good to go"
 }
 
 module.exports = {
     login,
-    signUp
+    signUp,
+    logout
 }

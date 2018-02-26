@@ -77,13 +77,9 @@ app.post('/check-in', (req, res) => {
     let userId = req.cookies.uid
     res.send(barInfo.userCheckIn(userId, JSON.parse(req.body.toString())));
 })
-app.get('/logout', (req, res) => {
+app.get('/logout', async (req, res) => {
     let userId = req.cookies.uid
-    var tempDb = tools.FileReadSync(userDbPath);
-    console.log('temporary database: ', tempDb[userId]);
-    tempDb[userId].loggedIn = false;
-    console.log('temporary database after: ', tempDb[userId]);
-    tools.FileWriteSync(tempDb);
+    signup.logout(userId)
     res.send({status: 'User Has Logged Out!'});
 })
 
@@ -103,4 +99,4 @@ app.get('/bar-stats/:id', async (req, res) => {
     }
 })
 
-app.listen(4001, console.log("We're a go!"))
+app.listen(4000, console.log("We're a go!"))
