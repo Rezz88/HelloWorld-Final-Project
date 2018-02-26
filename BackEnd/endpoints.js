@@ -47,15 +47,10 @@ app.post('/cookie', (req, res) => {
 
 app.post('/sign-up', async (req, res) => {
     const verify = await signup.signUp(JSON.parse(req.body.toString()));
-    //verify.uid = 'chimpanzee'
-    // console.log("this is verify: ", verify);
-    // console.log("this is cookie", req.cookies)
+    console.log('this is verify: ',verify)
     if (verify.uid) {
         res.cookie('uid', verify.uid, { maxAge: 9000000000 });
-        // res.send('asd')
-        // console.log();
     }
-    // console.log(verify.response)
     verify.response ? res.send(await { response: verify.response }) : res.send(await verify)
 })
 

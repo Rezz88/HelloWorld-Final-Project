@@ -13,11 +13,46 @@ export const mediaSizes = {
 };
 
 export const Button = styled.div`
-  background-color: red;
+  background-color: whitesmoke;
   border-radius: 5px;
   padding: 8px;
+  box-shadow: ${constants.boxShadow};
 `;
 
 export const MainHeader = styled.h1`
   margin: 0;
+`;
+
+export const NavBar = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: ${constants.boxShadow};
+  margin-bottom: .5rem;
+  padding: .5rem;
+  background-color: white;
+`;
+
+export const Wrapper = styled.div``;
+
+export const FixedWrapper = styled.div`
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 100;
+  margin-bottom: 4rem;
+`;
+
+
+export const NavButton = styled.div`
+  cursor: pointer;
+  margin-right: 1rem;
+  @media (min-width: ${mediaSizes.sm}px) {
+    color: red;
+  }
+`;
+
+export const NavButtonWrapper = styled.div`
+  display: flex;
 `;

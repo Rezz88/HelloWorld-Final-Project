@@ -1,6 +1,7 @@
 import BarListComponent from './barList'
 import React from "react";
 import styled from 'styled-components';
+import { constants } from '../styles.js'
 import { compose, withProps, withHandlers, withStateHandlers, lifecycle } from "recompose"
 import {
   withScriptjs,
@@ -23,7 +24,7 @@ const PLACES_API_KEY = 'AIzaSyBA0wFPUwIo03AHcEf3pFarehPoQLzysCo';
 var placeID;
 
 const StyledInfoWindow = styled.div`
-  
+  background-color: whitesmoke;
 `;
 
 const Icon = styled.img`
@@ -32,30 +33,82 @@ const Icon = styled.img`
 `;
 
 const PeopleMetric = styled.div`
-  border: 1px solid red;
   padding: .5rem;
+  padding-left: 0;
 `;
 
-const Bar = styled.div`
+const BarCapacity = styled.div`
   width: ${({ capacityRatio }) => capacityRatio}%;
   height: .5rem;
   background-color: ${({ capacityRatio }) => {
-    if(capacityRatio < 25) {
+    if (capacityRatio < 25) {
       return 'green';
     }
-    if(capacityRatio > 25 && capacityRatio > 50) {
+    if (capacityRatio > 25 && capacityRatio > 50) {
       return 'yellow';
     }
-    if(capacityRatio > 50 && capacityRatio < 75) {
+    if (capacityRatio > 50 && capacityRatio < 75) {
       return 'orange';
     }
-    if(capacityRatio > 75 && capacityRatio <101) {
+    if (capacityRatio > 75 && capacityRatio < 101) {
       return 'red';
     }
-    if (capacityRatio >100) {
+    if (capacityRatio > 100) {
       return 'black';
-    } 
+    }
   }};
+`;
+
+// width: ${({averageAge}) => {
+const BarAvgAge = styled.div`
+  width: ${({ averageAge }) => {
+    if (averageAge < 20) {
+      return '15%'
+    }
+    if (averageAge > 21 && averageAge < 28) {
+      return '30%'
+    }
+    if (averageAge > 28 && averageAge < 35) {
+      return '60%'
+    }
+    if (averageAge > 35) {
+      return '85%'
+    }
+  }};
+  height: .5rem;  
+  background-color: ${({ averageAge }) => {
+    if (averageAge < 20) {
+      return 'red';
+    }
+    if (averageAge > 21 && averageAge < 28) {
+      return 'blue';
+    }
+    if (averageAge > 28 && averageAge < 35) {
+      return 'green';
+    }
+    if (averageAge > 35) {
+      return 'grey'
+    }
+  }};
+`;
+
+const Ratio = styled.div`
+  width: ${({ genderRatio }) => genderRatio}%;
+  height: .5rem;
+  background-color: 'pink';
+`;
+
+
+const BarWrapper = styled.div`
+   border: '1px solid black'; 
+   width: '100%';
+`;
+
+const TitleWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  font-weight: bold;
 `;
 
 const MyMapComponent = compose(
@@ -99,21 +152,16 @@ const MyMapComponent = compose(
       }
     },
 
-
-    // seeHover: props => (e) => {
-    //   console.log(e);
-    // }
-
   }),
   withScriptjs,
   withGoogleMap
 )((props) => {
   return <GoogleMap
     ref={props.onMapMounted}
-    // center={props.center}
-    center={ {lat: 45.49914093562442, lng: -73.57023796767328}}
-    // zoom={props.zoom}
-    zoom={14}
+    center={props.center}
+    zoom={props.zoom}
+    // center={ {lat: 45.49914093562442, lng: -73.57023796767328}}
+    // zoom={14}
     onZoomChanged={props.onMapZoom}
     options={{ streetViewControl: false, mapTypeControl: false, styles: myMapStyles }}
     onClick={props.onMapClick}
@@ -132,15 +180,29 @@ const MyMapComponent = compose(
       }}
       onCloseClick={props.closeInfoWindow}>
       <StyledInfoWindow>
-        <Icon src={props.venueData.icon} alt='icon' />
-        <div>Name: {props.venueData.name}</div>
-        <PeopleMetric>
-          <div style={{ border: '1px solid whitesmoke', width: '100%' }}>
-            <Bar capacityRatio={props.venueData.people && 300 / props.venueData.people } />
-          </div>
-          <div>People: {props.venueData.people || ''}</div>
-        <div>AgeAvg: {props.venueData.averageAge}</div>
-        </PeopleMetric>
+        <TitleWrapper>
+          <Icon src={props.venueData.icon} alt='icon' />
+          <div>{props.venueData.name}</div>
+        </TitleWrapper>
+        {
+          props.venueData.people !== 0 ?
+            <PeopleMetric>
+              <BarWrapper>
+                <BarCapacity capacityRatio={props.venueData.people && 300 / props.venueData.people} />
+              </BarWrapper>
+              <div>People: {props.venueData.people || ''}</div>
+              <BarWrapper>
+                <BarAvgAge averageAge={props.venueData.averageAge} />
+              </BarWrapper>
+              <div>AgeAvg: {props.venueData.averageAge || ''}</div>
+              <BarWrapper>
+                <Ratio genderRatio={props.venueData.ratio.femalePercent} />
+              </BarWrapper>
+              <div>Gender Ratio: {props.venueData.ratio.femalePercent || ''}</div>
+            </PeopleMetric>
+            :
+            <div>*No whatslit users</div>
+        }
       </StyledInfoWindow>
     </InfoWindow>}
     {props.venues.length > 0 && props.venues.map((venue, idx) => {
@@ -152,8 +214,10 @@ const MyMapComponent = compose(
         >
           <div
             // onMouseOver={() => console.log(venue.name)}
-            onClick={() => console.log(venue)}
-            onMouseEnter={() => props.fetchVenueData(venue)} 
+            // onClick={() => props.infoWindow && props.venueDate.name === venue.name
+            // ? props.closeInfoWindow() : props.fetchVenueData(venue) }
+            onClick={() => console.log(props.venueData)}
+            onMouseEnter={() => props.fetchVenueData(venue)}
             onMouseLeave={() => props.closeInfoWindow()}
 
             className="bar-marker"
@@ -181,25 +245,26 @@ class MyFancyComponent extends React.PureComponent {
 
 
   componentDidMount() {
-    //get user location
-    //update state (this.setState) with location and pass props to MyMapComponent
-    // this.getUserLocation()
-    //   .then(coords => this.setCenter(coords.lat, coords.lng));
+    // get user location
+    // update state (this.setState) with location and pass props to MyMapComponent
+    this.getUserLocation()
+      .then(coords => this.setCenter(coords.lat, coords.lng));
   }
 
   getUserLocation = () => {
-  
+
     // {lat: 45.49914093562442, lng: -73.57023796767328}
-    // // return new Promise((resolve, reject) => {
-    // //   navigator.geolocation.getCurrentPosition((e) => {
-    // //     resolve({ lat: e.coords.latitude, lng: e.coords.longitude });
-    // //   });
-    // // });
+    return new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition((e) => {
+        resolve({ lat: e.coords.latitude, lng: e.coords.longitude });
+      });
+    });
   }
 
   showBars = async (map, radius) => {
     const { marker, center } = this.state;
     this.setState({ barShowing: true })
+    console.log(this.state.venues);
     let location = marker ? marker : center;
     if (!location) {
       location = await this.getUserLocation();
@@ -243,7 +308,6 @@ class MyFancyComponent extends React.PureComponent {
         if (Object.keys(data).length) {
           this.setState({ infoWindow: true, venueData: { ...venueData, ...data } });
         } else {
-          console.log('venue', venueData);
           this.setState({ infoWindow: true, venueData });
         }
         return;
@@ -251,15 +315,9 @@ class MyFancyComponent extends React.PureComponent {
       .catch((err) => {
         console.log('error', err);
       });
-    };
-
-
-    //********TO FIX for the info window to display Bar Data */
-    // .then(x => this.setState({infoWindow: x}))
-    //setstate...
+  };
 
   userClickedBar = () => {
-    console.log(this.state.clickedBar)
     this.setState({ marker: null })
   }
 
@@ -319,15 +377,15 @@ class MyFancyComponent extends React.PureComponent {
             fetchVenueData={this.fetchVenueData}
           />
         </div>
-          <BarListComponent
-            //state
-            venues={this.state.venues}
-            infoWindow={this.state.infoWindow}
-            //functions
-            handleHover={this.handleMouseOver}
-            handleHoverOut={this.handleMouseOut}
-            toggleInfoWindow={this.toggleInfoWindow}
-          />
+        <BarListComponent
+          //state
+          venues={this.state.venues}
+          infoWindow={this.state.infoWindow}
+          //functions
+          handleHover={this.handleMouseOver}
+          handleHoverOut={this.handleMouseOut}
+          toggleInfoWindow={this.toggleInfoWindow}
+        />
       </div>
 
     )

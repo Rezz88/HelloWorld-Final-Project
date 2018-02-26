@@ -6,6 +6,15 @@ import { MainHeader, constants, mediaSizes } from '../styles';
 
 const Wrapper = styled.div``;
 
+const FixedWrapper = styled.div`
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 100;
+  margin-bottom: 4rem;
+`;
+
 const NavBar = styled.div`
   display: flex;
   align-items: center;
@@ -13,6 +22,7 @@ const NavBar = styled.div`
   box-shadow: ${constants.boxShadow};
   margin-bottom: .5rem;
   padding: .5rem;
+  background-color: white;
 `;
 
 const NavButton = styled.div`
@@ -56,14 +66,18 @@ class Main extends Component {
     if (this.props.location.state.loggedIn === true) {
       return (
         <Wrapper>
+          <FixedWrapper>
+            <NavBar>
+              <MainHeader>WhatsLit</MainHeader>
+              <NavButtonWrapper>
+                <NavButton onClick={() => this.props.history.push("/profile", this.props.location.state)}>Your Profile</NavButton>
+              </NavButtonWrapper>
+            </NavBar>
+          </FixedWrapper>
+          <MainMap/>
           <NavBar>
-            <MainHeader>WhatsLit</MainHeader>
-            <NavButtonWrapper>
-              <NavButton onClick={() => this.props.history.push("/profile", this.props.location.state)}>Your Profile</NavButton>
-              <NavButton onClick={() => this.props.history.push("/ratings", this.props.location.state)}>Rating </NavButton>
-            </NavButtonWrapper>
+              <MainHeader>WhatsLit</MainHeader>
           </NavBar>
-          <MainMap />
         </Wrapper>
       )
     } else {
