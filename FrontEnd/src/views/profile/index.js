@@ -6,8 +6,46 @@ import '../../App.css';
 class Profile extends Component {
   constructor() {
     super();
-    this.state = {}
+    this.state = {
+      barHistory: []
+    }
   }
+
+  componentWillMount() {
+    let data = [
+      {
+        barname: 'bar1name',
+        averageAge: 30,
+        attendance: 200,
+      },
+      {
+        barname: 'bar2name',
+        averageAge: 20,
+        attendance: 150,
+      }
+    ]
+    this.setState({barHistory: data})
+
+  }
+  renderBarHistory = () => {
+    const { barHistory } = this.state;
+    if (barHistory.length) {
+        return barHistory.map(item => {
+            // console.log(product)
+            return (
+              <div> 
+                <div>Venue: {item.barname}</div>
+                <div>Average age: {item.averageAge}</div>
+                <div>Attendance: {item.attendance}</div>
+                <div>-</div>
+              </div>
+            )
+
+        })
+    } else {
+        return <div>Nothing available</div>
+    }
+}
 
   renderUserInfo = () => {
     //Will be filled with user info from sign-up
@@ -23,29 +61,29 @@ class Profile extends Component {
     )
   };
 
-  renderProfileButton = () => {
+  renderMainButton = () => {
     return (
       <div>
         <button onClick={
           () => this.props.history.push('/main', this.props.location.state
-          )}>Bar Map</button>
+          )}>Back to Map</button>
       </div>
     )
   };
 
-  renderBarHistory = () => {
-    //Will be filled with user bar info
-    const { barName, barRatio, barAge, barNum } = this.props.location.state
-    return (
-      <div>
-        <h4>Bar History</h4>
-        <div>{"barName: " + barName}</div>
-        <div>{"barRatio: " + barRatio}</div>
-        <div>{"barAge: " + barAge}</div>
-        <div>{"barNum: " + barNum}</div>
-      </div>
-    )
-  };
+  // renderBarHistory = () => {
+  //   //Will be filled with user bar info
+  //   const { barName, barRatio, barAge, barNum } = this.props.location.state
+  //   return (
+  //     <div>
+  //       <h4>Bar History</h4>
+  //       <div>{"barName: " + barName}</div>
+  //       <div>{"barRatio: " + barRatio}</div>
+  //       <div>{"barAge: " + barAge}</div>
+  //       <div>{"barNum: " + barNum}</div>
+  //     </div>
+  //   )
+  // };
 
   logout = () => {
     console.log('logout before fetch = ', this.props.location.state)
@@ -76,8 +114,9 @@ class Profile extends Component {
     if (this.props.location.state.loggedIn === true) {
       return (
         <div>
+          {this.renderMainButton()}
           {this.renderUserInfo()}
-          {this.renderProfileButton()}
+          <h4>Bar History</h4>
           {this.renderBarHistory()}
           {this.renderLogout()}
         </div>
