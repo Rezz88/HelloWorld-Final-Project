@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 // import '../../App.css';
 
 class Login extends Component {
-    constructor()   {
+    constructor() {
         super();
         this.state = {
             username: '',
@@ -19,24 +19,24 @@ class Login extends Component {
             method: "post",
             credentials: "include"
         })
-        .then(response => response.json())
-        .then(data => {
-            if (data.loggedIn) {
-                this.props.history.push('/main', data);
-            } else {
-                this.props.history.push('/', data);
-            }
-        }).catch((err) => {
-            console.log(err);
-        })
-        .catch(e => console.log(e));
+            .then(response => response.json())
+            .then(data => {
+                if (data.loggedIn) {
+                    this.props.history.push('/main', data);
+                } else {
+                    this.props.history.push('/', data);
+                }
+            }).catch((err) => {
+                console.log(err);
+            })
+            .catch(e => console.log(e));
     }
 
-    setInputValue =(key, value)=> {
-        this.setState({[key]: value})
-      }
+    setInputValue = (key, value) => {
+        this.setState({ [key]: value })
+    }
 
-    loggingIn = () =>    {
+    loggingIn = () => {
         const { username, password } = this.state
         fetch('/login', {
             method: 'post',
@@ -47,51 +47,56 @@ class Login extends Component {
                 loggedIn: true
             })
         }).then(response => response.json())
-        .then(data=> {console.log(data); return data})
-        .then(data => {
-            if (!data.signIn) {
-                this.setState({ error: data.error })
-            } else {
-                this.loginPass(data);
-            }
-        }).catch((err) => {
-            console.log(err);
-        })
+            .then(data => { console.log(data); return data })
+            .then(data => {
+                if (!data.signIn) {
+                    this.setState({ error: data.error })
+                } else {
+                    this.loginPass(data);
+                }
+            }).catch((err) => {
+                console.log(err);
+            })
     }
 
     loginPass = (data) => {
         this.props.history.push("/main", data);
     }
 
-    login = () =>    {
+    login = () => {
         const { username, password } = this.state
-        return(
-            <div>
-                Username
-                <input  placeholder="Username"
+        return (
+            <div className="center-text" >
+                <div>
+                <h4>Login</h4>
+                <input placeholder="Username"
                         value={username}
-                        onChange={(e)=> this.setInputValue('username', e.target.value)}>
+                        onChange={(e) => this.setInputValue('username', e.target.value)}>
                 </input>
-                Password
-                <input  placeholder="Password"
-                        type="password"
-                        value={password}
-                        onChange={(e)=> this.setInputValue('password', e.target.value)}>
+                </div>
+                <div>
+                <input placeholder="Password"
+                    type="password"
+                    value={password}
+                    onChange={(e) => this.setInputValue('password', e.target.value)}>
                 </input>
+                </div>
+                <div>
                 <button type="submit"
-                        onClick={this.loggingIn}>Login
+                    onClick={this.loggingIn}>Login
                 </button>
-                <button onClick={this.signUp}>create an account</button>
+                </div>
+                <button onClick={this.signUp}>Sign-up</button>
                 <div>{this.state.error}</div>
             </div>
         )
     }
-    signUp = () =>  {
+    signUp = () => {
         this.props.history.push("/signUp");
     }
 
     render() {
-        return(
+        return (
             <div>
                 {this.login()}
             </div>

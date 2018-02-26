@@ -845,14 +845,5 @@
         "gender": "male",
         "age": "1",
         "whatBar": "none"
-    },
-    "userId9882200357": {
-        "loggedIn": true,
-        "username": "Admin",
-        "email": "admin1@gmail.com",
-        "password": "111",
-        "gender": "male",
-        "age": "29",
-        "whatBar": "none"
     }
 }
