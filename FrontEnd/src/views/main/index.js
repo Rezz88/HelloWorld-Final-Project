@@ -75,12 +75,14 @@ class Main extends Component {
             <NavBar>
               <MainHeader>WhatsLit</MainHeader>
               <NavButtonWrapper>
-                <NavButton onClick={() => this.props.history.push("/ratings", this.props.location.state)}>Rating </NavButton>
                 <NavButton onClick={() => this.props.history.push("/profile", this.props.location.state)}>Your Profile</NavButton>
               </NavButtonWrapper>
             </NavBar>
           </FixedWrapper>
           <MainMap/>
+          <NavBar>
+              <MainHeader>WhatsLit</MainHeader>
+          </NavBar>
         </Wrapper>
       )
     } else {

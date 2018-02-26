@@ -1,4 +1,13 @@
 import React, { Component } from 'react';
+import {  MainHeader, 
+    constants, 
+    mediaSizes, 
+    NavBar,
+    Wrapper,
+    FixedWrapper,
+    NavButton,
+    NavButtonWrapper
+     } from '../styles';
 // import { Link } from 'react-router-dom'; Not using link ATM
 // import '../../App.css';
 
@@ -66,7 +75,7 @@ class Login extends Component {
     login = () => {
         const { username, password } = this.state
         return (
-            <div className="center-text" >
+            <div className="login-screen" >
                 <div>
                 <h4>Login</h4>
                 <input placeholder="Username"
@@ -82,11 +91,11 @@ class Login extends Component {
                 </input>
                 </div>
                 <div>
-                <button type="submit"
+                <button className="button-size" type="submit"
                     onClick={this.loggingIn}>Login
                 </button>
                 </div>
-                <button onClick={this.signUp}>Sign-up</button>
+                <button className="button-size" onClick={this.signUp}>Sign-up</button>
                 <div>{this.state.error}</div>
             </div>
         )
@@ -97,9 +106,14 @@ class Login extends Component {
 
     render() {
         return (
-            <div>
+                <Wrapper>
+                <FixedWrapper>
+                <NavBar>
+                <MainHeader>WhatsLit</MainHeader>
+                </NavBar>
                 {this.login()}
-            </div>
+                </FixedWrapper>
+            </Wrapper>
         );
     }
 }

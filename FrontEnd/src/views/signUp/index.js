@@ -1,4 +1,13 @@
 import React, { Component } from 'react';
+import {  MainHeader, 
+    constants, 
+    mediaSizes, 
+    NavBar,
+    Wrapper,
+    FixedWrapper,
+    NavButton,
+    NavButtonWrapper
+     } from '../styles';
 // import { Link } from 'react-router-dom'; Not using link ATM
 import '../../App.css';
 
@@ -71,7 +80,7 @@ class SignUp extends Component {
     signUp = () => {
         const { username, password, password1, email, age, gender } = this.state
         return (
-            <div className="center-text">
+            <div className="login-screen">
                 <div>
                     <h4>Sign-Up</h4>
                     <input placeholder="Username"
@@ -114,8 +123,8 @@ class SignUp extends Component {
                             onClick={(e) => this.setInputValue('gender', e.target.value)} />
                         Female
                     </form>
-                    <button onClick={this.signingUp}>Submit</button>
-                    <button onClick={this.login}>Already have an account?</button>
+                    <button className="button-size" onClick={this.signingUp}>Submit</button>
+                    <button className="button-size" onClick={this.login}>Already have an account?</button>
                     <div>{this.state.error}</div>
                 </div>
                 )
@@ -128,12 +137,18 @@ class SignUp extends Component {
             
     render() {
         return (
-            <div>
-                    {this.signUp()}
-                </div>
+    <Wrapper>
+        <FixedWrapper>
+        <NavBar>
+        <MainHeader>WhatsLit</MainHeader>
+        </NavBar>
+        {this.signUp()}
+        </FixedWrapper>
+    </Wrapper>
                 );
     
         }
     }
     
 export default SignUp;
+
