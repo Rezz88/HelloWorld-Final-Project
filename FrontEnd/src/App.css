@@ -17,6 +17,14 @@ html {
   background-color: whitesmoke;
 }
 
+body, html {
+  height: 100%;
+}
+
+.login-text {
+  color: whitesmoke
+}
+
 .login-screen {
   text-align: center;
   margin-top: 50px;
@@ -25,15 +33,15 @@ html {
   width: 10em;
   border-style: solid; 
   border-width: thick;
-  padding: 5%
-
-
+  border-color: whitesmoke;
+  padding: 5%;
+  background: rgba(19, 16, 16, 0.55)
 }
 
 .button-size {
   background-color: grey;
   color: black;
-  width: 60%
+  width: 60%;
 }
 
 .button-size:hover {
