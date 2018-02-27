@@ -70,7 +70,7 @@ class Login extends Component {
         }).then(response => response.json())
             .then(data => { console.log(data); return data })
             .then(data => {
-                if (!data.signIn) {
+                if (!data.loggedIn) {
                     this.setState({ error: data.error })
                 } else {
                     this.loginPass(data);
