@@ -1,7 +1,8 @@
 import BarListComponent from './barList'
+import SortComponent from './filter'
 import React from "react";
 import styled from 'styled-components';
-import { constants } from '../styles.js'
+import { constants, mediaSizes } from '../styles.js'
 import { compose, withProps, withHandlers, withStateHandlers, lifecycle } from "recompose"
 import {
   withScriptjs,
@@ -16,15 +17,17 @@ import {
 import markerImage from './images/heatDot.png';
 import markerHovered from './images/greenMarker.png';
 import personImage from './images/user.png';
+import darkUser from './images/darkUser.png'
 import testLogo from './images/firecircle.png';
-import myMapStyles from "./mapStyle/style.js";
+import darkMapStyles from "./mapStyle/dark.js";
+import lightStyles from "./mapStyle/light.js"
 
 const PLACES_API_KEY = 'AIzaSyBA0wFPUwIo03AHcEf3pFarehPoQLzysCo';
 
-var placeID;
 
 const StyledInfoWindow = styled.div`
   background-color: whitesmoke;
+  max-width: 200px;
 `;
 
 const Icon = styled.img`
@@ -44,10 +47,10 @@ const BarCapacity = styled.div`
     if (capacityRatio < 25) {
       return 'green';
     }
-    if (capacityRatio > 25 && capacityRatio > 50) {
+    if (capacityRatio > 25 && capacityRatio <= 50) {
       return 'yellow';
     }
-    if (capacityRatio > 50 && capacityRatio < 75) {
+    if (capacityRatio > 50 && capacityRatio <= 75) {
       return 'orange';
     }
     if (capacityRatio > 75 && capacityRatio < 101) {
@@ -65,7 +68,7 @@ const BarAvgAge = styled.div`
     if (averageAge < 20) {
       return '15%'
     }
-    if (averageAge > 21 && averageAge < 28) {
+    if (averageAge > 21 && averageAge <= 28) {
       return '30%'
     }
     if (averageAge > 28 && averageAge < 35) {
@@ -80,7 +83,7 @@ const BarAvgAge = styled.div`
     if (averageAge < 20) {
       return 'red';
     }
-    if (averageAge > 21 && averageAge < 28) {
+    if (averageAge > 21 && averageAge <= 28) {
       return 'blue';
     }
     if (averageAge > 28 && averageAge < 35) {
@@ -92,16 +95,25 @@ const BarAvgAge = styled.div`
   }};
 `;
 
+const GenderWrapper = styled.div`
+display: flex;
+align-items: center;
+font-size: 18px;
+font-weight: bold;
+background: blue;
+`;
+
 const Ratio = styled.div`
   width: ${({ genderRatio }) => genderRatio}%;
   height: .5rem;
-  background-color: 'pink';
+  background-color: pink;
 `;
 
 
 const BarWrapper = styled.div`
-   border: '1px solid black'; 
-   width: '100%';
+  box-shadow: 0px 0px 0px 1px black;
+  width: 95%;
+  margin: 5px auto;
 `;
 
 const TitleWrapper = styled.div`
@@ -109,6 +121,22 @@ const TitleWrapper = styled.div`
   align-items: center;
   font-size: 18px;
   font-weight: bold;
+`;
+
+const Container = styled.div`
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  @media(min-width: ${mediaSizes.sm}px) {
+    flex-direction: row;
+  }
+`
+
+const MapContent = styled.div`
+  width: 100%;
+  @media(min-width: ${mediaSizes.sm}px) {
+    width: 60%;
+  }
 `;
 
 const MyMapComponent = compose(
@@ -140,8 +168,7 @@ const MyMapComponent = compose(
 
     onMapClick: props => (e) => {
       // console.log(e.latLng.lat(), e.latLng.lng());
-      // if (props.clickedBar){return}
-      // props.userClickedBar(false)
+      // if (props.clickedBar){return};
       const lat = e.latLng.lat();
       const lng = e.latLng.lng();
       props.setMarker(lat, lng);
@@ -163,13 +190,18 @@ const MyMapComponent = compose(
     // center={ {lat: 45.49914093562442, lng: -73.57023796767328}}
     // zoom={14}
     onZoomChanged={props.onMapZoom}
-    options={{ streetViewControl: false, mapTypeControl: false, styles: myMapStyles }}
+    options={{ streetViewControl: false, mapTypeControl: false, 
+      
+      styles: props.mapState ? lightStyles : darkMapStyles
+    
+    }}
     onClick={props.onMapClick}
   >
     {props.marker && <Marker
       position={props.marker}
       onClick={() => { props.showBars(500); }}
-      icon={personImage}
+      icon={
+        props.mapState ?  darkUser : personImage}
     // Animation={'DROP'}
     >
     </Marker>}
@@ -188,16 +220,16 @@ const MyMapComponent = compose(
           props.venueData.people !== 0 ?
             <PeopleMetric>
               <BarWrapper>
-                <BarCapacity capacityRatio={props.venueData.people && 300 / props.venueData.people} />
+                <BarCapacity capacityRatio={props.venueData.people &&  (props.venueData.people / 80) *100} />
               </BarWrapper>
               <div>People: {props.venueData.people || ''}</div>
               <BarWrapper>
                 <BarAvgAge averageAge={props.venueData.averageAge} />
               </BarWrapper>
               <div>AgeAvg: {props.venueData.averageAge || ''}</div>
-              <BarWrapper>
+              <GenderWrapper>
                 <Ratio genderRatio={props.venueData.ratio.femalePercent} />
-              </BarWrapper>
+              </GenderWrapper>
               <div>Gender Ratio: {props.venueData.ratio.femalePercent || ''}</div>
             </PeopleMetric>
             :
@@ -216,7 +248,7 @@ const MyMapComponent = compose(
             // onMouseOver={() => console.log(venue.name)}
             // onClick={() => props.infoWindow && props.venueDate.name === venue.name
             // ? props.closeInfoWindow() : props.fetchVenueData(venue) }
-            onClick={() => console.log(props.venueData)}
+            onClick={() => props.barClick()}
             onMouseEnter={() => props.fetchVenueData(venue)}
             onMouseLeave={() => props.closeInfoWindow()}
 
@@ -241,6 +273,8 @@ class MyFancyComponent extends React.PureComponent {
     venueData: null,
     barShowing: null,
     clickedBar: false,
+    mapState: false,
+    userLoc: null,
   }
 
 
@@ -256,32 +290,38 @@ class MyFancyComponent extends React.PureComponent {
     // {lat: 45.49914093562442, lng: -73.57023796767328}
     return new Promise((resolve, reject) => {
       navigator.geolocation.getCurrentPosition((e) => {
-        resolve({ lat: e.coords.latitude, lng: e.coords.longitude });
+        let loc = { lat: e.coords.latitude, lng: e.coords.longitude };
+        this.setState({userLoc: loc})
+        resolve(loc);
       });
     });
   }
 
   showBars = async (map, radius) => {
+    console.log('WHY IS THIS BEING CALLED')
     const { marker, center } = this.state;
     this.setState({ barShowing: true })
-    console.log(this.state.venues);
     let location = marker ? marker : center;
     if (!location) {
       location = await this.getUserLocation();
     }
 
-    const google = window.google;
-    var service = new google.maps.places.PlacesService(map.context.__SECRET_MAP_DO_NOT_USE_OR_YOU_WILL_BE_FIRED);
-    service.nearbySearch({
-      location,
-      radius: radius,
-      type: ['bar']
-    }, (results, status) => {
-      if (status === google.maps.places.PlacesServiceStatus.OK) {
-        // console.log(results);
-        this.setVenues(results);
-      }
-    });
+    if(map){
+      const google = window.google;
+      var service = new google.maps.places.PlacesService(map.context.__SECRET_MAP_DO_NOT_USE_OR_YOU_WILL_BE_FIRED);
+      service.nearbySearch({
+        location,
+        radius: radius,
+        type: ['bar']
+      }, (results, status) => {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+          // console.log(results);
+          this.setVenues(results);
+        }
+      });
+    }
+    // console.log('map', map)
+   
   }
 
   toggleInfoWindow = (venue) => {
@@ -292,8 +332,6 @@ class MyFancyComponent extends React.PureComponent {
       this.fetchVenueData(venue);
     }
   }
-
-
 
   closeInfoWindow = () => {
     this.setState({ infoWindow: false });
@@ -317,8 +355,13 @@ class MyFancyComponent extends React.PureComponent {
       });
   };
 
-  userClickedBar = () => {
+  barClick = () => {
+    this.setState({ clickedBar : true })
     this.setState({ marker: null })
+  }
+  
+  mapClick = () => {
+    this.setState({clickedBar: false})
   }
 
   setCenter = (lat, lng) => {
@@ -352,10 +395,19 @@ class MyFancyComponent extends React.PureComponent {
     this.setState({ venues: newVenues })
   }
 
+  toggleMap = () => {
+    this.setState({ mapState: !this.state.mapState })
+  }
+
   render() {
     return (
-      <div className='container'>
-        <div className='map-content'>
+      <Container>
+        <MapContent>
+          <SortComponent
+            //state
+            venues={this.state.venues}
+          />
+        <div><button onClick={this.toggleMap}>Toggle Map</button></div>
           <MyMapComponent
             //state
             zoom={this.state.zoom}
@@ -366,27 +418,30 @@ class MyFancyComponent extends React.PureComponent {
             venueData={this.state.venueData}
             barShowing={this.state.barShowing}
             clickedBar={this.state.clickedBar}
+            mapState={this.state.mapState}
             //functions
-            onBarClick={this.barClick}
+            barClick={this.barClick}
+            mapClick={this.mapClick}
             setMarker={this.setMarker}
             setZoom={this.setZoom}
             setCenter={this.setCenter}
             closeInfoWindow={this.closeInfoWindow}
             showBars={this.showBars}
-            userClickedBar={this.userClickedBar}
             fetchVenueData={this.fetchVenueData}
+            toggleMap={this.toggleMap}
           />
-        </div>
+        </MapContent>
         <BarListComponent
           //state
           venues={this.state.venues}
           infoWindow={this.state.infoWindow}
+          userLoc={this.state.userLoc}
           //functions
           handleHover={this.handleMouseOver}
           handleHoverOut={this.handleMouseOut}
           toggleInfoWindow={this.toggleInfoWindow}
         />
-      </div>
+      </Container>
 
     )
   }

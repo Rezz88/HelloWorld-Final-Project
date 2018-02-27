@@ -1,15 +1,27 @@
 import React, { Component } from 'react';
-import {  MainHeader, 
-    constants, 
-    mediaSizes, 
+import styled from 'styled-components';
+import {
+    MainHeader,
+    constants,
+    mediaSizes,
     NavBar,
-    Wrapper,
-    FixedWrapper,
     NavButton,
     NavButtonWrapper
-     } from '../styles';
+} from '../styles';
 // import { Link } from 'react-router-dom'; Not using link ATM
 // import '../../App.css';
+
+const Wrapper = styled.div`
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+`;
+
+const LoginWrapper = styled.div`
+     flex: 1;
+     background: url(https://cdn.mtlblog.com/uploads/272655_030b5a01fc8b7c76d3587ead4e8f04ffbb0acdc6.jpg);
+     background-size: cover;
+`;
 
 class Login extends Component {
     constructor() {
@@ -24,6 +36,24 @@ class Login extends Component {
     }
 
     componentWillMount() {
+        fetch('/cookie', {
+            method: "post",
+            credentials: "include"
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.loggedIn) {
+                    this.props.history.push('/main', data);
+                } else {
+                    this.props.history.push('/', data);
+                }
+            }).catch((err) => {
+                console.log(err);
+            })
+            .catch(e => console.log(e));
+    }
+
+    componentDidMount() {
         fetch('/cookie', {
             method: "post",
             credentials: "include"
@@ -58,7 +88,7 @@ class Login extends Component {
         }).then(response => response.json())
             .then(data => { console.log(data); return data })
             .then(data => {
-                if (!data.signIn) {
+                if (!data.loggedIn) {
                     this.setState({ error: data.error })
                 } else {
                     this.loginPass(data);
@@ -77,26 +107,26 @@ class Login extends Component {
         return (
             <div className="login-screen" >
                 <div>
-                <h4>Login</h4>
-                <input placeholder="Username"
+                    <h3 className="login-text">Login</h3>
+                    <input placeholder="Username"
                         value={username}
                         onChange={(e) => this.setInputValue('username', e.target.value)}>
-                </input>
+                    </input>
                 </div>
                 <div>
-                <input placeholder="Password"
-                    type="password"
-                    value={password}
-                    onChange={(e) => this.setInputValue('password', e.target.value)}>
-                </input>
+                    <input placeholder="Password"
+                        type="password"
+                        value={password}
+                        onChange={(e) => this.setInputValue('password', e.target.value)}>
+                    </input>
                 </div>
                 <div>
-                <button className="button-size" type="submit"
-                    onClick={this.loggingIn}>Login
+                    <button className="button-size" type="submit"
+                        onClick={this.loggingIn}>Login
                 </button>
                 </div>
                 <button className="button-size" onClick={this.signUp}>Sign-up</button>
-                <div>{this.state.error}</div>
+                <div className="login-text">{this.state.error}</div>
             </div>
         )
     }
@@ -106,13 +136,16 @@ class Login extends Component {
 
     render() {
         return (
-                <Wrapper>
-                <FixedWrapper>
+            <Wrapper>
                 <NavBar>
-                <MainHeader>WhatsLit</MainHeader>
+                    <div className="div-flex">
+                    <MainHeader>WhatsLit</MainHeader>
+                    <div className="split">
+                    <img src="https://i.imgur.com/fSG9Cdt.png" height="30" width="35"/>
+                    </div>
+                    </div>
                 </NavBar>
-                {this.login()}
-                </FixedWrapper>
+                <LoginWrapper>{this.login()}</LoginWrapper>
             </Wrapper>
         );
     }

@@ -4,16 +4,21 @@ import { Redirect } from 'react-router';
 import MainMap from './map'
 import { MainHeader, constants, mediaSizes } from '../styles';
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  height: 100vh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+`;
 
 const FixedWrapper = styled.div`
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  z-index: 100;
-  margin-bottom: 4rem;
 `;
+// position: fixed;
+// left: 0;
+// right: 0;
+// top: 0;
+// z-index: 100;
+// margin-bottom: 4rem;
 
 const NavBar = styled.div`
   display: flex;
@@ -46,14 +51,16 @@ class Main extends Component {
   componentDidMount = () => {
     this.props.location.state.bar = [
 
-      {name: "Fredo",
-       age: 29,
-       gender: "Male"
+      {
+        name: "Fredo",
+        age: 29,
+        gender: "Male"
       },
 
-      {name: "Annie",
-       age: 27,
-       gender: "Female"
+      {
+        name: "Annie",
+        age: 27,
+        gender: "Female"
       }
     ]
   };
@@ -68,21 +75,26 @@ class Main extends Component {
         <Wrapper>
           <FixedWrapper>
             <NavBar>
+              <div className="div-flex">
               <MainHeader>WhatsLit</MainHeader>
+              <div className="split">
+              <img src="https://i.imgur.com/fSG9Cdt.png" height="30" width="35" />
+              </div>
+              </div>
               <NavButtonWrapper>
                 <NavButton onClick={() => this.props.history.push("/profile", this.props.location.state)}>Your Profile</NavButton>
               </NavButtonWrapper>
             </NavBar>
           </FixedWrapper>
-          <MainMap/>
+          <MainMap />
           <NavBar>
-              <MainHeader>WhatsLit</MainHeader>
+            <MainHeader>Montreal</MainHeader>
           </NavBar>
         </Wrapper>
       )
     } else {
       return (
-        <Redirect to="/"/>
+        <Redirect to="/" />
       )
     }
   }

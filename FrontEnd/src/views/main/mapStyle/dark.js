@@ -1,4 +1,4 @@
-const myStyle = [
+const darkStyle = [
   {
       "featureType": "all",
       "elementType": "labels",
@@ -315,4 +315,4 @@ const myStyle = [
 
 
 
-export default myStyle
+export default darkStyle
