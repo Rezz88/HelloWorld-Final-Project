@@ -40,7 +40,6 @@ class Profile extends Component {
       }
     ]
     this.setState({ barHistory: data })
-
   }
   renderBarHistory = () => {
     const { barHistory } = this.state;
@@ -63,8 +62,8 @@ class Profile extends Component {
   }
 
   renderUserInfoEdit = () => {
-    const { username, email  } = this.props.location.state
-
+    const { username, email, password  } = this.props.location.state
+    const { newEmail, newPassword1, newPassword, oldPassword }  = this.state
     return (
       <div>
         <h4>Profile</h4>
@@ -72,25 +71,25 @@ class Profile extends Component {
 
         <div>{"E-mail: " + email}</div>
         <input placeholder="enter new E-mail"
-                value=''
+                value={newEmail}
                 onChange={(e) => this.setInputValue('newEmail', e.target.value)}>
         </input>
 
         <input placeholder="Old Password"
           type="password"
-          value=''
+          value={oldPassword}
           onChange={(e) => this.setInputValue('oldPassword', e.target.value)}>
         </input>
 
         <input placeholder="New Password"
           type="password"
-          value=''
+          value={newPassword}
           onChange={(e) => this.setInputValue('newPassword', e.target.value)}>
         </input>
 
         <input placeholder="Confirm New Password"
           type="password"
-          value= ''
+          value= {newPassword1}
           onChange={(e) => this.setInputValue('newPassword1', e.target.value)}>
         </input>
         <button className="button-size" onClick={this.editing}>Submit changes</button>
@@ -172,7 +171,7 @@ logout = () => {
   })
   this.props.location.state.loggedIn = false;
   console.log('logout = ', this.props.location.state)
-  this.props.history.push("/")
+  this.props.history.push("/", this.props.location.state)
 };
 
 renderLogout = () => {
