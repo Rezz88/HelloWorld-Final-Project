@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Redirect } from 'react-router';
 import MainMap from './map'
-import { MainHeader, constants, mediaSizes } from '../styles';
+import { MainHeader, constants, mediaSizes, MainFooter, FootBar } from '../styles';
 
 const Wrapper = styled.div`
   height: 100vh;
