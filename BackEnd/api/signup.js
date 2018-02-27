@@ -15,7 +15,7 @@ const signUp = async (userInfo) => {
     //sorts user data coming in
     var username = userInfo.username;
     var password = userInfo.password;
-    var age = userInfo.age;
+    var age = Number(userInfo.age);
     var gender = userInfo.gender;
     var email = userInfo.email;
     var loggedIn = userInfo.loggedIn;
