@@ -289,16 +289,7 @@ theSorter = async (barQuery) => {
             return sortedArray
         }
 
-    } else {
-
-    }
-
-    createSortedArray = (x, y) => {
-
-    }
-
-
-
+    } 
     return bars;
 }
 
