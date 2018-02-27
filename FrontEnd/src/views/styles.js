@@ -21,6 +21,7 @@ export const Button = styled.div`
 
 export const MainHeader = styled.h1`
   margin: 0;
+  font-variant: small-caps
 `;
 
 export const NavBar = styled.div`
