@@ -51,14 +51,16 @@ class Main extends Component {
   componentDidMount = () => {
     this.props.location.state.bar = [
 
-      {name: "Fredo",
-       age: 29,
-       gender: "Male"
+      {
+        name: "Fredo",
+        age: 29,
+        gender: "Male"
       },
 
-      {name: "Annie",
-       age: 27,
-       gender: "Female"
+      {
+        name: "Annie",
+        age: 27,
+        gender: "Female"
       }
     ]
   };
@@ -73,21 +75,26 @@ class Main extends Component {
         <Wrapper>
           <FixedWrapper>
             <NavBar>
+              <div className="div-flex">
               <MainHeader>WhatsLit</MainHeader>
+              <div className="split">
+              <img src="https://i.imgur.com/fSG9Cdt.png" height="30" width="35" />
+              </div>
+              </div>
               <NavButtonWrapper>
                 <NavButton onClick={() => this.props.history.push("/profile", this.props.location.state)}>Your Profile</NavButton>
               </NavButtonWrapper>
             </NavBar>
           </FixedWrapper>
-          <MainMap/>
+          <MainMap />
           <NavBar>
-              <MainHeader>WhatsLit</MainHeader>
+            <MainHeader>Montreal</MainHeader>
           </NavBar>
         </Wrapper>
       )
     } else {
       return (
-        <Redirect to="/"/>
+        <Redirect to="/" />
       )
     }
   }

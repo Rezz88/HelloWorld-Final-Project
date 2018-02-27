@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router';
-import {  MainHeader, 
-          constants, 
-          mediaSizes, 
-          NavBar,
-          Wrapper,
-          FixedWrapper,
-          NavButton,
-          NavButtonWrapper
-           } from '../styles';
+import {
+  MainHeader,
+  constants,
+  mediaSizes,
+  NavBar,
+  Wrapper,
+  FixedWrapper,
+  NavButton,
+  NavButtonWrapper
+} from '../styles';
 // import { Link } from 'react-router-dom'; Not using link ATM
 import '../../App.css';
 
@@ -33,28 +34,28 @@ class Profile extends Component {
         attendance: 150,
       }
     ]
-    this.setState({barHistory: data})
+    this.setState({ barHistory: data })
 
   }
   renderBarHistory = () => {
     const { barHistory } = this.state;
     if (barHistory.length) {
-        return barHistory.map(item => {
-            // console.log(product)
-            return (
-              <div> 
-                <div>Venue: {item.barname}</div>
-                <div>Average age: {item.averageAge}</div>
-                <div>Attendance: {item.attendance}</div>
-                <div>-</div>
-              </div>
-            )
+      return barHistory.map(item => {
+        // console.log(product)
+        return (
+          <div>
+            <div>Venue: {item.barname}</div>
+            <div>Average age: {item.averageAge}</div>
+            <div>Attendance: {item.attendance}</div>
+            <div>-</div>
+          </div>
+        )
 
-        })
+      })
     } else {
-        return <div>Nothing available</div>
+      return <div>Nothing available</div>
     }
-}
+  }
 
   renderUserInfo = () => {
     //Will be filled with user info from sign-up
@@ -119,22 +120,27 @@ class Profile extends Component {
     //For now the state is undefined unless someone logs in
     if (this.props.location.state.loggedIn === true) {
       return (
-<Wrapper>
-<FixedWrapper>
-  <NavBar>
-    <MainHeader>WhatsLit</MainHeader>
-    <NavButtonWrapper>
-    {this.renderMainButton()}
-    {this.renderLogout()}
-    </NavButtonWrapper>
-  </NavBar>
-  <div>
-    {this.renderUserInfo()}
-    <h4>Bar History</h4>
-    {this.renderBarHistory()}
-  </div>
-</FixedWrapper>
-</Wrapper>
+        <Wrapper>
+          <FixedWrapper>
+            <NavBar>
+              <div className="div-flex">
+              <MainHeader>WhatsLit</MainHeader>
+              <div className="split">
+              <img src="https://i.imgur.com/fSG9Cdt.png" height="30" width="35" />
+              </div>
+              </div>
+              <NavButtonWrapper>
+                {this.renderMainButton()}
+                {this.renderLogout()}
+              </NavButtonWrapper>
+            </NavBar>
+            <div>
+              {this.renderUserInfo()}
+              <h4>Bar History</h4>
+              {this.renderBarHistory()}
+            </div>
+          </FixedWrapper>
+        </Wrapper>
       );
     }
     else {
