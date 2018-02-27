@@ -167,12 +167,8 @@ renderMainButton = () => {
 logout = () => {
   console.log('logout before fetch = ', this.props.location.state)
   fetch('/logout', {
-    method: 'post',
-    credentials: 'include',
-    body: JSON.stringify({
-      loggedIn: false
-
-    })
+    method: 'get',
+    credentials: 'include'
   })
   this.props.location.state.loggedIn = false;
   console.log('logout = ', this.props.location.state)

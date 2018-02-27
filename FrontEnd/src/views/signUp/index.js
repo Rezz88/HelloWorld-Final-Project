@@ -141,7 +141,7 @@ class SignUp extends Component {
                     </input>
                     <div>
                         <select className="button-size" value={month} onChange={(e) => this.setInputValue('month', e.target.value)} >
-                            <option value='' selected>month</option>
+                            <option value='' selected>Month</option>
                             <option value='1'>Jan</option>
                             <option value='2'>Feb</option>
                             <option value='3'>Mar</option>
@@ -155,12 +155,12 @@ class SignUp extends Component {
                             <option value='11'>Nov</option>
                             <option value='12'>Dec</option>
                         </select>
-                        <input placeholder="day"
+                        <input placeholder="Day"
                             type="number"
                             value={day}
                             onChange={(e) => this.setInputValue('day', e.target.value)}>
                         </input>
-                        <input placeholder="year"
+                        <input placeholder="Year"
                             type="number"
                             value={year}
                             onChange={(e) => this.setInputValue('year', e.target.value)}>
@@ -172,12 +172,12 @@ class SignUp extends Component {
                             name="gender"
                             value="male"
                             onClick={(e) => this.setInputValue('gender', e.target.value)} />
-                        Male
+                        <a className="login-text">Male</a>
                     <input type="radio"
                             name="gender"
                             value="female"
                             onClick={(e) => this.setInputValue('gender', e.target.value)} />
-                        Female
+                        <a className="login-text">Female</a>
                     </form>
                     <button className="button-size" onClick={this.signingUp}>Submit</button>
                     <button className="button-size" onClick={this.login}>Already have an account?</button>
