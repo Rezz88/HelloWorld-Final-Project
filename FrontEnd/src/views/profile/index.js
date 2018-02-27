@@ -225,6 +225,6 @@ renderLogout = () => {
 
   }
 }
-}
+
 
 export default Profile;
