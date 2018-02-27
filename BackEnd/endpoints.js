@@ -108,7 +108,7 @@ app.get('/bar-stats/:id', async (req, res) => {
 app.post('/sort', (req, res) => {
     //let sortedArray = sort.amountOfPeople((req.body.toString()));
    //let sortedArray = sort.sortByGender((req.body.toString()));
-   let sortedArray = sort.theSorter((req.body.toString()));
+   let sortedArray = sort.theSorter(JSON.parse(req.body.toString()));
    sortedArray
    .then(x => res.json(x))
 })
