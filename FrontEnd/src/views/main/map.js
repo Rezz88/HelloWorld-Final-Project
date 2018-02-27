@@ -298,6 +298,7 @@ class MyFancyComponent extends React.PureComponent {
   }
 
   showBars = async (map, radius) => {
+    console.log('WHY IS THIS BEING CALLED')
     const { marker, center } = this.state;
     this.setState({ barShowing: true })
     let location = marker ? marker : center;
@@ -305,18 +306,22 @@ class MyFancyComponent extends React.PureComponent {
       location = await this.getUserLocation();
     }
 
-    const google = window.google;
-    var service = new google.maps.places.PlacesService(map.context.__SECRET_MAP_DO_NOT_USE_OR_YOU_WILL_BE_FIRED);
-    service.nearbySearch({
-      location,
-      radius: radius,
-      type: ['bar']
-    }, (results, status) => {
-      if (status === google.maps.places.PlacesServiceStatus.OK) {
-        // console.log(results);
-        this.setVenues(results);
-      }
-    });
+    if(map){
+      const google = window.google;
+      var service = new google.maps.places.PlacesService(map.context.__SECRET_MAP_DO_NOT_USE_OR_YOU_WILL_BE_FIRED);
+      service.nearbySearch({
+        location,
+        radius: radius,
+        type: ['bar']
+      }, (results, status) => {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+          // console.log(results);
+          this.setVenues(results);
+        }
+      });
+    }
+    // console.log('map', map)
+   
   }
 
   toggleInfoWindow = (venue) => {
