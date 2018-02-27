@@ -18,6 +18,7 @@ const BarItem = styled(Button)`
   &:hover {
     transform: scale(1.1);
   }
+
 `;
 
 class BarListComponent extends React.PureComponent {
@@ -35,11 +36,12 @@ class BarListComponent extends React.PureComponent {
       <BarList>
         {this.props.venues.map((venue, idx) => 
         <BarItem
-          key={idx}
-          onClick={() => this.handleClick(venue, idx)}
-          onMouseEnter={(e) => this.props.handleHover(e, venue, idx)}
-          onMouseOut={(e) => this.props.handleHoverOut(e, venue, idx)}
-          // highlight={venue.genderRatio}
+        key={idx}
+        // ourData={}
+        onClick={() => this.handleClick(venue, idx)}
+        onMouseEnter={(e) => this.props.handleHover(e, venue, idx)}
+        onMouseOut={(e) => this.props.handleHoverOut(e, venue, idx)}
+          // highlight={venue.genderRatio !== undefined}
         >        
           {venue.name}
           <div>
