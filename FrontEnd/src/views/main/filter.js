@@ -34,7 +34,7 @@ class SortComponent extends React.PureComponent {
 
   render() {
     return (
-      <div class="dropdown">
+      <div>
         <select onChange={this.handleChange}>
           <option value="people"># of People</option>
           <option value="avgAge">Average Age</option>
