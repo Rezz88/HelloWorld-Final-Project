@@ -8,8 +8,11 @@ import {  MainHeader,
     NavButton,
     NavButtonWrapper
      } from '../styles';
+
 // import { Link } from 'react-router-dom'; Not using link ATM
 import '../../App.css';
+var ageCalculator = require('age-calculator');
+let {AgeFromDateString, AgeFromDate} = require('age-calculator');
 
 class SignUp extends Component {
     constructor() {
@@ -19,6 +22,9 @@ class SignUp extends Component {
             password: '',
             password1: '',
             email: '',
+            day: '',
+            month: '',
+            year: '',
             age: '',
             gender: '',
             loggedIn: false,
@@ -30,7 +36,23 @@ class SignUp extends Component {
         this.setState({ [key]: value })
     }
 
+    calculateAge = () =>   {
+        var day = this.state.day
+        var month = this.state.month
+        var year = this.state.year
+        console.log("dob = ",`${year}-${month}-${day}`)
+        let ageFromString = new AgeFromDateString(`${year}-${month}-${day}`).age;
+        console.log("value from ageFromString", ageFromString);
+        this.setState({age: ageFromString})
+        // console.log(this.state.age)
+
+    }
+
     signingUp = () => {
+        //the age calculator on the frontend doesn't ensure that the users age is kept up to date
+        //a better alternative would be to have it on the backend
+        //or to send an age update everytime the user visits the site...
+        this.calculateAge();
         console.log('signing up')
         const { username, password, email, age, gender } = this.state
         fetch('/sign-up', {
@@ -78,7 +100,7 @@ class SignUp extends Component {
     }
 
     signUp = () => {
-        const { username, password, password1, email, age, gender } = this.state
+        const { username, password, password1, email, gender, day, month, year } = this.state
         return (
             <div className="login-screen">
                 <div>
@@ -104,13 +126,34 @@ class SignUp extends Component {
                         value={email}
                         onChange={(e) => this.setInputValue('email', e.target.value)}>
                     </input>
-
-                    <input placeholder="Age"
-                        type="number"
-                        value={age}
-                        onChange={(e) => this.setInputValue('age', e.target.value)}>
-                    </input>
+                    <div>
+                        <select className="button-size" value={month} onChange={(e) => this.setInputValue('month', e.target.value)} >
+                            <option value='' selected>month</option>
+                            <option value='1'>Jan</option>
+                            <option value='2'>Feb</option>
+                            <option value='3'>Mar</option>
+                            <option value='4'>Apr</option>
+                            <option value='5'>May</option>
+                            <option value='6'>Jun</option>
+                            <option value='7'>Jul</option>
+                            <option value='8'>Aug</option>
+                            <option value='9'>Sep</option>
+                            <option value='10'>Oct</option>
+                            <option value='11'>Nov</option>
+                            <option value='12'>Dec</option>
+                        </select>
+                        <input placeholder="day"
+                            type="number"
+                            value={day}
+                            onChange={(e) => this.setInputValue('day', e.target.value)}>
+                        </input>
+                        <input placeholder="year"
+                            type="number"
+                            value={year}
+                            onChange={(e) => this.setInputValue('year', e.target.value)}>
+                        </input>
                     </div>
+                </div>
                     <form>
                         <input type="radio"
                             name="gender"
@@ -126,7 +169,7 @@ class SignUp extends Component {
                     <button className="button-size" onClick={this.signingUp}>Submit</button>
                     <button className="button-size" onClick={this.login}>Already have an account?</button>
                     <div>{this.state.error}</div>
-                </div>
+            </div>
                 )
             }
         

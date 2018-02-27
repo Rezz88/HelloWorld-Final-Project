@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Redirect } from 'react-router';
 import MainMap from './map'
-import { MainHeader, constants, mediaSizes } from '../styles';
+import { MainHeader, constants, mediaSizes, MainFooter, FootBar } from '../styles';
 
 const Wrapper = styled.div``;
 
@@ -75,9 +75,9 @@ class Main extends Component {
             </NavBar>
           </FixedWrapper>
           <MainMap/>
-          <NavBar>
-              <MainHeader>WhatsLit</MainHeader>
-          </NavBar>
+          <FootBar>
+              <MainFooter>WhatsLit</MainFooter>
+          </FootBar>
         </Wrapper>
       )
     } else {
