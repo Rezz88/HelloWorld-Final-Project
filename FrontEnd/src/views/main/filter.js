@@ -1,5 +1,6 @@
 import React from "react";
 import styled from 'styled-components';
+// import { Button } from '../styles';
 
 class SortComponent extends React.PureComponent {
   constructor() {
@@ -12,13 +13,13 @@ class SortComponent extends React.PureComponent {
   sendInfo = () => {
 
     var placeIDs = []
-    
+
     this.props.venues.forEach((item, pos) => {
       if (item.place_id) {
         placeIDs.push(item.place_id)
       }
     });
-    var infoToSend = {value: this.state.value, hiOrLow: this.state.hiOrLow, placeIDs: placeIDs}
+    var infoToSend = { value: this.state.value, hiOrLow: this.state.hiOrLow, placeIDs: placeIDs }
     console.log(infoToSend)
     //Potential solution...
     //fetch sortedVenues and call this.props.setVenues to update parent state and replace venues array
@@ -35,16 +36,21 @@ class SortComponent extends React.PureComponent {
   render() {
     return (
       <div>
-        <select onChange={this.handleChange}>
-          <option value="people"># of People</option>
-          <option value="avgAge">Average Age</option>
-          <option value="ratio">Male Ratio</option>
-        </select>
-        <select onChange={this.handleValueChange}>
-          <option value='high'>High</option>
-          <option value='low'>Low</option>
-        </select>
-        <button onClick={this.sendInfo}>Filter</button>
+        <div>
+          <button onClick={() => this.props.toggleMap()}>Toggle Map</button>
+        </div>
+        <div>
+          <select onChange={this.handleChange}>
+            <option value="people"># of People</option>
+            <option value="avgAge">Average Age</option>
+            <option value="ratio">Male Ratio</option>
+          </select>
+          <select onChange={this.handleValueChange}>
+            <option value='high'>High</option>
+            <option value='low'>Low</option>
+          </select>
+          <button onClick={this.sendInfo}>Filter</button>
+        </div>
       </div>
     )
   }

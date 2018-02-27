@@ -144,7 +144,7 @@ const MyMapComponent = compose(
   withProps({
     googleMapURL: "https://maps.googleapis.com/maps/api/js?key=" + PLACES_API_KEY + "&v=3.exp&libraries=geometry,drawing,places",
     loadingElement: <div style={{ height: `100%` }} />,
-    containerElement: <div style={{ height: `400px` }} />,
+    containerElement: <div style={{ height: `490px` }} />,
     mapElement: <div id="map" style={{ height: `100%` }} />,
   }),
   lifecycle({
@@ -406,8 +406,9 @@ class MyFancyComponent extends React.PureComponent {
           <SortComponent
             //state
             venues={this.state.venues}
+            //functions
+            toggleMap={this.toggleMap}
           />
-        <div><button onClick={this.toggleMap}>Toggle Map</button></div>
           <MyMapComponent
             //state
             zoom={this.state.zoom}
