@@ -23,7 +23,20 @@ export const MainHeader = styled.h1`
   margin: 0;
   font-variant: small-caps
 `;
-
+export const FootBar = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center ;
+  box-shadow: ${constants.boxShadow};
+  margin-bottom: .5rem;
+  padding: .5rem;
+  background-color: white;
+`;
+export const MainFooter = styled.h1`
+  display: flex;
+  align-items: center;
+  margin: 0;
+`;
 export const NavBar = styled.div`
   display: flex;
   align-items: center;
@@ -33,7 +46,6 @@ export const NavBar = styled.div`
   padding: .5rem;
   background-color: white;
 `;
-
 export const Wrapper = styled.div``;
 
 export const FixedWrapper = styled.div`
@@ -44,7 +56,6 @@ export const FixedWrapper = styled.div`
   z-index: 100;
   margin-bottom: 4rem;
 `;
-
 
 export const NavButton = styled.div`
   cursor: pointer;

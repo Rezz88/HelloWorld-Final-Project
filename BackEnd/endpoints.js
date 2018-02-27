@@ -2,6 +2,7 @@ const signup = require('./api/signup');
 const profile = require('./api/profile');
 const barInfo = require('./api/barInfo');
 const { fileread } = require('./tools');
+const sort = require('./api/sort');
 const express = require('express');
 const morgan = require('morgan');
 const app = express();
@@ -72,7 +73,8 @@ app.post('/login', async (req, res) => {
 })
 
 app.post('/profile', async (req, res) => {
-    res.send(await profile.profileAccess(JSON.parse(req.body.toString())));
+    let userId = req.cookies.uid
+    res.send(await profile.profileAccess(userId, JSON.parse(req.body.toString())));
 })
 app.post('/check-in', (req, res) => {
     //console.log('this is cookies: ', req.cookies)
@@ -101,6 +103,14 @@ app.get('/bar-stats/:id', async (req, res) => {
     catch(e) {
         console.log('shitting the bed: ', e);
     }
+})
+
+app.post('/sort', (req, res) => {
+    //let sortedArray = sort.amountOfPeople((req.body.toString()));
+   //let sortedArray = sort.sortByGender((req.body.toString()));
+   let sortedArray = sort.theSorter((req.body.toString()));
+   sortedArray
+   .then(x => res.json(x))
 })
 
 app.listen(4000, console.log("We're a go!"))
