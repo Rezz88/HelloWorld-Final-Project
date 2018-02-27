@@ -60,6 +60,7 @@ const BarCapacity = styled.div`
       return 'black';
     }
   }};
+  transition: width 2s
 `;
 
 // width: ${({averageAge}) => {
@@ -93,6 +94,7 @@ const BarAvgAge = styled.div`
       return 'grey'
     }
   }};
+  transition: width 2s;
 `;
 
 const GenderWrapper = styled.div`
@@ -107,6 +109,7 @@ const Ratio = styled.div`
   width: ${({ genderRatio }) => genderRatio}%;
   height: .5rem;
   background-color: pink;
+  transition: width 2s
 `;
 
 
@@ -144,7 +147,7 @@ const MyMapComponent = compose(
   withProps({
     googleMapURL: "https://maps.googleapis.com/maps/api/js?key=" + PLACES_API_KEY + "&v=3.exp&libraries=geometry,drawing,places",
     loadingElement: <div style={{ height: `100%` }} />,
-    containerElement: <div style={{ height: `400px` }} />,
+    containerElement: <div style={{ height: `490px` }} />,
     mapElement: <div id="map" style={{ height: `100%` }} />,
   }),
   lifecycle({
@@ -275,6 +278,7 @@ class MyFancyComponent extends React.PureComponent {
     clickedBar: false,
     mapState: false,
     userLoc: null,
+    ourVenues: null
   }
 
 
@@ -286,7 +290,6 @@ class MyFancyComponent extends React.PureComponent {
   }
 
   getUserLocation = () => {
-
     // {lat: 45.49914093562442, lng: -73.57023796767328}
     return new Promise((resolve, reject) => {
       navigator.geolocation.getCurrentPosition((e) => {
@@ -298,7 +301,6 @@ class MyFancyComponent extends React.PureComponent {
   }
 
   showBars = async (map, radius) => {
-    console.log('WHY IS THIS BEING CALLED')
     const { marker, center } = this.state;
     this.setState({ barShowing: true })
     let location = marker ? marker : center;
@@ -319,8 +321,13 @@ class MyFancyComponent extends React.PureComponent {
           this.setVenues(results);
         }
       });
+      // fetch(`/bar-stats/${this.state.venues.place_id}`, {
+      //   method: 'Get',
+      // }) .then(( response ) => response.json())
+      // .then(data => {
+      //   this.setState({ourVenues: {...data}});
+      // })
     }
-    // console.log('map', map)
    
   }
 
@@ -358,6 +365,7 @@ class MyFancyComponent extends React.PureComponent {
   barClick = () => {
     this.setState({ clickedBar : true })
     this.setState({ marker: null })
+    
   }
   
   mapClick = () => {
@@ -379,6 +387,7 @@ class MyFancyComponent extends React.PureComponent {
   setVenues = (venues) => {
     // console.log('in venues: ', venues)
     this.setState({ venues });
+    console.log(this.state.venues)
   }
 
   handleMouseOver = (event, venue, idx) => {
@@ -406,8 +415,11 @@ class MyFancyComponent extends React.PureComponent {
           <SortComponent
             //state
             venues={this.state.venues}
+            mapState={this.state.mapState}
+            //functions
+            toggleMap={this.toggleMap}
+            setVenues={this.setVenues}
           />
-        <div><button onClick={this.toggleMap}>Toggle Map</button></div>
           <MyMapComponent
             //state
             zoom={this.state.zoom}
