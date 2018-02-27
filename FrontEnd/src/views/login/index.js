@@ -53,6 +53,24 @@ class Login extends Component {
             .catch(e => console.log(e));
     }
 
+    componentDidMount() {
+        fetch('/cookie', {
+            method: "post",
+            credentials: "include"
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.loggedIn) {
+                    this.props.history.push('/main', data);
+                } else {
+                    this.props.history.push('/', data);
+                }
+            }).catch((err) => {
+                console.log(err);
+            })
+            .catch(e => console.log(e));
+    }
+
     setInputValue = (key, value) => {
         this.setState({ [key]: value })
     }
@@ -70,7 +88,7 @@ class Login extends Component {
         }).then(response => response.json())
             .then(data => { console.log(data); return data })
             .then(data => {
-                if (!data.signIn) {
+                if (!data.loggedIn) {
                     this.setState({ error: data.error })
                 } else {
                     this.loginPass(data);
@@ -120,7 +138,12 @@ class Login extends Component {
         return (
             <Wrapper>
                 <NavBar>
-                <MainHeader>WhatsLit</MainHeader>
+                    <div className="div-flex">
+                    <MainHeader>WhatsLit</MainHeader>
+                    <div className="split">
+                    <img src="https://i.imgur.com/fSG9Cdt.png" height="30" width="35"/>
+                    </div>
+                    </div>
                 </NavBar>
                 <LoginWrapper>{this.login()}</LoginWrapper>
             </Wrapper>

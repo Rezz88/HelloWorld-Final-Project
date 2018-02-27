@@ -48,3 +48,12 @@ body, html {
   background-color: #555555;
   color: white;
 }
+
+.div-flex {
+  display: flex;
+}
+
+.split {
+  margin-left: 10px;
+  border-style: solid;
+}

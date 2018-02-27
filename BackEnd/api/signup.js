@@ -19,7 +19,7 @@ const signUp = async (userInfo) => {
     var gender = userInfo.gender;
     var email = userInfo.email;
     var loggedIn = userInfo.loggedIn;
-    console.log(userInfo)
+    //console.log(userInfo)
     //test to see if legit email else fuck you 
     if (!emailValidate(email)) {
         return ({ error: "Invalid E-mail" });
@@ -54,11 +54,11 @@ const signUp = async (userInfo) => {
                 //console.log('this is result again: ', result)
                 for (let id of Object.keys(result)) {
                     if (result[id].username === username) {
-                        console.log("test1")
+                        //console.log("test1")
                         errors = "Username Already Exists"
                         alreadyExist = true;
                     } else if (result[id].email === email) {
-                        console.log("test2")
+                        //console.log("test2")
                         errors = "Email Already in Use"
                         alreadyExist = true;
                     }
@@ -68,16 +68,16 @@ const signUp = async (userInfo) => {
                     return false;
                 } else {
                     verify = true
-                    console.log('builds object now!!')
+                    //console.log('builds object now!!')
                     return await buildObj();
                 }
             } else {
                 verify = true
-                console.log('builds object now!!1')
+                //console.log('builds object now!!1')
                 return await buildObj();
             }
         }).catch(err => err);
-    console.log('this is the last respose: ', errors)
+    //console.log('this is the last respose: ', errors)
     if (verify) {
         return { response: true, uid: userId }
     } else if (errors != undefined) {
@@ -98,8 +98,8 @@ const login = async (userInfo) => {
     //console.log(dbUser);
     for (let id of Object.keys(dbUser)) {
         if (dbUser[id].username === attemptUsername && dbUser[id].password === attemptPass) {
-            console.log('this is user logging in: ', dbUser[id])
             dbUser[id].loggedIn = true;
+            //console.log('this is user logging in: ', dbUser[id])
             FileWriteSync(userDbPath, JSON.stringify(dbUser));
             return { id: id, object: dbUser[id] };
         } else if (dbUser[id].username !== attemptUsername && dbUser[id].password === attemptPass) {
@@ -112,9 +112,10 @@ const login = async (userInfo) => {
 }
 
 const logout = async (id) => {
-    //console.log('this is user info! :  ', userInfo)
+    console.log('this is user info! :  ', id)
     var dbUser = await fs.readFile(userDbPath, { String });
     dbUser = JSON.parse(dbUser.toString());
+    console.log(">>>>>>>>>>>>>>>>>",dbUser[id])
     dbUser[id].loggedIn = false;
     console.log(dbUser[id].loggedIn)
     FileWriteSync(userDbPath, JSON.stringify(dbUser));
