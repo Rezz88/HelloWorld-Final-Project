@@ -1,18 +1,31 @@
 import React, { Component } from 'react';
-import {  MainHeader, 
-    constants, 
-    mediaSizes, 
+import styled from 'styled-components';
+import {
+    MainHeader,
+    constants,
+    mediaSizes,
     NavBar,
-    Wrapper,
-    FixedWrapper,
     NavButton,
     NavButtonWrapper
      } from '../styles';
+
 
 // import { Link } from 'react-router-dom'; Not using link ATM
 import '../../App.css';
 var ageCalculator = require('age-calculator');
 let {AgeFromDateString, AgeFromDate} = require('age-calculator');
+
+const Wrapper = styled.div`
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+`;
+
+const LoginWrapper = styled.div`
+     flex: 1;
+     background: url(https://cdn.mtlblog.com/uploads/272655_030b5a01fc8b7c76d3587ead4e8f04ffbb0acdc6.jpg);
+     background-size: cover;
+`;
 
 class SignUp extends Component {
     constructor() {
@@ -104,7 +117,7 @@ class SignUp extends Component {
         return (
             <div className="login-screen">
                 <div>
-                    <h4>Sign-Up</h4>
+                    <h3 className="login-text">Sign-Up</h3>
                     <input placeholder="Username"
                         value={username}
                         onChange={(e) => this.setInputValue('username', e.target.value)}>
@@ -178,20 +191,22 @@ class SignUp extends Component {
                 }
             
             
+
     render() {
         return (
-    <Wrapper>
-        <FixedWrapper>
-        <NavBar>
-        <MainHeader>WhatsLit</MainHeader>
-        </NavBar>
-        {this.signUp()}
-        </FixedWrapper>
-    </Wrapper>
-                );
-    
-        }
+            <Wrapper>
+                <NavBar>
+                    <div className="div-flex">
+                    <MainHeader>WhatsLit</MainHeader>
+                    <div className="split">
+                    <img src="https://i.imgur.com/fSG9Cdt.png" height="30" width="35"/>
+                    </div>
+                    </div>
+                </NavBar>
+                <LoginWrapper>{this.signUp()}</LoginWrapper>
+            </Wrapper>
+        );
     }
-    
-export default SignUp;
+}
 
+export default SignUp;

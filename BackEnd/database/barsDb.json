@@ -1,6 +1,106 @@
-{"ChIJI6dT20EayUwRlh4PMACiNks":{"name":"Electric Avenue Club", "music": "whatever"},
-"ChIJV-r5z0MayUwR_AhUawxZGSk": {"name":"Peel Pub", "music": "whatever"},
-"ChIJt_AwXEoayUwREwHAzPkIslI":{"name":"Buonanotte", "music": "whatever"},
-"ChIJ9ZvFXlYayUwRx5Cjqrbna6w":{"name": "Pub St-Paul", "music": "whatever"},
-"ChIJ6_jWUmwZyUwRWjjJjKZTojw": {"name": "Le Zotique", "music": "whatever"},
-"ChIJg1TBjWsayUwRIJAq9bMpNic": {"name": "Moose Bawr", "music": "whatever"}}
+{
+    "ChIJI6dT20EayUwRlh4PMACiNks": {
+        "name": "Electric Avenue Club",
+        "address": "1476 Crescent St, Montreal"
+    },
+    "ChIJV-r5z0MayUwR_AhUawxZGSk": {
+        "name": "Peel Pub",
+        "address": "1196 Peel St, Montreal"
+    },
+    "ChIJt_AwXEoayUwREwHAzPkIslI": {
+        "name": "Buonanotte",
+        "address": "3518 Boulevard Saint-Laurent, Montréal"
+    },
+    "ChIJ9ZvFXlYayUwRx5Cjqrbna6w": {
+        "name": "Pub St-Paul",
+        "address": "124 Rue Saint Paul Est, Montréal"
+    },
+    "ChIJ6_jWUmwZyUwRWjjJjKZTojw": {
+        "name": "Le Zotique",
+        "address": "227 Rue Saint-Zotique Est, Montréal"
+    },
+    "ChIJg1TBjWsayUwRIJAq9bMpNic": {
+        "name": "Moose Bawr",
+        "address": "1817 Rue Sainte-Catherine Ouest, Montréal"
+    },
+    "ChIJ7x8Weq0byUwRb9Y3M1B1b48": {
+        "name": "M Montreal",
+        "address": "1245 Rue Saint-André, Montréal"
+    },
+    "ChIJy5oabUQayUwR7Eo5SZm-J4M": {
+        "name": "3 brasseurs McGill",
+        "address": "732 Rue Sainte-Catherine, Montréal"
+    },
+    "ChIJza_cylkayUwRwrnA0q721F4": {
+        "name": "Santos",
+        "address": "191 Rue Saint-Paul Ouest, Montréal"
+    },
+    "ChIJyfoxlEMayUwR7G2ZSXAiQ4M": {
+        "name": "Dominion Square Tavern",
+        "address": "1243 Rue Metcalfe, Montréal"
+    },
+    "ChIJFZfK_lgayUwRedvZcBKwZQo": {
+        "name": "BARROCO",
+        "address": "312 Rue Saint-Paul Ouest, Montréal"
+    },
+    "ChIJFaffc0EayUwR4LM1Y4dLj38": {
+        "name": "Firegrill Montréal",
+        "address": "1490 Rue Stanley, Montréal"
+    },
+    "ChIJD3OyGzUayUwRpcZODl4WgNk": {
+        "name": "Tokyo Bar",
+        "address": "3709 Boulevard Saint-Laurent, Montréal"
+    },
+    "ChIJ4Yi_tkMayUwRQC5BTTU87tU": {
+        "name": "McLean's Pub",
+        "address": "1210 Rue Peel, Montréal"
+    },
+    "ChIJ0UdVjNUbyUwRAGNwVsdkuiU": {
+        "name": "Dieu du Ciel!",
+        "address": "29 Laurier Avenue, Montréal"
+    },
+    "ChIJ20EKz0EayUwRLLtuxwuOPk4": {
+        "name": "Stogies Cigar Lounge",
+        "address": "2015 Rue Crescent, Montréal"
+    },
+    "ChIJRRD3WnoZyUwR5QRQNO7zRfk": {
+        "name": "Whiskey Cafe Enr",
+        "address": "5800 Boulevard Saint-Laurent, Montréal"
+    },
+    "ChIJ7d6Q_FYayUwR067bgZty6kk": {
+        "name": "L'Auberge Saint-Gabriel",
+        "address": "426 Rue Saint Gabriel, Montréal"
+    },
+    "ChIJiS1sC34ZyUwR5FGmqprMb0c": {
+        "name": "Lawrence",
+        "address": "5201 Boulevard Saint-Laurent, Montréal"
+    },
+    "ChIJr5cOe0YayUwR4eB4sFK-Soc": {
+        "name": "Essence",
+        "address": "2001 Boulevard Robert-Bourassa, Montréal"
+    },
+    "ChIJ1xJ8r20ZyUwRKXE68-42mKI": {
+        "name": "Trattoria Piatto Pieno",
+        "address": "177 Rue Saint-Zotique Est, Montréal"
+    },
+    "ChIJfZWdnXIayUwRjzho9Fnp7q4": {
+        "name": "IMADAKE IZAKAYA",
+        "address": "4006 Rue Sainte-Catherine, Westmount"
+    },
+    "ChIJ4Rl_L0EayUwREWrbitMz5wg": {
+        "name": "Universel Déjeuner & Grillades",
+        "address": "2055 Rue Peel, Montréal"
+    },
+    "ChIJiQT8_2kayUwRbRMCdN7wths": {
+        "name": "3 Brasseurs Crescent",
+        "address": "1356 Rue Sainte-Catherine Ouest, Montréal"
+    },
+    "ChIJifdCYjUayUwRsT75_noUhCI": {
+        "name": "Café Campus",
+        "address": "57 Rue Prince Arthur Est, Montréal"
+    },
+    "ChIJQTtxNrMbyUwRp8Jqls_86hA": {
+        "name": "Restaurant Confusion",
+        "address": "1635 Rue Saint-Denis, Montréal"
+    }
+}

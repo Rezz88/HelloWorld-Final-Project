@@ -61,8 +61,10 @@ class Profile extends Component {
       return <div>Nothing available</div>
     }
   }
+
   renderUserInfoEdit = () => {
     const { username, email  } = this.props.location.state
+
     return (
       <div>
         <h4>Profile</h4>
@@ -169,6 +171,7 @@ logout = () => {
     credentials: 'include',
     body: JSON.stringify({
       loggedIn: false
+
     })
   })
   this.props.location.state.loggedIn = false;
@@ -184,34 +187,42 @@ renderLogout = () => {
   )
 };
 
-render() {
-  //Props to be passed down from app.js
-  console.log('Profile page ', this.props.location.state)
-  //For now the state is undefined unless someone logs in
-  if (this.props.location.state.loggedIn === true) {
-    return (
-      <Wrapper>
-        <FixedWrapper>
-          <NavBar>
-            <MainHeader>WhatsLit</MainHeader>
-            <NavButtonWrapper>
-              {this.renderMainButton()}
-              {this.renderLogout()}
-            </NavButtonWrapper>
-          </NavBar>
-          <div>
-            {this.state.editing ? this.renderUserInfoEdit() : this.renderUserInfo()}
-            <h4>Bar History</h4>
-            {this.renderBarHistory()}
-          </div>
-        </FixedWrapper>
-      </Wrapper>
-    );
-  }
-  else {
-    return (
-      <Redirect to="/" />
-    )
+
+  render() {
+    //Props to be passed down from app.js
+    console.log('Profile page ', this.props.location.state)
+    //For now the state is undefined unless someone logs in
+    if (this.props.location.state.loggedIn === true) {
+      return (
+        <Wrapper>
+          <FixedWrapper>
+            <NavBar>
+              <div className="div-flex">
+              <MainHeader>WhatsLit</MainHeader>
+              <div className="split">
+              <img src="https://i.imgur.com/fSG9Cdt.png" height="30" width="35" />
+              </div>
+              </div>
+              <NavButtonWrapper>
+                {this.renderMainButton()}
+                {this.renderLogout()}
+              </NavButtonWrapper>
+            </NavBar>
+            <div>
+              {this.state.editing ? this.renderUserInfoEdit() : this.renderUserInfo()}
+              <h4>Bar History</h4>
+              {this.renderBarHistory()}
+            </div>
+          </FixedWrapper>
+        </Wrapper>
+      );
+    }
+    else {
+      return (
+        <Redirect to="/" />
+      )
+    }
+
   }
 }
 }

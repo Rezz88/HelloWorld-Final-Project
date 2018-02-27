@@ -1,5 +1,6 @@
 .info-window {
-  min-width:200px;
+  max-width:200px;
+  max-height: 100px;
   text-align: center;
 }
 
@@ -12,17 +13,16 @@
   filter: drop-shadow(0px 0px 10px blue);
 }
 
-.container {
-  display: flex;
-  flex-direction: row;
-}
-
-.map-content {
-  flex: 3;
-}
-
 html {
   background-color: whitesmoke;
+}
+
+body, html {
+  height: 100%;
+}
+
+.login-text {
+  color: whitesmoke
 }
 
 .login-screen {
@@ -33,18 +33,27 @@ html {
   width: 10em;
   border-style: solid; 
   border-width: thick;
-  padding: 5%
-
-
+  border-color: whitesmoke;
+  padding: 5%;
+  background: rgba(19, 16, 16, 0.55)
 }
 
 .button-size {
   background-color: grey;
   color: black;
-  width: 60%
+  width: 60%;
 }
 
 .button-size:hover {
   background-color: #555555;
   color: white;
+}
+
+.div-flex {
+  display: flex;
+}
+
+.split {
+  margin-left: 10px;
+  border-style: solid;
 }
