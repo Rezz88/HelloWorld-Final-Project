@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
 import { Redirect } from 'react-router';
 import FlipClock from '../main/Components/FlipClock'
 import styled from 'styled-components';

@@ -13,6 +13,7 @@ margin-top: -1rem;
   `
 //avoid the copy pasting
 const Selectors = styled.select`
+font-variant: small-caps;
 ${({ mapState }) => {
   if (!mapState) { return 'background-color: #404040; color: white; cursor: pointer;  border-radius: 5px; height: 1.7rem; width: 6.5rem; transition: background-color 3s, color 2s; margin-top: 16px;' };
   return 'background-color: #f2f2f2; color: black; cursor: pointer;  border-radius: 5px; height: 1.7rem; width: 6.5rem; transition: background-color 2s;  color 3s; margin-top: 16px;';
@@ -21,7 +22,7 @@ ${({ mapState }) => {
 
 //also apply this styling to all buttons
 const ToggleButton = styled.button`
-  
+font-variant: small-caps;
   ${({ mapState }) => {
     if (!mapState) { return 'background-color: #404040; color: white; cursor: pointer;  border-radius: 5px; height: 1.7rem; width: 6.5rem; transition: background-color 3s, color 2s; margin-top: 16px;' };
     return 'background-color: #f2f2f2; color: black; cursor: pointer;  border-radius: 5px; height: 1.7rem; width: 6.5rem; transition: background-color 2s;  color 3s; margin-top: 16px;';
@@ -30,6 +31,7 @@ const ToggleButton = styled.button`
 
 const FilterButton = styled.button`
   cursor: pointer;
+  font-variant: small-caps;
   background-color: #404040;
   color: white;
   border-radius: 5px;
