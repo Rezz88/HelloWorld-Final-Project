@@ -131,6 +131,7 @@ const TitleWrapper = styled.div`
 
 const Container = styled.div`
   display: flex;
+  padding-left: 2%;
   flex: 1;
   flex-direction: column;
   @media(min-width: ${mediaSizes.sm}px) {

@@ -65,7 +65,7 @@ const AboutBar = styled.div`
   text-align: center;
   font-size: 15px;
   font-weight: bold;
-  margin-top: 3%
+  margin-top: 4%;
 `;
 const ProfileWrapper = styled.div`
   align-items: center;
@@ -127,7 +127,7 @@ class Main extends Component {
 
           {this.state.about ?
             <AboutBar>
-              <div className="about-space">
+              <div>
                 <img src={marc} height="150" width="150" />
                 <div>
                   <a>Marc Renaud</a>

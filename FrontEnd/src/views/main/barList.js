@@ -6,7 +6,7 @@ const BarList = styled.div`
   flex: 1;
   overflow-y: scroll;
   text-align: center;
-  padding: 20px;
+  padding: 2%;
 `;
 
 const BarItem = styled(Button)`
