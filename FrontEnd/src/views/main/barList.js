@@ -27,18 +27,25 @@ const BarItem = styled(Button)`
       return 'background-color: #d9d9d9; color: black';
     }
     if (props.existCheck && props.mapState) {
-      return 'background-color: #404040; color: white';
+      return 'background-color: white; color: black';
     }
     if (!props.existCheck && props.mapState) {
       return 'background-color: #d9d9d9; color: black';
-    }}
-  }
+    }
+  }}
     `;
 
   const Link = styled.a`
     cursor: help;
     font-variant: small-caps;
-    color: ${props => !props.mapState ? 'white': 'black'}
+    ${ props  => {
+      if (!props.mapState) {
+        return 'color: white; transition: all 0.2s';
+      }
+      if (props.mapState) {
+        return 'color: black; transition: all 0.2s';
+      }
+    }}
   `
     // background-color: ${ props  => props.existCheck && props.mapState ? 'blue' : 'yellow'};
     
@@ -54,8 +61,7 @@ class BarListComponent extends React.PureComponent {
     this.props.toggleInfoWindow(venue);
     this.setState({ isActive: idx });
   }
-  render() { 
-    
+  render() {
     return ( 
       <BarList>
         {this.props.venues.map((venue, idx) => 
@@ -63,7 +69,7 @@ class BarListComponent extends React.PureComponent {
         key={idx}
         // ourData={}
         existCheck={venue.exists}
-        // mapState={props.mapState}
+        mapState={this.props.mapState}
         onClick={() => this.handleClick(venue, idx)}
         onMouseEnter={(e) => this.props.handleHover(e, venue, idx)}
         onMouseOut={(e) => this.props.handleHoverOut(e, venue, idx)}
@@ -73,7 +79,9 @@ class BarListComponent extends React.PureComponent {
           <div>
           {/* `https://www.google.com/maps?saddr=${this.props.userLoc}&daddr=${encodeURI(venue.vicinity)}` */}
           {/* http://maps.google.com/?q=${encodeURI(venue.vicinity)} */}
-            <Link href={`https://www.google.com/maps/dir/${this.props.userLoc.lat},${this.props.userLoc.lng}/${encodeURI(venue.vicinity)}`} 
+            <Link 
+            mapState={this.props.mapState}
+            href={`https://www.google.com/maps/dir/${this.props.userLoc.lat},${this.props.userLoc.lng}/${encodeURI(venue.vicinity)}`} 
             target="_blank">{this.state.isActive === idx ? 'Directions  ' + venue.vicinity : ''}</Link>
           </div>
         </BarItem>
