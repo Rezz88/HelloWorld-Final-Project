@@ -209,7 +209,7 @@ renderLogout = () => {
         <Wrapper>
           <FixedWrapper>
             <NavBar>
-            <FlipClock inverse={!this.props.mapState} />
+            <FlipClock inverse={this.props.location.state.theme} />
               <div className="div-flex">
               <MainHeader>WhatsLit</MainHeader>
               <div className="split">

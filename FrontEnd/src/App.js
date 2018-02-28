@@ -22,9 +22,9 @@ class App extends Component {
           <Route exact path="/" component={Login} />
           <Route path="/signUp" component ={SignUp}/>
           <Route path="/profile" component={Profile} />
-          <Route path="/main" component={Main} />
           <Route path="/ratings" component={Rating} />
         </Switch>
+        <Route path="/main" children={(routeProps) => <Main {...routeProps} />} />
       </div>
     );
   }

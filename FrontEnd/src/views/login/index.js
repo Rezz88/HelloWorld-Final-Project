@@ -139,6 +139,7 @@ class Login extends Component {
         return (
             <Wrapper>
                 <NavBar>
+                    
                     <div className="div-flex">
                     <MainHeader>WhatsLit</MainHeader>
                     <div className="split">
