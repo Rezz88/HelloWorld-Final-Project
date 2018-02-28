@@ -5,8 +5,6 @@ const userDbPath = './database/userInfo.json';
 const dbBarsPath = './database/BarsInfo.json';
 const dbImagesPath = './database/images';
 
-
-
 theSorter = async (barQuery) => {
     var bars = {}
     var dbUser = await fs.readFile(userDbPath, { String });

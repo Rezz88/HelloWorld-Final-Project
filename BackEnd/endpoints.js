@@ -3,6 +3,7 @@ const profile = require('./api/profile');
 const barInfo = require('./api/barInfo');
 const exists = require('./api/exists');
 const sort = require('./api/sort');
+const mockdata = require('./api/mockdata');
 const { fileread } = require('./tools');
 const express = require('express');
 const morgan = require('morgan');
@@ -116,6 +117,10 @@ app.post('/exists', async (req, res) => {
     let blue = await exists.doesItExist(JSON.parse(req.body.toString()))
     console.log('this is bluuuuuue',blue)
     res.send(JSON.stringify(blue));
+})
+
+app.get('/populate', (req,res) => {
+    let red = exists.pushNewDb(JSON.parse(req.body.toString()))
 })
 
 app.listen(4000, console.log("We're a go!"))
