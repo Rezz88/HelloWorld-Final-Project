@@ -46,6 +46,7 @@ export const NavBar = styled.div`
   margin-bottom: .5rem;
   padding: .5rem;
   background-color: white;
+  min-width: auto;
 `;
 export const Wrapper = styled.div``;
 
@@ -71,5 +72,7 @@ export const NavButton = styled.div`
 `;
 
 export const NavButtonWrapper = styled.div`
-  display: flex;
+  display: box;
+  margin-left: 7px;
+  margin-top: 19px;
 `;

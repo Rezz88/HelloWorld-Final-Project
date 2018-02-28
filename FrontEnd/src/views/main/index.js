@@ -117,6 +117,10 @@ class Main extends Component {
               <img src="https://i.imgur.com/fSG9Cdt.png" height="30" width="35" />
               </div>
               </div>
+              <div className="ttlc">
+              <p className="ttlc">L a s t - c a l l</p>
+              <FlipClock inverse={!this.props.mapState} />
+              </div>  
               <NavButtonWrapper>
                 <NavButton onClick={() => this.props.history.push("/profile", this.props.location.state)}>Your Profile</NavButton>
               </NavButtonWrapper>
@@ -131,7 +135,7 @@ class Main extends Component {
                     <img src={marc} height="60" width="60"/>
                     <ProfileBlurb>
                       <div>
-                      MARC RENAUD
+                      Marc Renaud
                       </div>
                       <div>
                       Front-End (Google API's)
@@ -164,7 +168,7 @@ class Main extends Component {
                     <img src={gleb1} height="60" width="60" />
                     <ProfileBlurb>
                     <div>
-                      GLEB DVINSKI
+                      Gleb Dvinski
                       </div>
                       <div>
                       Back-End

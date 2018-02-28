@@ -41,13 +41,21 @@ class Profile extends Component {
     let data = [
       {
         barname: 'Fitzroy',
-        averageAge: 25,
+        averageAge: 24,
         attendance: 158,
+        date: "06/15/18"
+      },
+      {
+        barname: 'Big in Japan Bar',
+        averageAge: 30,
+        attendance: 35,
+        date: "06/23/18"
       },
       {
         barname: 'Bar Waverly',
-        averageAge: 28,
+        averageAge: 27,
         attendance: 42,
+        date: "07/20/18"
       }
     ]
     this.setState({ barHistory: data })
@@ -62,6 +70,7 @@ class Profile extends Component {
             <div>Venue: {item.barname}</div>
             <div>Average age: {item.averageAge}</div>
             <div>Attendance: {item.attendance}</div>
+            <div>{item.date}</div>
           </div>
         )
 
@@ -217,6 +226,10 @@ renderLogout = () => {
               <img src="https://i.imgur.com/fSG9Cdt.png" height="30" width="35" />
               </div>
               </div>
+              <div className="ttlc">
+              L a s t - c a l l
+              <FlipClock inverse={!this.props.mapState} />
+              </div>  
               <NavButtonWrapper>
                 {this.renderMainButton()}
                 {this.renderLogout()}
