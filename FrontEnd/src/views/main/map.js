@@ -284,7 +284,6 @@ class MyFancyComponent extends React.PureComponent {
 
 
   componentDidMount() {
-    
 
     // get user location
     // update state (this.setState) with location and pass props to MyMapComponent
@@ -474,7 +473,7 @@ class MyFancyComponent extends React.PureComponent {
           venues={this.state.venues}
           infoWindow={this.state.infoWindow}
           userLoc={this.state.userLoc}
-          mapState={this.state. mapState}
+          mapState={this.state.mapState}
           //functions
           handleHover={this.handleMouseOver}
           handleHoverOut={this.handleMouseOut}

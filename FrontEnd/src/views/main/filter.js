@@ -1,32 +1,29 @@
 import React from "react";
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import FlipClock from './Components/FlipClock'
-
 
 
 const Wrapper = styled.div`
 display: flex;
 padding: .2rem;
-padding-bottom: 0.5rem;
-margin-top: -1rem;
-  justify-content: space-between;
-  `
+justify-content: space-between;
+`
+
+const themeStyles = css`
+${({ mapState }) => !mapState ?
+'background-color: #404040; color: white; cursor: pointer;  border-radius: 5px; height: 1.7rem; width: 6.5rem; transition: background-color 3s, color 2s; margin-top: 16px;' :
+'background-color: #f2f2f2; color: black; cursor: pointer;  border-radius: 5px; height: 1.7rem; width: 6.5rem; transition: background-color 2s;  color 3s; margin-top: 16px;'
+};
+`
+
 //avoid the copy pasting
 const Selectors = styled.select`
-font-variant: small-caps;
-${({ mapState }) => {
-  if (!mapState) { return 'background-color: #404040; color: white; cursor: pointer;  border-radius: 5px; height: 1.7rem; width: 6.5rem; transition: background-color 3s, color 2s; margin-top: 16px;' };
-  return 'background-color: #f2f2f2; color: black; cursor: pointer;  border-radius: 5px; height: 1.7rem; width: 6.5rem; transition: background-color 2s;  color 3s; margin-top: 16px;';
-}};
-  `
+${themeStyles}
+`
 
 //also apply this styling to all buttons
 const ToggleButton = styled.button`
-font-variant: small-caps;
-  ${({ mapState }) => {
-    if (!mapState) { return 'background-color: #404040; color: white; cursor: pointer;  border-radius: 5px; height: 1.7rem; width: 6.5rem; transition: background-color 3s, color 2s; margin-top: 16px;' };
-    return 'background-color: #f2f2f2; color: black; cursor: pointer;  border-radius: 5px; height: 1.7rem; width: 6.5rem; transition: background-color 2s;  color 3s; margin-top: 16px;';
-  }};
+${themeStyles}
 `;
 
 const FilterButton = styled.button`
