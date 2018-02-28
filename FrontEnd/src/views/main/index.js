@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Redirect } from 'react-router';
 import MainMap from './map'
+import gleb1 from './images/gleb1.png'
+import payrez from './images/payrez.png'
+import wash from './images/wash.png'
+import marc from './images/marc.png'
 import { MainHeader, constants, mediaSizes, MainFooter, FootBar } from '../styles';
 
 const Wrapper = styled.div`
@@ -38,32 +42,49 @@ const NavButton = styled.div`
   }
 `;
 
+
+
 const NavButtonWrapper = styled.div`
   display: flex;
+  
 `;
+
+const AboutProfile = styled.div`
+  display: flex;
+  justify-content: space-around;
+  min-height: 30px;
+  margin-top: 4%;
+  margin-bottom:4%;
+`
+
+const AboutBar = styled.div`
+  min-height: 40vh;
+  align-items: center;
+  text-align: center;
+  vertical-align: middle;
+`
+const ProfileWrapper = styled.div`
+  align-items: center;
+  margin: auto;
+  max-width: 50%;
+
+`
+const ProfileBlurb = styled.div`
+  width: 200px; 
+`
 
 class Main extends Component {
   constructor() {
     super();
-    this.state = { hoverBar: null };
+    this.state = { 
+      hoverBar: null,
+      about: false
+      };
   }
 
-  componentDidMount = () => {
-    this.props.location.state.bar = [
-
-      {
-        name: "Fredo",
-        age: 29,
-        gender: "Male"
-      },
-
-      {
-        name: "Annie",
-        age: 27,
-        gender: "Female"
-      }
-    ]
-  };
+  toggleAbout = () => {
+    this.setState({about: !this.state.about})
+  }
 
   render() {
     console.log(this.props)
@@ -87,8 +108,60 @@ class Main extends Component {
             </NavBar>
           </FixedWrapper>
           <MainMap />
+            
+              {this.state.about ? 
+                <AboutBar> 
+                  <ProfileWrapper>
+                  <AboutProfile>
+                    <img src={marc} height="60" width="60"/>
+                    <ProfileBlurb>
+                      <div>
+                      MARC RENAUD
+                      </div>
+                      <div>
+                      Front-End (Google API's)
+                      </div>
+                      </ProfileBlurb>
+                  </AboutProfile>
+                  <AboutProfile>
+                    <img src={wash} height="60" width="60"/>
+                    <ProfileBlurb>
+                      <div>
+                      Eric Washburn
+                      </div>
+                      <div>
+                      Front-End (UI)
+                      </div>
+                    </ProfileBlurb>
+                  </AboutProfile>
+                  <AboutProfile>
+                    <img src={payrez} height="60" width="60"/>
+                    <ProfileBlurb>
+                      <div>
+                      Emmanuel Perez
+                      </div>
+                      <div>
+                      Front-End
+                      </div>
+                    </ProfileBlurb>
+                  </AboutProfile>
+                  <AboutProfile>
+                    <img src={gleb1} height="60" width="60" />
+                    <ProfileBlurb>
+                    <div>
+                      GLEB DVINSKI
+                      </div>
+                      <div>
+                      Back-End
+                      </div>
+                    </ProfileBlurb>
+                  </AboutProfile>
+                  </ProfileWrapper>
+                </AboutBar> 
+              : null}
+            
           <NavBar>
-            <MainHeader>Montreal</MainHeader>
+            <MainHeader onClick={this.toggleAbout}>about us</MainHeader>
           </NavBar>
         </Wrapper>
       )
