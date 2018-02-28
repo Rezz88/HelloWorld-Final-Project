@@ -31,7 +31,6 @@ const NavBar = styled.div`
   align-items: center;
   justify-content: space-between;
   box-shadow: ${constants.boxShadow};
-  margin-bottom: .5rem;
   padding: .5rem;
   background-color: white;
 `;
