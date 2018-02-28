@@ -197,9 +197,7 @@ const MyMapComponent = compose(
     onZoomChanged={props.onMapZoom}
     options={{
       streetViewControl: false, mapTypeControl: false,
-
-      styles: props.mapState ? lightStyles : darkMapStyles
-
+      styles: props.mapState ? lightStyles : darkMapStyles 
     }}
     onClick={props.onMapClick}
   >
@@ -208,7 +206,7 @@ const MyMapComponent = compose(
       onClick={() => { props.showBars(500); }}
       icon={
         props.mapState ? darkUser : personImage}
-    // Animation={'DROP'}
+    
     >
     </Marker>}
     {props.infoWindow && <InfoWindow
