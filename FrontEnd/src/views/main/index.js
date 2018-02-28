@@ -151,7 +151,7 @@ class Main extends Component {
                 <div>
                   <a>Emmanuel Perez</a>
                   <div>
-                    <a>Font-End</a>
+                    <a>Front-End</a>
                   </div>
                 </div>
               </div>
