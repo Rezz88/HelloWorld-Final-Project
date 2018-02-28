@@ -210,8 +210,8 @@ const MyMapComponent = compose(
     </Marker>}
     {props.infoWindow && <InfoWindow
       position={{
-        lat: props.venueData.geometry.location.lat(),
-        lng: props.venueData.geometry.location.lng()
+        lat: props.venueData.geometry.location.lat,
+        lng: props.venueData.geometry.location.lng
       }}
       onCloseClick={props.closeInfoWindow}>
       <StyledInfoWindow>
@@ -245,7 +245,7 @@ const MyMapComponent = compose(
         <OverlayView
           key={idx}
           mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
-          position={{ lat: venue.geometry.location.lat(), lng: venue.geometry.location.lng() }}
+          position={{ lat: venue.geometry.location.lat, lng: venue.geometry.location.lng }}
         >
           <div
             // onMouseOver={() => console.log(venue.name)}
@@ -321,14 +321,7 @@ class MyFancyComponent extends React.PureComponent {
           this.setVenues(results);
         }
       });
-      // fetch(`/bar-stats/${this.state.venues.place_id}`, {
-      //   method: 'Get',
-      // }) .then(( response ) => response.json())
-      // .then(data => {
-      //   this.setState({ourVenues: {...data}});
-      // })
     }
-   
   }
 
   toggleInfoWindow = (venue) => {
@@ -385,8 +378,18 @@ class MyFancyComponent extends React.PureComponent {
   }
 
   setVenues = (venues) => {
-    // console.log('in venues: ', venues)
+    console.log('in venues: ', venues)
     this.setState({ venues });
+    
+    
+    fetch('/exists', {
+      method: 'Post',
+      body: JSON.stringify(this.state.venues)
+    }) .then(( response ) => response.json())
+    .then(data => { console.log('my data', data)
+    this.setState({venues: data});
+    })
+
     console.log(this.state.venues)
   }
 
@@ -426,6 +429,7 @@ class MyFancyComponent extends React.PureComponent {
   }
 
   render() {
+    
     return (
       <Container>
         <MapContent>
@@ -465,6 +469,7 @@ class MyFancyComponent extends React.PureComponent {
           venues={this.state.venues}
           infoWindow={this.state.infoWindow}
           userLoc={this.state.userLoc}
+          mapState={this.state. mapState}
           //functions
           handleHover={this.handleMouseOver}
           handleHoverOut={this.handleMouseOut}

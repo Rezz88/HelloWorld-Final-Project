@@ -80,7 +80,7 @@ class SortComponent extends React.PureComponent {
       <Wrapper>
         <div>
           <ToggleButton
-          mapState={this.props.mapState}
+            mapState={this.props.mapState}
             onClick={this.props.toggleMap}>Toggle Map</ToggleButton>
         </div>
         <FlipClock inverse={!this.props.mapState} />
