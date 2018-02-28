@@ -40,7 +40,10 @@ const NavButton = styled.div`
   cursor: pointer;
   margin-right: 1rem;
   @media (min-width: ${mediaSizes.sm}px) {
-    color: red;
+    color: black;
+    background-color: lightgrey;
+    font-variant: small-caps; 
+    box-shadow: ${constants.boxShadow};
   }
 `;
 

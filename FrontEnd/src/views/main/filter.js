@@ -77,8 +77,8 @@ class SortComponent extends React.PureComponent {
     return (
       <Wrapper>
         <div>
-        <ToggleButton
-          mapState={this.props.mapState}
+          <ToggleButton
+            mapState={this.props.mapState}
             onClick={this.props.toggleMap}>Toggle Map</ToggleButton>
         </div>
         <div>

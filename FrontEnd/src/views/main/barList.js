@@ -18,27 +18,46 @@ const BarItem = styled(Button)`
   &:hover {
     transform: scale(1.1);
   }
-
-`;
-
+  ${ props  => {
+    if (props.existCheck && !props.mapState) {
+      return 'background-color: #404040; color: white';
+    }
+    if (!props.existCheck && !props.mapState) {
+      return 'background-color: #f2f2f2; color: black';
+    }
+    if (props.existCheck && props.mapState) {
+      return 'background-color: #404040; color: white';
+    }
+    if (!props.existCheck && props.mapState) {
+      return 'background-color: #f2f2f2; color: black';
+    }}
+  }
+    `;
+    // background-color: ${ props  => props.existCheck && props.mapState ? 'blue' : 'yellow'};
+    
 class BarListComponent extends React.PureComponent {
   constructor() {
     super();
-    this.state = { isActive: -1 };
+    this.state = { 
+      isActive: -1,
+      // mapState
+    };
   }
   handleClick = (venue, idx) => {
     this.props.toggleInfoWindow(venue);
     this.setState({ isActive: idx });
   }
   render() { 
-    return (
-      
+    
+    return ( 
       <BarList>
         {this.props.venues.map((venue, idx) => 
         <BarItem
         key={idx}
         // ourData={}
-        onClick={() => this.handleClick(venue, idx)}
+        existCheck={venue.exists}
+        // mapState={props.mapState}
+        onClick={() => {console.log(this.props.mapState); this.handleClick(venue, idx)}}
         onMouseEnter={(e) => this.props.handleHover(e, venue, idx)}
         onMouseOut={(e) => this.props.handleHoverOut(e, venue, idx)}
           // highlight={venue.genderRatio !== undefined}

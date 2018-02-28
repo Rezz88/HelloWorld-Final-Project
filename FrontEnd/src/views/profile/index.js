@@ -12,6 +12,13 @@ import {
 // import { Link } from 'react-router-dom'; Not using link ATM
 import '../../App.css';
 
+const ProfileWrapper = styled.div`
+     height: 100vh;
+     flex: 1;
+     background: url(https://i.imgur.com/TThJDpg.jpg);
+     background-size: cover;
+`;
+
 class Profile extends Component {
   constructor() {
     super();
@@ -25,19 +32,20 @@ class Profile extends Component {
       error: ''
     }
   }
+  
 
   componentWillMount() {
     //fake bar data for bar history
     let data = [
       {
-        barname: 'bar1name',
-        averageAge: 30,
-        attendance: 200,
+        barname: 'Fitzroy',
+        averageAge: 25,
+        attendance: 158,
       },
       {
-        barname: 'bar2name',
-        averageAge: 20,
-        attendance: 150,
+        barname: 'Bar Waverly',
+        averageAge: 28,
+        attendance: 42,
       }
     ]
     this.setState({ barHistory: data })
@@ -48,11 +56,10 @@ class Profile extends Component {
       return barHistory.map(item => {
         // console.log(product)
         return (
-          <div>
+          <div className="profile-style">
             <div>Venue: {item.barname}</div>
             <div>Average age: {item.averageAge}</div>
             <div>Attendance: {item.attendance}</div>
-            <div>-</div>
           </div>
         )
 
@@ -67,15 +74,16 @@ class Profile extends Component {
     const { newEmail, newPassword1, newPassword, oldPassword }  = this.state
     return (
       <div>
-        <h4>Profile</h4>
+        <h4 className="profile-title">Profile Edit</h4>
+        <div className="profile-style">
         <div>{"Username: " + username}</div>
 
         <div>{"E-mail: " + email}</div>
-        <input placeholder="enter new E-mail"
+        <div className="edit-screen">
+        <input placeholder="Enter New E-mail"
                 value={newEmail}
                 onChange={(e) => this.setInputValue('newEmail', e.target.value)}>
         </input>
-
         <input placeholder="Old Password"
           type="password"
           value={oldPassword}
@@ -93,9 +101,13 @@ class Profile extends Component {
           value= {newPassword1}
           onChange={(e) => this.setInputValue('newPassword1', e.target.value)}>
         </input>
-        <button className="button-size" onClick={this.editing}>Submit changes</button>
+        </div>
+        <div>
+        <button className="button-size2" onClick={this.editing}>Submit changes</button>
         <div>{this.state.error}</div>
-        <button className="button-size" onClick={this.toggleEdit}>back</button>
+        <button className="button-size2" onClick={this.toggleEdit}>Back</button>
+        </div>
+        </div>
       </div>
     )
 }
@@ -129,7 +141,7 @@ editing = () => {
 });
 
   } else {
-      this.setState({ error: 'passwords do not match' })
+      this.setState({ error: 'Passwords do not match' })
   }
   this.setState({editing: false})
 
@@ -145,12 +157,14 @@ renderUserInfo = () => {
   const { username, email, gender, age } = this.props.location.state
   return (
     <div>
-      <h4>Profile</h4>
-      <div>{"Username: " + username}</div>
-      <div>{"Gender: " + gender}</div>
-      <div>{"Age: " + age}</div>
-      <div>{"E-mail: " + email}</div>
-      <button onClick={this.toggleEdit}>Edit</button>
+      <h4 className="profile-title">P R O F I L E</h4>
+      <div className="profile-style">
+        <div>{"Username: " + username}</div>
+        <div>{"Gender: " + gender}</div>
+        <div>{"Age: " + age}</div>
+        <div>{"E-mail: " + email}</div>
+        <button onClick={this.toggleEdit}>Edit</button>
+      </div>
     </div>
   )
 };
@@ -206,11 +220,13 @@ renderLogout = () => {
                 {this.renderLogout()}
               </NavButtonWrapper>
             </NavBar>
+            <ProfileWrapper>
             <div>
               {this.state.editing ? this.renderUserInfoEdit() : this.renderUserInfo()}
-              <h4>Bar History</h4>
+              <h4 className="profile-title">H I S T O R Y</h4>
               {this.renderBarHistory()}
             </div>
+            </ProfileWrapper>
           </FixedWrapper>
         </Wrapper>
       );
