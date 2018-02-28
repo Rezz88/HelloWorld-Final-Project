@@ -25,7 +25,7 @@ export const MainHeader = styled.h1`
   font-variant: small-caps
 `;
 export const FootBar = styled.div`
-  display: flex;
+  display: block;
   align-items: center;
   justify-content: center ;
   box-shadow: ${constants.boxShadow};
@@ -34,7 +34,7 @@ export const FootBar = styled.div`
   background-color: white;
 `;
 export const MainFooter = styled.h1`
-  display: flex;
+  display: block;
   align-items: center;
   margin: 0;
 `;
