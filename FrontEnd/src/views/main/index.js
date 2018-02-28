@@ -105,11 +105,12 @@ class Main extends Component {
     console.log('Main page ', this.props.location.state)
 
     //for now the state is undefined unless someone logs in
-    if (this.props.location.state.loggedIn === true) {
+    if (this.props.location.state && this.props.location.state.loggedIn === true) {
       return (
         <Wrapper>
           <FixedWrapper>
             <NavBar>
+            <FlipClock inverse={this.props.location.state.theme} />
               <div className="div-flex">
               <MainHeader>WhatsLit</MainHeader>
               <div className="split">
