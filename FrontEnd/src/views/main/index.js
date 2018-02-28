@@ -47,62 +47,58 @@ const NavButton = styled.div`
   }
 `;
 
-
-
 const NavButtonWrapper = styled.div`
   display: flex;
-  
 `;
 
-const AboutProfile = styled.div`
+const AboutProfile = styled.div`z
   display: flex;
   justify-content: space-around;
   min-height: 30px;
   margin-top: 4%;
   margin-bottom:4%;
-`
-
+`;
 const AboutBar = styled.div`
+  display: Flex;
+  justify-content: space-around;
   min-height: 30%;
-  align-items: center;
   text-align: center;
-  vertical-align: middle;
-`
+  font-size: 15px;
+  font-weight: bold;
+  margin-top: 3%
+`;
 const ProfileWrapper = styled.div`
   align-items: center;
   margin: auto;
   max-width: 50%;
-
-`
+`;
 const ProfileBlurb = styled.div`
   width: 200px; 
-`
+`;
 
 class Main extends Component {
   constructor() {
     super();
-    this.state = { 
+    this.state = {
       hoverBar: null,
       about: false,
       mapState: false
-      };
+    };
   }
-
-  
 
   ChangeTheme = (state) => {
-    this.setState({mapState: state})
+    this.setState({ mapState: state })
     this.props.location.state.theme = !state
-    console.log('theme',this.props.location.state.theme)
+    console.log('theme', this.props.location.state.theme)
   }
-
 
   toggleAbout = () => {
-    this.setState({about: !this.state.about})
+    this.setState({ about: !this.state.about })
   }
 
+
   render() {
-    console.log('props ',this.props)
+    console.log('props ', this.props)
     //props.location.state is the login information originated at login/index.js
     console.log('Main page ', this.props.location.state)
 
@@ -113,73 +109,66 @@ class Main extends Component {
           <FixedWrapper>
             <NavBar>
               <div className="div-flex">
-              <MainHeader>WhatsLit</MainHeader>
-              <div className="split">
-              <img src="https://i.imgur.com/fSG9Cdt.png" height="30" width="35" />
-              </div>
+                <MainHeader>WhatsLit</MainHeader>
+                <div className="split">
+                  <img src="https://i.imgur.com/fSG9Cdt.png" height="30" width="35" />
+                </div>
               </div>
               <div className="ttlc">
-              <p className="ttlc">L a s t - c a l l</p>
-              <FlipClock inverse={this.props.location.state.theme} />
-              </div>  
+                <p className="ttlc">L a s t - c a l l</p>
+                <FlipClock inverse={this.props.location.state.theme} />
+              </div>
               <NavButtonWrapper>
                 <NavButton onClick={() => this.props.history.push("/profile", this.props.location.state)}>Your Profile</NavButton>
               </NavButtonWrapper>
             </NavBar>
           </FixedWrapper>
-          <MainMap ChangeTheme={this.ChangeTheme}/>
-            
-              {this.state.about ? 
-                <AboutBar> 
-                  <ProfileWrapper>
-                  <AboutProfile>
-                    <img src={marc} height="60" width="60"/>
-                    <ProfileBlurb>
-                      <div>
-                      Marc Renaud
-                      </div>
-                      <div>
-                      Front-End (Google API's)
-                      </div>
-                      </ProfileBlurb>
-                  </AboutProfile>
-                  <AboutProfile>
-                    <img src={wash} height="60" width="60"/>
-                    <ProfileBlurb>
-                      <div>
-                      Eric Washburn
-                      </div>
-                      <div>
-                      Front-End (UI)
-                      </div>
-                    </ProfileBlurb>
-                  </AboutProfile>
-                  <AboutProfile>
-                    <img src={payrez} height="60" width="60"/>
-                    <ProfileBlurb>
-                      <div>
-                      Emmanuel Perez
-                      </div>
-                      <div>
-                      Front-End
-                      </div>
-                    </ProfileBlurb>
-                  </AboutProfile>
-                  <AboutProfile>
-                    <img src={gleb1} height="60" width="60" />
-                    <ProfileBlurb>
-                    <div>
-                      Gleb Dvinski
-                      </div>
-                      <div>
-                      Back-End
-                      </div>
-                    </ProfileBlurb>
-                  </AboutProfile>
-                  </ProfileWrapper>
-                </AboutBar> 
-              : null}
-            
+          <MainMap ChangeTheme={this.ChangeTheme} />
+
+          {this.state.about ?
+            <AboutBar>
+              <div className="about-space">
+                <img src={marc} height="150" width="150" />
+                <div>
+                  <a>Marc Renaud</a>
+                  <div>
+                    <a>Google Map API</a>
+                  </div>
+                </div>
+              </div>
+              <div>
+
+                <img src={wash} height="150" width="150" />
+                <div>
+                  <a>Eric Washburn</a>
+                  <div>
+                    <a>Front-End(UI)</a>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <img src={payrez} height="150" width="150" />
+                <div>
+                  <a>Emmanuel Perez</a>
+                  <div>
+                    <a>Font-End</a>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <img src={gleb1} height="150" width="150" />
+                <div>
+                  <a>Gleb Dvinski</a>
+                  <div>
+                    <a>Back-End</a>
+                  </div>
+                </div>
+              </div>
+            </AboutBar>
+            : null}
+
           <NavBar>
             <MainHeader onClick={this.toggleAbout}>about us</MainHeader>
           </NavBar>
