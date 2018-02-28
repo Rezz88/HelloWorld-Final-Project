@@ -12,6 +12,7 @@ const BarList = styled.div`
 const BarItem = styled(Button)`
   margin: 10px;
   font-size: 14px;
+  font-variant: small-caps;
   padding: .5rem;
   cursor: pointer;
   transition: all 0.1s ease-in-out;
@@ -36,6 +37,7 @@ const BarItem = styled(Button)`
 
   const Link = styled.a`
     cursor: help;
+    font-variant: small-caps;
     color: ${props => !props.mapState ? 'white': 'black'}
   `
     // background-color: ${ props  => props.existCheck && props.mapState ? 'blue' : 'yellow'};
@@ -72,7 +74,7 @@ class BarListComponent extends React.PureComponent {
           {/* `https://www.google.com/maps?saddr=${this.props.userLoc}&daddr=${encodeURI(venue.vicinity)}` */}
           {/* http://maps.google.com/?q=${encodeURI(venue.vicinity)} */}
             <Link href={`https://www.google.com/maps/dir/${this.props.userLoc.lat},${this.props.userLoc.lng}/${encodeURI(venue.vicinity)}`} 
-            target="_blank">{this.state.isActive === idx ? venue.vicinity : ''}</Link>
+            target="_blank">{this.state.isActive === idx ? 'Directions  ' + venue.vicinity : ''}</Link>
           </div>
         </BarItem>
         )}

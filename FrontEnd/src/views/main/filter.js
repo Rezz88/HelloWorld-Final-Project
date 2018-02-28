@@ -28,6 +28,7 @@ ${themeStyles}
 
 const FilterButton = styled.button`
   cursor: pointer;
+  font-variant: small-caps;
   background-color: #404040;
   color: white;
   border-radius: 5px;
