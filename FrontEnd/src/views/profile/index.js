@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router';
 import FlipClock from '../main/Components/FlipClock'
+import styled from 'styled-components';
 import {
   MainHeader,
   NavBar,
