@@ -6,7 +6,7 @@ import gleb1 from './images/gleb1.png'
 import payrez from './images/payrez.png'
 import wash from './images/wash.png'
 import marc from './images/marc.png'
-import { MainHeader, constants, mediaSizes, MainFooter, FootBar } from '../styles';
+import { constants, mediaSizes, MainFooter, FootBar } from '../styles';
 import FlipClock from './Components/FlipClock'
 
 const themeStyles = css`
@@ -21,6 +21,16 @@ ${({ mapState }) => !mapState ?
 'background-color: whitesmoke; transition: background-color 2s;  color 3s;'
 };
 `
+const textstyles = css`
+${({ mapState }) => !mapState ?
+'color: white; transition: background-color 3s, color 2s;' :
+'color: black; transition: background-color 2s;  color 3s;'
+};
+`
+const LastCall = styled.p`
+${textstyles}
+`
+
 const Wrapper = styled.div`
   height: 100vh;
   overflow: auto;
@@ -28,6 +38,10 @@ const Wrapper = styled.div`
   flex-direction: column;
 `;
 
+const MainHeader = styled.h1`
+${textstyles}
+  margin: 0;
+`;
 const FixedWrapper = styled.div`
 `;
 // position: fixed;
@@ -119,13 +133,13 @@ class Main extends Component {
           <FixedWrapper>
             <NavBar mapState={this.state.mapState}>
               <div className="div-flex">
-              <MainHeader>WhatsLit</MainHeader>
+              <MainHeader mapState={this.state.mapState}>WhatsLit</MainHeader>
               <div className="split">
               <img src="https://i.imgur.com/fSG9Cdt.png" height="30" width="35" />
               </div>
               </div>
               <div className="ttlc">
-              <p className="ttlc">L a s t - c a l l</p>
+              <LastCall mapState={this.state.mapState} className="ttlc">L a s t - c a l l</LastCall>
               <FlipClock inverse={this.props.location.state.theme} />
               </div>  
               <NavButtonWrapper>
@@ -187,7 +201,7 @@ class Main extends Component {
               : null}
             
           <NavBar mapState={this.state.mapState}>
-            <MainHeader onClick={this.toggleAbout}>about us</MainHeader>
+            <MainHeader mapState={this.state.mapState} onClick={this.toggleAbout}>about us</MainHeader>
           </NavBar>
         </Wrapper>
       )
