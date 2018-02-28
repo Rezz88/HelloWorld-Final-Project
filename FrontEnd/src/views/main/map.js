@@ -102,13 +102,13 @@ display: flex;
 align-items: center;
 font-size: 18px;
 font-weight: bold;
-background: blue;
+background: pink;
 `;
 
 const Ratio = styled.div`
   width: ${({ genderRatio }) => genderRatio}%;
   height: .5rem;
-  background-color: pink;
+  background-color: blue;
   transition: width 2s
 `;
 
@@ -233,7 +233,7 @@ const MyMapComponent = compose(
               <GenderWrapper>
                 <Ratio genderRatio={props.venueData.ratio.femalePercent} />
               </GenderWrapper>
-              <div>Gender Ratio: {props.venueData.ratio.femalePercent || ''}</div>
+              <div>Gender Ratio: {props.venueData.ratio.malePercent || ''}</div>
             </PeopleMetric>
             :
             <div>*No whatslit users</div>
@@ -408,6 +408,23 @@ class MyFancyComponent extends React.PureComponent {
     this.setState({ mapState: !this.state.mapState })
   }
 
+  sortVenues = (data) => {
+  
+    var res = []
+
+    for (var i = 0; i < data.length; i++) {
+      
+      this.state.venues.forEach((item, pos) => {
+        if (item.place_id === data[i]) {
+          res.push(item);
+        }  
+      });
+    }
+
+    this.setState({venues: res})
+
+  }
+
   render() {
     return (
       <Container>
@@ -418,7 +435,7 @@ class MyFancyComponent extends React.PureComponent {
             mapState={this.state.mapState}
             //functions
             toggleMap={this.toggleMap}
-            setVenues={this.setVenues}
+            sortVenues={this.sortVenues}
           />
           <MyMapComponent
             //state

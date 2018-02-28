@@ -1,5 +1,6 @@
 import React from "react";
 import styled from 'styled-components';
+import FlipClock from './Components/FlipClock'
 
 
 
@@ -9,32 +10,45 @@ padding: .2rem;
   justify-content: space-between;
   `
 
-  const Selectors = styled.select`
+const Selectors = styled.select`
   background-color: #404040;
   color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  height: 1.7rem;
+  width: 6.5rem;
   `
 
-  
-  const ToggleButton = styled.button`
+
+const ToggleButton = styled.button`
   
   ${({ mapState }) => {
-    if (!mapState)  {return 'background-color: #404040; color: white'};
-    return 'background-color: #f2f2f2; color: black';
+    if (!mapState) { return 'background-color: #404040; color: white; cursor: pointer;  border-radius: 5px; height: 1.7rem; width: 6.5rem; transition: background-color 3s, color 2s; margin-top: 16px;' };
+    return 'background-color: #f2f2f2; color: black; cursor: pointer;  border-radius: 5px; height: 1.7rem; width: 6.5rem; transition: background-color 2s;  color 3s; margin-top: 16px;';
   }};
 `;
+
+const FilterButton = styled.button`
+  cursor: pointer;
+  background-color: #404040;
+  color: white;
+  border-radius: 5px;
+  height: 1.7rem;
+  width: 4rem;
+`
 
 class SortComponent extends React.PureComponent {
   constructor() {
     super();
     this.state = {
       value: 'people',
-      hiOrLow: 'high'
+      hiOrLow: 'high',
     }
   }
   sendInfo = () => {
-    
+
     var placeIDs = []
-    
+
     this.props.venues.forEach((item, pos) => {
       if (item.place_id) {
         placeIDs.push(item.place_id)
@@ -43,30 +57,33 @@ class SortComponent extends React.PureComponent {
     var infoToSend = { value: this.state.value, hiOrLow: this.state.hiOrLow, placeIDs: placeIDs }
     console.log(infoToSend)
     fetch('/sort', {
-      method: 'Get'
-    }) .then(( response ) => response.json())
-      .then((data) => console.log(data))
-      .then(( data ) => this.props.setVenues(data))
+      method: 'Post',
+      body: JSON.stringify(infoToSend)
+    }).then((response) => response.json())
+      // .then((data) => console.log(data))
+      .then((data) => this.props.sortVenues(data))
+
     //Potential solution...
     //fetch sortedVenues and call this.props.setVenues to update parent state and replace venues array
   }
-  
+
   handleChange = (event) => {
     this.setState({ value: event.target.value });
   }
-  
+
   handleValueChange = (event) => {
     this.setState({ hiOrLow: event.target.value });
   }
-  
+
   render() {
     return (
       <Wrapper>
         <div>
-          <ToggleButton 
+          <ToggleButton
           mapState={this.props.mapState}
-          onClick={this.props.toggleMap}>Toggle Map</ToggleButton>
+            onClick={this.props.toggleMap}>Toggle Map</ToggleButton>
         </div>
+        <FlipClock inverse={!this.props.mapState} />
         <div>
           <Selectors onChange={this.handleChange}>
             <option value="people"># of People</option>
@@ -77,10 +94,9 @@ class SortComponent extends React.PureComponent {
             <option value='high'>High</option>
             <option value='low'>Low</option>
           </Selectors>
-          <button 
-          // setVenues={this.props.setVenues}
-          onClick={this.sendInfo}
-          >Filter</button>
+          <FilterButton
+            onClick={this.sendInfo}
+          >Filter</FilterButton>
         </div>
       </Wrapper>
     )
