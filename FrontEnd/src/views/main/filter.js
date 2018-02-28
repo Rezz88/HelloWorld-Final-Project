@@ -7,6 +7,8 @@ import FlipClock from './Components/FlipClock'
 const Wrapper = styled.div`
 display: flex;
 padding: .2rem;
+padding-bottom: 0.5rem;
+margin-top: -1rem;
   justify-content: space-between;
   `
 //avoid the copy pasting
