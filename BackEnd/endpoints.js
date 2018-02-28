@@ -1,8 +1,9 @@
 const signup = require('./api/signup');
 const profile = require('./api/profile');
 const barInfo = require('./api/barInfo');
-const { fileread } = require('./tools');
+const exists = require('./api/exists');
 const sort = require('./api/sort');
+const { fileread } = require('./tools');
 const express = require('express');
 const morgan = require('morgan');
 const app = express();
@@ -106,11 +107,15 @@ app.get('/bar-stats/:id', async (req, res) => {
 })
 
 app.post('/sort', (req, res) => {
-    //let sortedArray = sort.amountOfPeople((req.body.toString()));
-   //let sortedArray = sort.sortByGender((req.body.toString()));
    let sortedArray = sort.theSorter(JSON.parse(req.body.toString()));
    sortedArray
    .then(x => res.json(x))
+})
+
+app.post('/exists', async (req, res) => {
+    let blue = await exists.doesItExist(JSON.parse(req.body.toString()))
+    console.log('this is bluuuuuue',blue)
+    res.send(JSON.stringify(blue));
 })
 
 app.listen(4000, console.log("We're a go!"))
