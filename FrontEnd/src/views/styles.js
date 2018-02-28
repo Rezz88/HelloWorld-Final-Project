@@ -13,6 +13,7 @@ export const mediaSizes = {
 };
 
 export const Button = styled.div`
+  font-style: bold;
   background-color: whitesmoke;
   border-radius: 5px;
   padding: 8px;
@@ -61,7 +62,11 @@ export const NavButton = styled.div`
   cursor: pointer;
   margin-right: 1rem;
   @media (min-width: ${mediaSizes.sm}px) {
-    color: red;
+    background-color: lightgrey;
+    color: black;
+    font-variant: small-caps;
+    box-shadow: ${constants.boxShadow};
+    
   }
 `;
 
