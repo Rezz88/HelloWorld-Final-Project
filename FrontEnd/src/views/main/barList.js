@@ -23,16 +23,21 @@ const BarItem = styled(Button)`
       return 'background-color: #404040; color: white';
     }
     if (!props.existCheck && !props.mapState) {
-      return 'background-color: #f2f2f2; color: black';
+      return 'background-color: #d9d9d9; color: black';
     }
     if (props.existCheck && props.mapState) {
       return 'background-color: #404040; color: white';
     }
     if (!props.existCheck && props.mapState) {
-      return 'background-color: #f2f2f2; color: black';
+      return 'background-color: #d9d9d9; color: black';
     }}
   }
     `;
+
+  const Link = styled.a`
+    cursor: help;
+    color: ${props => !props.mapState ? 'white': 'black'}
+  `
     // background-color: ${ props  => props.existCheck && props.mapState ? 'blue' : 'yellow'};
     
 class BarListComponent extends React.PureComponent {
@@ -57,7 +62,7 @@ class BarListComponent extends React.PureComponent {
         // ourData={}
         existCheck={venue.exists}
         // mapState={props.mapState}
-        onClick={() => {console.log(this.props.mapState); this.handleClick(venue, idx)}}
+        onClick={() => this.handleClick(venue, idx)}
         onMouseEnter={(e) => this.props.handleHover(e, venue, idx)}
         onMouseOut={(e) => this.props.handleHoverOut(e, venue, idx)}
           // highlight={venue.genderRatio !== undefined}
@@ -66,8 +71,8 @@ class BarListComponent extends React.PureComponent {
           <div>
           {/* `https://www.google.com/maps?saddr=${this.props.userLoc}&daddr=${encodeURI(venue.vicinity)}` */}
           {/* http://maps.google.com/?q=${encodeURI(venue.vicinity)} */}
-            <a href={`https://www.google.com/maps/dir/${this.props.userLoc.lat},${this.props.userLoc.lng}/${encodeURI(venue.vicinity)}`} 
-            target="_blank">{this.state.isActive === idx ? venue.vicinity : ''}</a>
+            <Link href={`https://www.google.com/maps/dir/${this.props.userLoc.lat},${this.props.userLoc.lng}/${encodeURI(venue.vicinity)}`} 
+            target="_blank">{this.state.isActive === idx ? venue.vicinity : ''}</Link>
           </div>
         </BarItem>
         )}

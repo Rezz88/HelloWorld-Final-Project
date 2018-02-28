@@ -26,8 +26,9 @@ const PLACES_API_KEY = 'AIzaSyBA0wFPUwIo03AHcEf3pFarehPoQLzysCo';
 
 
 const StyledInfoWindow = styled.div`
-  background-color: whitesmoke;
   max-width: 200px;
+  font-family: arial;
+  font-weight: bold;
 `;
 
 const Icon = styled.img`
@@ -147,7 +148,7 @@ const MyMapComponent = compose(
   withProps({
     googleMapURL: "https://maps.googleapis.com/maps/api/js?key=" + PLACES_API_KEY + "&v=3.exp&libraries=geometry,drawing,places",
     loadingElement: <div style={{ height: `100%` }} />,
-    containerElement: <div style={{ height: `85%` }} />,
+    containerElement: <div style={{ height: `91%` }} />,
     mapElement: <div id="map" style={{ height: `100%` }} />,
   }),
   lifecycle({
@@ -225,15 +226,15 @@ const MyMapComponent = compose(
               <BarWrapper>
                 <BarCapacity capacityRatio={props.venueData.people &&  (props.venueData.people / 80) *100} />
               </BarWrapper>
-              <div>People: {props.venueData.people || ''}</div>
+              <div> People: {props.venueData.people || ''}</div>
               <BarWrapper>
                 <BarAvgAge averageAge={props.venueData.averageAge} />
               </BarWrapper>
-              <div>AgeAvg: {props.venueData.averageAge || ''}</div>
+              <div> AgeAvg: {props.venueData.averageAge || ''}</div>
               <GenderWrapper>
                 <Ratio genderRatio={props.venueData.ratio.femalePercent} />
               </GenderWrapper>
-              <div>Gender Ratio: {props.venueData.ratio.malePercent || ''}</div>
+              <div> Ratio: {props.venueData.ratio.malePercent || ''}</div>
             </PeopleMetric>
             :
             <div>*No whatslit users</div>
@@ -387,8 +388,7 @@ class MyFancyComponent extends React.PureComponent {
       method: 'Post',
       body: JSON.stringify(this.state.venues)
     }) .then(( response ) => response.json())
-    .then(data => { console.log('my data', data)
-    this.setState({venues: data});
+    .then(data => { this.setState({venues: data} );
     })
 
     console.log(this.state.venues)

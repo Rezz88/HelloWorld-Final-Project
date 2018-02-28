@@ -1,0 +1,321 @@
+Corner between St-Urban/St-Lau and Sherbrooke
+---------------------------------------
+
+"Le Rouge Bar"
+"ChIJrTSqfzUayUwRU95kVSYdQWs"
+"7 Rue Prince Arthur Ouest, Montréal"
+
+"Ye Olde Orchard Pub & Grill"
+"ChIJA64vgTUayUwRxBwBh2W2_fU"
+"20 Rue Prince Arthur Ouest, Montréal"
+
+"Pullman"
+"ChIJVbPj_kgayUwRkQMwA8xvPgM"
+"3424 Avenue du Parc, Montréal"
+
+"BENELUX @rueSherbrooke"
+"ChIJk05gDkkayUwRSLMUdh9xeqc"
+"245 Rue Sherbrooke Ouest, Montréal"
+
+"Mckibbins Irish Pub"
+"ChIJ42NXYEoayUwRK1yRnKff4ro"
+"3515 Boulevard Saint-Laurent, Montréal"
+
+"Maestro SVP"
+"ChIJG7ritt8ZyUwRKKk9x33S_vw"
+"3615 Boulevard Saint-Laurent, Montréal"
+
+"Marché 27 Bar à Tartare"
+"ChIJ3UeMhjUayUwRwwo7-8VzmHw"
+"27 Rue Prince Arthur Ouest, Montréal"
+
+"Distillery no.1"
+"ChIJjWSjVksayUwR_Xv79OqovVA"
+"300 Rue Ontario Est, Montréal"
+
+"Les Deux Gamins"
+"ChIJDWcXqUoayUwR4c7GeUjZYuQ"
+"170 Rue Prince Arthur Est, Montréal"
+
+"O.Noir"
+"ChIJM_MRxmsayUwRJal7VGeChZY"
+"124 Rue Prince Arthur East, Montréal"
+
+"Circos"
+"ChIJ3xM67EgayUwRHNltXfLEDRA"
+"380 Rue Sherbrooke Ouest, Montréal"
+
+"Kamasutra Club"
+"ChIJA7XrhEoayUwRiBnQn9osE-o"
+"3580 Rue Saint-Dominique, Montréal"
+
+"Caffe E Cucina"
+"ChIJ2aT55EgayUwRD1_NPojowlk"
+"350 Rue Sherbrooke Ouest, Montréal"
+
+"SuWu"
+"ChIJZ7_MgUoayUwRfhwiD1PLKv0"
+"3581 Boulevard Saint-Laurent, Montréal"
+
+"Blvd44"
+"ChIJfVnNvksayUwRtso-hFHKh2c"
+"2108 Boulevard Saint-Laurent, Montréal"
+
+"SPOT Bar Terrasse Lounge"
+"ChIJb0h5YUoayUwRMCuVIK-QOq4"
+"3523 Boulevard Saint-Laurent, Montréal"
+
+"Mundo Lingo Montreal"
+"ChIJIanZD9EbyUwR3XMo9ENwStw"
+"3435 Boulevard Saint-Laurent, Montréal"
+
+
+
+Corner St-Cath and Crescent
+----------------------------------
+
+"Café Vasco Da Gama"
+"ChIJ1ww8aEEayUwRzR5Y9p3iQ0g"
+"1472 Rue Peel, Montréal"
+
+"Hurley's Irish Pub"
+"ChIJby8842kayUwRm34-zaQVMWA"
+"1225 Rue Crescent, Montréal"
+
+"Nespresso Boutique-Bar"
+"ChIJTdGbzkEayUwRFFDRwmbcKxk"
+"2045 Rue Crescent, Montréal"
+
+"Ye Olde Orchard Pub & Grill"
+"ChIJixNqdEIayUwRZV7VH4QEEOE"
+"1189 Rue de la Montagne, Montréal"
+
+"Brutopia"
+"ChIJwcmT5mkayUwRBM9sBnwsFeM"
+"1219 Rue Crescent, Montréal"
+
+"Decca 77"
+"ChIJYxxtkEIayUwR4ZSyX2dMuNQ"
+"1077 Rue Drummond, Montréal"
+
+"Ferreira Café"
+"ChIJdyXKZkEayUwR2qeViS0Kndk"
+"1446 Rue Peel, Montréal"
+
+"Le Cinq"
+"ChIJ_2uKBkIayUwRDbF-KStsHJA"
+"1234 Rue de la Montagne, Montréal"
+
+"Kafein cafe-bar"
+"ChIJ9ZTvDGoayUwRsW-jGIzLNQ8"
+"1429 Rue Bishop, Montréal"
+
+"Irish Embassy Pub & Grill"
+"ChIJAWUu82kayUwRGQf51nlKrsw"
+"1234 Rue Bishop, Montréal"
+
+"McKibbin's Irish Pub"
+"ChIJU3alcmoayUwRHw9ZVSUzjzc"
+"1426 Rue Bishop, Montréal"
+
+"La Cage - Brasserie sportive"
+"ChIJt3KEzEIayUwRARSanLY55C8"
+"Le Centre Bell, 1212 Avenue des Canadiens-de-Montréal, Montréal"
+
+"Foonzo"
+"ChIJbWGAJEIayUwRgJoO30VpoXY"
+"1245 Rue Drummond, Montréal"
+
+
+
+
+End of St-Lau. (Old Port)
+-------------------------------
+
+
+"The Keg Steakhouse + Bar"
+"ChIJeW3z_1YayUwRuUMlkCSGU54"
+"25 Rue Saint Paul Est, Montréal"
+
+"Bevo Bar + Pizzeria"
+"ChIJW8fv8lYayUwRLx7pfbQVuhE"
+"410 Rue Saint Vincent, Montréal"
+
+"Brasserie 701"
+"ChIJb2jhtFAayUwR1osp9xSfKXc"
+"701 Côte de la Place d'Armes, Montréal"
+
+"Philemon Bar"
+"ChIJ-3MdglcayUwRT1n31lOjkRw"
+"111 Rue Saint-Paul Ouest, Montréal"
+
+"L'Assommoir Notre-Dame"
+"ChIJr32g-lkayUwR5CQWj_yZnD0"
+"211 Rue Notre-Dame Ouest, Montréal"
+
+"Modavie"
+"ChIJF47_p1cayUwR1uC4VBovwI0"
+"1 Rue Saint Paul Ouest, Montréal"
+
+"Les 3 Brasseurs"
+"ChIJl1R-V1YayUwRbFHDpVAwA4A"
+"105 Rue Saint Paul Est, Montréal"
+
+"Méchant Boeuf Bar-Brasserie"
+"ChIJnfuLKlgayUwRcE0MoQ4-dI8"
+"124 Rue Saint-Paul Ouest, Montréal"
+
+"2 PIERROTS"
+"ChIJES8PV1YayUwRtHCAYsoYTSU"
+"104 Rue Saint Paul Est, Montréal"
+
+"Porto Mar"
+"ChIJwayYSFgayUwRPMDkDlpjtBs"
+"201 Place d'Youville, Montréal"
+
+"La Cage - Brasserie sportive"
+"ChIJLR5yV1YayUwRwVZGcTk9xnk"
+"114 Rue Saint Paul Est, Montréal"
+
+"Restaurant Chez L'Épicier"
+"ChIJuY3a0lUayUwRB441skySK4s"
+"311 Rue Saint Paul Est, Montréal"
+
+"Taverne Gaspar"
+"ChIJCdLMUlYayUwRcvW39j2wAb0"
+"89 Rue de la Commune Est, Montréal"
+
+"Accords"
+"ChIJz1oZ8FkayUwRJZ4hlnoE38E"
+"212 Rue Notre-Dame Ouest, Montréal"
+
+"Verses Bistro"
+"ChIJ33rmglcayUwR7AjjvPA0Q8s"
+"100 Rue Saint Paul Ouest, Montréal"
+
+"Mangiafoco"
+"ChIJcTN2glcayUwRHAV5t-fuqHg"
+"105 Rue Saint-Paul Ouest, Montréal"
+
+
+
+WeWork.. Cathcart and mcGill
+----------------------------------
+
+"Café Vasco Da Gama"
+"ChIJ1ww8aEEayUwRzR5Y9p3iQ0g"
+"1472 Rue Peel, Montréal"
+
+"Bistro L'Aromate Centre-Ville"
+"ChIJzb0mrkYayUwRmwN0xldtZRs"
+"980 Boulevard de Maisonneuve Ouest, Montréal"
+
+"Le Vieux Dublin Pub & Restaurant"
+"ChIJzRXiV0QayUwRCXD__VGJEGs"
+"636 Rue Cathcart, Montréal"
+
+"Vargas Steakhouse & Sushi"
+"ChIJ1Zj3u0QayUwRwjoylEnYkNE"
+"690 Boulevard René-Lévesque Ouest, Montréal"
+
+"Salsathèque"
+"ChIJ4Yg7sUMayUwRtFYvGxoEx-c"
+"1220 Rue Peel, Montréal"
+
+"Alexandre Restaurant Français"
+"ChIJNS-sZ0EayUwRObJP0eZb1uc"
+"1454 Rue Peel, Montréal"
+
+"Carlos & Pepe's Taqueria"
+"ChIJK9ze2EMayUwR4ujNhXIeMcE"
+"1420 Rue Peel, Montréal"
+
+"L'Entrecôte Saint-Jean"
+"ChIJK-lpP0EayUwRT0f5_eSzIfU"
+"2022 Rue Peel, Montréal"
+
+"mkt"
+"ChIJJ67ZMkEayUwRzzA9kPuk4iQ"
+"2044 Rue Metcalfe, Montréal"
+
+"Piranha Bar"
+"ChIJhf8sREQayUwRzRMYXklvgeI"
+"680 Rue Sainte-Catherine Ouest, Montréal"
+
+
+
+Rachel St-Lau (unit)
+-------------------------
+
+
+"Divan Orange"
+"ChIJHVLFWs0byUwRkCa5iKQ25EQ"
+"4234 Boulevard Saint-Laurent, Montréal"
+
+"Resto Bar Champs"
+"ChIJzdQYSTMayUwRVCngcxS3eMw"
+"3956 Boulevard Saint-Laurent, Montréal"
+
+"Réservoir"
+"ChIJt1iSMzMayUwRXDqFy_11h8c"
+"9 Avenue Duluth Est, Montréal"
+
+"Bar James"
+"ChIJhQoLWjMayUwRYA8gs1ZVOSw"
+"3910 Boulevard Saint-Laurent, Montréal"
+
+"Le Bayou Bar"
+"ChIJe1SFSs0byUwRokb3T2uGvIk"
+"4134 Boulevard Saint-Laurent, Montréal"
+
+"Bar Big in Japan"
+"ChIJr3ZTNs0byUwRZULEd3N80Rs"
+"4175 Boulevard Saint-Laurent, Montréal"
+
+"Blizzarts"
+"ChIJBTr7SDMayUwRTE6rK8WyuzM"
+"3956 Boulevard Saint-Laurent, Montréal"
+
+"Bar Suzanne"
+"ChIJQcv-yswbyUwRxIXOCGvF3SE"
+"20 Avenue Duluth Est, Montréal"
+
+"Bar Juke Box"
+"ChIJhd0EpzQayUwRUxehT7Pe3vQ"
+"3874 Boulevard Saint-Laurent, Montréal"
+
+"North Star Machines À Piastres"
+"ChIJFYlDWjMayUwRLhjYkNrpdLg"
+"3908 Boulevard Saint-Laurent, Montréal"
+
+"Barfly"
+"ChIJHS8ALTMayUwRhWE5dlJNbNs"
+"4062 Boulevard Saint-Laurent, Montréal"
+
+"Addydanse"
+"ChIJtQtOfk8ayUwRvsF_Z-pU7II"
+"24 Avenue du Mont-Royal Ouest, Montréal"
+
+"Bar A"
+"ChIJez8fpM0byUwRsOLtwN0j6Hg"
+"213 Rue Rachel Est, Montréal"
+
+"Club Lambi"
+"ChIJefsEA9MbyUwRjjCvZmg1gS8"
+"4465 Boulevard Saint-Laurent, Montréal"
+
+"Zad Communications Inc"
+"ChIJeyr5HNMbyUwRXSZjcOZSak0"
+"4446 Boulevard Saint-Laurent, Montréal"
+
+"Sake Bar"
+"ChIJW7ldN80byUwRIQtdAKAYK98"
+"4161 Boulevard Saint-Laurent, Montréal"
+
+"Le Majestique Montreal"
+"ChIJKz2aKs0byUwRBPsetIbRk90"
+"4105 Boulevard Saint-Laurent, Montréal"
+
+"The Blue Dog Motel"
+"ChIJT1hNSDMayUwRvtLyBUQSEq8"
+"3958 Boulevard Saint-Laurent, Montréal"
