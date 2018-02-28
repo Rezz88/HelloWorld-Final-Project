@@ -110,7 +110,6 @@ class Main extends Component {
         <Wrapper>
           <FixedWrapper>
             <NavBar>
-            <FlipClock inverse={this.props.location.state.theme} />
               <div className="div-flex">
               <MainHeader>WhatsLit</MainHeader>
               <div className="split">
@@ -119,7 +118,7 @@ class Main extends Component {
               </div>
               <div className="ttlc">
               <p className="ttlc">L a s t - c a l l</p>
-              <FlipClock inverse={!this.props.mapState} />
+              <FlipClock inverse={this.props.location.state.theme} />
               </div>  
               <NavButtonWrapper>
                 <NavButton onClick={() => this.props.history.push("/profile", this.props.location.state)}>Your Profile</NavButton>
