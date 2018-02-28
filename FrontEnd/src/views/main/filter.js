@@ -19,11 +19,13 @@ ${({ mapState }) => !mapState ?
 //avoid the copy pasting
 const Selectors = styled.select`
 ${themeStyles}
+font-variant: small-caps;
 `
 
 //also apply this styling to all buttons
 const ToggleButton = styled.button`
 ${themeStyles}
+font-variant: small-caps;
 `;
 
 const FilterButton = styled.button`
