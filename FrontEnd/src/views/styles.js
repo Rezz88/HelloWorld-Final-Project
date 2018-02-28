@@ -13,7 +13,6 @@ export const mediaSizes = {
 };
 
 export const Button = styled.div`
-  font-style: bold;
   background-color: whitesmoke;
   border-radius: 5px;
   padding: 8px;
@@ -22,7 +21,6 @@ export const Button = styled.div`
 
 export const MainHeader = styled.h1`
   margin: 0;
-  font-variant: small-caps
 `;
 export const FootBar = styled.div`
   display: flex;
@@ -46,8 +44,8 @@ export const NavBar = styled.div`
   margin-bottom: .5rem;
   padding: .5rem;
   background-color: white;
-  min-width: auto;
 `;
+
 export const Wrapper = styled.div``;
 
 export const FixedWrapper = styled.div`
@@ -59,20 +57,15 @@ export const FixedWrapper = styled.div`
   margin-bottom: 4rem;
 `;
 
+
 export const NavButton = styled.div`
   cursor: pointer;
   margin-right: 1rem;
   @media (min-width: ${mediaSizes.sm}px) {
-    background-color: lightgrey;
-    color: black;
-    font-variant: small-caps;
-    box-shadow: ${constants.boxShadow};
-    
+    color: red;
   }
 `;
 
 export const NavButtonWrapper = styled.div`
-  display: box;
-  margin-left: 7px;
-  margin-top: 19px;
+  display: flex;
 `;

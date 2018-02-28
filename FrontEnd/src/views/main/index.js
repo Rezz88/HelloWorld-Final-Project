@@ -1,14 +1,35 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
+import styled, {css} from 'styled-components';
 import { Redirect } from 'react-router';
 import MainMap from './map'
 import gleb1 from './images/gleb1.png'
 import payrez from './images/payrez.png'
 import wash from './images/wash.png'
 import marc from './images/marc.png'
-import { MainHeader, constants, mediaSizes, MainFooter, FootBar } from '../styles';
+import { constants, mediaSizes, MainFooter, FootBar } from '../styles';
 import FlipClock from './Components/FlipClock'
 
+const themeStyles = css`
+${({ mapState }) => !mapState ?
+'background-color: #404040; color: white; cursor: pointer;  border-radius: 5px; height: 1.7rem; width: 6.5rem; transition: background-color 3s, color 2s; margin-top: 16px;' :
+'background-color: #f2f2f2; color: black; cursor: pointer;  border-radius: 5px; height: 1.7rem; width: 6.5rem; transition: background-color 2s;  color 3s; margin-top: 16px;'
+};
+`
+const NavThemeStyles = css`
+${({ mapState }) => !mapState ?
+'background-color: rgb(89, 89, 89); transition: background-color 3s, color 2s;' :
+'background-color: whitesmoke; transition: background-color 2s;  color 3s;'
+};
+`
+const textstyles = css`
+${({ mapState }) => !mapState ?
+'color: white; transition: background-color 3s, color 2s;' :
+'color: black; transition: background-color 2s;  color 3s;'
+};
+`
+const LastCall = styled.p`
+${textstyles}
+`
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -17,6 +38,10 @@ const Wrapper = styled.div`
   flex-direction: column;
 `;
 
+const MainHeader = styled.h1`
+${textstyles}
+  margin: 0;
+`;
 const FixedWrapper = styled.div`
 `;
 // position: fixed;
@@ -27,24 +52,17 @@ const FixedWrapper = styled.div`
 // margin-bottom: 4rem;
 
 const NavBar = styled.div`
+  ${NavThemeStyles}
   display: flex;
   align-items: center;
   justify-content: space-between;
   box-shadow: ${constants.boxShadow};
   margin-bottom: .5rem;
   padding: .5rem;
-  background-color: white;
 `;
 
 const NavButton = styled.div`
-  cursor: pointer;
-  margin-right: 1rem;
-  @media (min-width: ${mediaSizes.sm}px) {
-    color: black;
-    background-color: lightgrey;
-    font-variant: small-caps; 
-    box-shadow: ${constants.boxShadow};
-  }
+${themeStyles};
 `;
 
 
@@ -63,6 +81,7 @@ const AboutProfile = styled.div`
 `
 
 const AboutBar = styled.div`
+  ${NavThemeStyles}
   min-height: 30%;
   align-items: center;
   text-align: center;
@@ -91,9 +110,10 @@ class Main extends Component {
   
 
   ChangeTheme = (state) => {
-    this.setState({mapState: state})
+    this.setState({mapState: !state})
     this.props.location.state.theme = !state
     console.log('theme',this.props.location.state.theme)
+    console.log('mapstate', this.state.mapState)
   }
 
 
@@ -111,19 +131,19 @@ class Main extends Component {
       return (
         <Wrapper>
           <FixedWrapper>
-            <NavBar>
+            <NavBar mapState={this.state.mapState}>
               <div className="div-flex">
-              <MainHeader>WhatsLit</MainHeader>
+              <MainHeader mapState={this.state.mapState}>WhatsLit</MainHeader>
               <div className="split">
               <img src="https://i.imgur.com/fSG9Cdt.png" height="30" width="35" />
               </div>
               </div>
               <div className="ttlc">
-              <p className="ttlc">L a s t - c a l l</p>
+              <LastCall mapState={this.state.mapState} className="ttlc">L a s t - c a l l</LastCall>
               <FlipClock inverse={this.props.location.state.theme} />
               </div>  
               <NavButtonWrapper>
-                <NavButton onClick={() => this.props.history.push("/profile", this.props.location.state)}>Your Profile</NavButton>
+                <NavButton mapState={this.state.mapState} onClick={() => this.props.history.push("/profile", this.props.location.state)}>Your Profile</NavButton>
               </NavButtonWrapper>
             </NavBar>
           </FixedWrapper>
@@ -180,8 +200,8 @@ class Main extends Component {
                 </AboutBar> 
               : null}
             
-          <NavBar>
-            <MainHeader onClick={this.toggleAbout}>about us</MainHeader>
+          <NavBar mapState={this.state.mapState}>
+            <MainHeader mapState={this.state.mapState} onClick={this.toggleAbout}>about us</MainHeader>
           </NavBar>
         </Wrapper>
       )
