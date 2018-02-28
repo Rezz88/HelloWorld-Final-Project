@@ -14,7 +14,9 @@ import {
   SearchBox
 } from "react-google-maps";
 // import { connect } from "tls";
-import markerImage from './images/heatDot.png';
+import heatDot from './images/heatDot.png';
+import redFlame from './images/lit.png';
+import notLit from './images/not-lit.png'
 import markerHovered from './images/greenMarker.png';
 import personImage from './images/user.png';
 import darkUser from './images/darkUser.png'
@@ -264,7 +266,9 @@ const MyMapComponent = compose(
             onMouseLeave={() => props.closeInfoWindow()}
 
             className="bar-marker"
-          ><img src={(props.zoom <= 14 || venue.hover) ? markerImage : markerHovered} />
+          >
+          {/* <img src={(props.zoom <= 14 || venue.hover) ? markerImage : markerHovered} /> */}
+          <img src={(props.zoom <= 14 ? heatDot : (venue.hover ? heatDot : (!venue.exists ? notLit : redFlame)))} />
           </div>
         </OverlayView>);
     }
