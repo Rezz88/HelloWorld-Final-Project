@@ -147,7 +147,7 @@ const MyMapComponent = compose(
   withProps({
     googleMapURL: "https://maps.googleapis.com/maps/api/js?key=" + PLACES_API_KEY + "&v=3.exp&libraries=geometry,drawing,places",
     loadingElement: <div style={{ height: `100%` }} />,
-    containerElement: <div style={{ height: `90%` }} />,
+    containerElement: <div style={{ height: `85%` }} />,
     mapElement: <div id="map" style={{ height: `100%` }} />,
   }),
   lifecycle({
@@ -283,6 +283,8 @@ class MyFancyComponent extends React.PureComponent {
 
 
   componentDidMount() {
+    
+
     // get user location
     // update state (this.setState) with location and pass props to MyMapComponent
     this.getUserLocation()
@@ -404,8 +406,10 @@ class MyFancyComponent extends React.PureComponent {
     this.setState({ venues: newVenues })
   }
 
+
   toggleMap = () => {
     this.setState({ mapState: !this.state.mapState })
+    this.props.ChangeTheme(this.state.mapState)
   }
 
   sortVenues = (data) => {
@@ -433,6 +437,7 @@ class MyFancyComponent extends React.PureComponent {
             //state
             venues={this.state.venues}
             mapState={this.state.mapState}
+
             //functions
             toggleMap={this.toggleMap}
             sortVenues={this.sortVenues}

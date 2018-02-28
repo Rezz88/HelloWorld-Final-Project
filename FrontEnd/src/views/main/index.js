@@ -7,6 +7,8 @@ import payrez from './images/payrez.png'
 import wash from './images/wash.png'
 import marc from './images/marc.png'
 import { MainHeader, constants, mediaSizes, MainFooter, FootBar } from '../styles';
+import FlipClock from './Components/FlipClock'
+
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -58,7 +60,7 @@ const AboutProfile = styled.div`
 `
 
 const AboutBar = styled.div`
-  min-height: 40vh;
+  min-height: 30%;
   align-items: center;
   text-align: center;
   vertical-align: middle;
@@ -78,24 +80,34 @@ class Main extends Component {
     super();
     this.state = { 
       hoverBar: null,
-      about: false
+      about: false,
+      mapState: false
       };
   }
+
+  ChangeTheme = (state) => {
+    this.setState({mapState: state})
+    this.props.location.state.theme = state
+    console.log('theme',this.props.location.state.theme)
+  }
+
 
   toggleAbout = () => {
     this.setState({about: !this.state.about})
   }
 
   render() {
-    console.log(this.props)
+    console.log('props ',this.props)
     //props.location.state is the login information originated at login/index.js
     console.log('Main page ', this.props.location.state)
+
     //for now the state is undefined unless someone logs in
     if (this.props.location.state.loggedIn === true) {
       return (
         <Wrapper>
           <FixedWrapper>
             <NavBar>
+            <FlipClock inverse={!this.props.mapState} />
               <div className="div-flex">
               <MainHeader>WhatsLit</MainHeader>
               <div className="split">
@@ -107,7 +119,7 @@ class Main extends Component {
               </NavButtonWrapper>
             </NavBar>
           </FixedWrapper>
-          <MainMap />
+          <MainMap ChangeTheme={this.ChangeTheme}/>
             
               {this.state.about ? 
                 <AboutBar> 

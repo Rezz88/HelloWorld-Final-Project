@@ -75,6 +75,7 @@ class Login extends Component {
         this.setState({ [key]: value })
     }
 
+
     loggingIn = () => {
         const { username, password } = this.state
         fetch('/login', {
@@ -144,6 +145,7 @@ class Login extends Component {
                     <img src="https://i.imgur.com/fSG9Cdt.png" height="30" width="35"/>
                     </div>
                     </div>
+
                 </NavBar>
                 <LoginWrapper>{this.login()}</LoginWrapper>
             </Wrapper>

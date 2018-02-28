@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router';
+import FlipClock from '../main/Components/FlipClock'
 import {
   MainHeader,
   NavBar,
@@ -138,6 +139,7 @@ toggleEdit = () =>  {
   this.setState({editing: !this.state.editing})
 }
 
+
 renderUserInfo = () => {
   //Will be filled with user info from sign-up
   const { username, email, gender, age } = this.props.location.state
@@ -192,6 +194,7 @@ renderLogout = () => {
         <Wrapper>
           <FixedWrapper>
             <NavBar>
+            <FlipClock inverse={!this.props.mapState} />
               <div className="div-flex">
               <MainHeader>WhatsLit</MainHeader>
               <div className="split">
