@@ -88,9 +88,11 @@ class Main extends Component {
       };
   }
 
+  
+
   ChangeTheme = (state) => {
     this.setState({mapState: state})
-    this.props.location.state.theme = state
+    this.props.location.state.theme = !state
     console.log('theme',this.props.location.state.theme)
   }
 
