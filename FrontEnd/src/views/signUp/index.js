@@ -8,6 +8,7 @@ import {
     NavButton,
     NavButtonWrapper
      } from '../styles';
+// import FlipClock from './Components/FlipClock'
 
 
 // import { Link } from 'react-router-dom'; Not using link ATM
@@ -44,6 +45,7 @@ class SignUp extends Component {
             error: ''
         }
     }
+
 
     setInputValue = (key, value) => {
         this.setState({ [key]: value })

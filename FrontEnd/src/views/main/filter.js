@@ -1,41 +1,40 @@
 import React from "react";
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import FlipClock from './Components/FlipClock'
-
 
 
 const Wrapper = styled.div`
 display: flex;
 padding: .2rem;
-  justify-content: space-between;
-  `
+justify-content: space-between;
+`
 
+const themeStyles = css`
+${({ mapState }) => !mapState ?
+'background-color: #404040; color: white; cursor: pointer;  border-radius: 5px; height: 1.7rem; width: 6.5rem; transition: background-color 3s, color 2s; margin-top: 16px;' :
+'background-color: #f2f2f2; color: black; cursor: pointer;  border-radius: 5px; height: 1.7rem; width: 6.5rem; transition: background-color 2s;  color 3s; margin-top: 16px;'
+};
+`
+
+//avoid the copy pasting
 const Selectors = styled.select`
-  background-color: #404040;
-  color: white;
-  cursor: pointer;
-  border-radius: 5px;
-  height: 1.7rem;
-  width: 6.5rem;
-  `
+${themeStyles}
+`
 
-
+//also apply this styling to all buttons
 const ToggleButton = styled.button`
-  
-  ${({ mapState }) => {
-    if (!mapState) { return 'background-color: #404040; color: white; cursor: pointer;  border-radius: 5px; height: 1.7rem; width: 6.5rem; transition: background-color 3s, color 2s; margin-top: 16px;' };
-    return 'background-color: #f2f2f2; color: black; cursor: pointer;  border-radius: 5px; height: 1.7rem; width: 6.5rem; transition: background-color 2s;  color 3s; margin-top: 16px;';
-  }};
+${themeStyles}
 `;
 
 const FilterButton = styled.button`
   cursor: pointer;
+  font-variant: small-caps;
   background-color: #404040;
   color: white;
   border-radius: 5px;
   height: 1.7rem;
   width: 4rem;
-`
+`;
 
 class SortComponent extends React.PureComponent {
   constructor() {
@@ -80,23 +79,23 @@ class SortComponent extends React.PureComponent {
       <Wrapper>
         <div>
           <ToggleButton
-          mapState={this.props.mapState}
+            mapState={this.props.mapState}
             onClick={this.props.toggleMap}>Toggle Map</ToggleButton>
         </div>
-        <FlipClock inverse={!this.props.mapState} />
         <div>
-          <Selectors onChange={this.handleChange}>
+          <Selectors mapState={this.props.mapState} onChange={this.handleChange}>
             <option value="people"># of People</option>
             <option value="avgAge">Average Age</option>
             <option value="ratio">Male Ratio</option>
           </Selectors>
-          <Selectors onChange={this.handleValueChange}>
+          <Selectors mapState={this.props.mapState} onChange={this.handleValueChange}>
             <option value='high'>High</option>
             <option value='low'>Low</option>
           </Selectors>
-          <FilterButton
+          <ToggleButton
+          mapState={this.props.mapState}
             onClick={this.sendInfo}
-          >Filter</FilterButton>
+          >Filter</ToggleButton>
         </div>
       </Wrapper>
     )

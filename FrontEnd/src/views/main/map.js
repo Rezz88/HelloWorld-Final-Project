@@ -14,8 +14,9 @@ import {
   SearchBox
 } from "react-google-maps";
 // import { connect } from "tls";
-import markerImage from './images/heatDot.png';
-import markerHovered from './images/greenMarker.png';
+import heatDot from './images/heatDot.png';
+import notLit from './images/not-lit.png';
+import redFlame from './images/lit.png';
 import personImage from './images/user.png';
 import darkUser from './images/darkUser.png'
 import testLogo from './images/firecircle.png';
@@ -26,8 +27,9 @@ const PLACES_API_KEY = 'AIzaSyBA0wFPUwIo03AHcEf3pFarehPoQLzysCo';
 
 
 const StyledInfoWindow = styled.div`
-  background-color: whitesmoke;
   max-width: 200px;
+  font-family: arial;
+  font-weight: bold;
 `;
 
 const Icon = styled.img`
@@ -38,6 +40,7 @@ const Icon = styled.img`
 const PeopleMetric = styled.div`
   padding: .5rem;
   padding-left: 0;
+  font-variant: small-caps
 `;
 
 const BarCapacity = styled.div`
@@ -147,7 +150,7 @@ const MyMapComponent = compose(
   withProps({
     googleMapURL: "https://maps.googleapis.com/maps/api/js?key=" + PLACES_API_KEY + "&v=3.exp&libraries=geometry,drawing,places",
     loadingElement: <div style={{ height: `100%` }} />,
-    containerElement: <div style={{ height: `490px` }} />,
+    containerElement: <div style={{ height: `91%` }} />,
     mapElement: <div id="map" style={{ height: `100%` }} />,
   }),
   lifecycle({
@@ -181,7 +184,6 @@ const MyMapComponent = compose(
         props.setZoom(15);
       }
     },
-
   }),
   withScriptjs,
   withGoogleMap
@@ -193,10 +195,11 @@ const MyMapComponent = compose(
     // center={ {lat: 45.49914093562442, lng: -73.57023796767328}}
     // zoom={14}
     onZoomChanged={props.onMapZoom}
-    options={{ streetViewControl: false, mapTypeControl: false, 
-      
+    options={{
+      streetViewControl: false, mapTypeControl: false,
+
       styles: props.mapState ? lightStyles : darkMapStyles
-    
+
     }}
     onClick={props.onMapClick}
   >
@@ -204,14 +207,14 @@ const MyMapComponent = compose(
       position={props.marker}
       onClick={() => { props.showBars(500); }}
       icon={
-        props.mapState ?  darkUser : personImage}
+        props.mapState ? darkUser : personImage}
     // Animation={'DROP'}
     >
     </Marker>}
     {props.infoWindow && <InfoWindow
       position={{
-        lat: props.venueData.geometry.location.lat(),
-        lng: props.venueData.geometry.location.lng()
+        lat: props.venueData.geometry.location.lat,
+        lng: props.venueData.geometry.location.lng
       }}
       onCloseClick={props.closeInfoWindow}>
       <StyledInfoWindow>
@@ -223,17 +226,17 @@ const MyMapComponent = compose(
           props.venueData.people !== 0 ?
             <PeopleMetric>
               <BarWrapper>
-                <BarCapacity capacityRatio={props.venueData.people &&  (props.venueData.people / 80) *100} />
+                <BarCapacity capacityRatio={props.venueData.people && (props.venueData.people / 80) * 100} />
               </BarWrapper>
-              <div>People: {props.venueData.people || ''}</div>
+              <div> People: {props.venueData.people || ''}</div>
               <BarWrapper>
                 <BarAvgAge averageAge={props.venueData.averageAge} />
               </BarWrapper>
-              <div>AgeAvg: {props.venueData.averageAge || ''}</div>
+              <div> AgeAvg: {props.venueData.averageAge || ''}</div>
               <GenderWrapper>
                 <Ratio genderRatio={props.venueData.ratio.femalePercent} />
               </GenderWrapper>
-              <div>Gender Ratio: {props.venueData.ratio.malePercent || ''}</div>
+              <div> Ratio: {props.venueData.ratio.malePercent || ''}</div>
             </PeopleMetric>
             :
             <div>*No whatslit users</div>
@@ -245,7 +248,7 @@ const MyMapComponent = compose(
         <OverlayView
           key={idx}
           mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
-          position={{ lat: venue.geometry.location.lat(), lng: venue.geometry.location.lng() }}
+          position={{ lat: venue.geometry.location.lat, lng: venue.geometry.location.lng }}
         >
           <div
             // onMouseOver={() => console.log(venue.name)}
@@ -256,7 +259,10 @@ const MyMapComponent = compose(
             onMouseLeave={() => props.closeInfoWindow()}
 
             className="bar-marker"
-          ><img src={(props.zoom <= 14 || venue.hover) ? markerImage : markerHovered} />
+          >
+            <img src={(props.zoom <= 14 ? heatDot : (venue.hover ? heatDot : (!venue.exists ? notLit : redFlame)))} />
+
+            {/* <img src={this.setPhoto()} /> */}
           </div>
         </OverlayView>);
     }
@@ -283,6 +289,7 @@ class MyFancyComponent extends React.PureComponent {
 
 
   componentDidMount() {
+
     // get user location
     // update state (this.setState) with location and pass props to MyMapComponent
     this.getUserLocation()
@@ -294,7 +301,7 @@ class MyFancyComponent extends React.PureComponent {
     return new Promise((resolve, reject) => {
       navigator.geolocation.getCurrentPosition((e) => {
         let loc = { lat: e.coords.latitude, lng: e.coords.longitude };
-        this.setState({userLoc: loc})
+        this.setState({ userLoc: loc })
         resolve(loc);
       });
     });
@@ -308,7 +315,7 @@ class MyFancyComponent extends React.PureComponent {
       location = await this.getUserLocation();
     }
 
-    if(map){
+    if (map) {
       const google = window.google;
       var service = new google.maps.places.PlacesService(map.context.__SECRET_MAP_DO_NOT_USE_OR_YOU_WILL_BE_FIRED);
       service.nearbySearch({
@@ -321,14 +328,7 @@ class MyFancyComponent extends React.PureComponent {
           this.setVenues(results);
         }
       });
-      // fetch(`/bar-stats/${this.state.venues.place_id}`, {
-      //   method: 'Get',
-      // }) .then(( response ) => response.json())
-      // .then(data => {
-      //   this.setState({ourVenues: {...data}});
-      // })
     }
-   
   }
 
   toggleInfoWindow = (venue) => {
@@ -363,13 +363,13 @@ class MyFancyComponent extends React.PureComponent {
   };
 
   barClick = () => {
-    this.setState({ clickedBar : true })
+    this.setState({ clickedBar: true })
     this.setState({ marker: null })
-    
+
   }
-  
+
   mapClick = () => {
-    this.setState({clickedBar: false})
+    this.setState({ clickedBar: false })
   }
 
   setCenter = (lat, lng) => {
@@ -385,9 +385,17 @@ class MyFancyComponent extends React.PureComponent {
   }
 
   setVenues = (venues) => {
-    // console.log('in venues: ', venues)
+    console.log('in venues: ', venues)
     this.setState({ venues });
-    console.log(this.state.venues)
+
+
+    fetch('/exists', {
+      method: 'Post',
+      body: JSON.stringify(this.state.venues)
+    }).then((response) => response.json())
+      .then(data => {
+        this.setState({ venues: data });
+      })
   }
 
   handleMouseOver = (event, venue, idx) => {
@@ -404,28 +412,31 @@ class MyFancyComponent extends React.PureComponent {
     this.setState({ venues: newVenues })
   }
 
+
   toggleMap = () => {
     this.setState({ mapState: !this.state.mapState })
+    this.props.ChangeTheme(this.state.mapState)
   }
 
   sortVenues = (data) => {
-  
+
     var res = []
 
     for (var i = 0; i < data.length; i++) {
-      
+
       this.state.venues.forEach((item, pos) => {
         if (item.place_id === data[i]) {
           res.push(item);
-        }  
+        }
       });
     }
 
-    this.setState({venues: res})
+    this.setState({ venues: res })
 
   }
 
   render() {
+
     return (
       <Container>
         <MapContent>
@@ -433,6 +444,7 @@ class MyFancyComponent extends React.PureComponent {
             //state
             venues={this.state.venues}
             mapState={this.state.mapState}
+
             //functions
             toggleMap={this.toggleMap}
             sortVenues={this.sortVenues}
@@ -465,6 +477,7 @@ class MyFancyComponent extends React.PureComponent {
           venues={this.state.venues}
           infoWindow={this.state.infoWindow}
           userLoc={this.state.userLoc}
+          mapState={this.state.mapState}
           //functions
           handleHover={this.handleMouseOver}
           handleHoverOut={this.handleMouseOut}
