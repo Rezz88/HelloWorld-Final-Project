@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router';
-<<<<<<< HEAD
-import FlipClock from '../main/Components/FlipClock';
-import styled from 'styled-components';
-=======
 import FlipClock from '../main/Components/FlipClock'
 import styled, {css} from 'styled-components';
 
->>>>>>> final wash
 import {
   constants,
   MainHeader,
@@ -42,7 +37,6 @@ const NavBarProfile = styled.div`
   align-items: center;
   justify-content: space-between;
   box-shadow: ${constants.boxShadow};
-  margin-bottom: .5rem;
   padding: .5rem;
 `;
 const MainHeaderProfile = styled.h1`
