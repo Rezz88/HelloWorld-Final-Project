@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router';
+<<<<<<< HEAD
 import FlipClock from '../main/Components/FlipClock';
 import styled from 'styled-components';
+=======
+import FlipClock from '../main/Components/FlipClock'
+import styled, {css} from 'styled-components';
+
+>>>>>>> final wash
 import {
+  constants,
   MainHeader,
   NavBar,
   Wrapper,
@@ -12,6 +19,36 @@ import {
 } from '../styles';
 // import { Link } from 'react-router-dom'; Not using link ATM
 import '../../App.css';
+
+const textstyles = css`
+${({ mapState }) => !mapState ?
+'color: white; transition: background-color 3s, color 2s;' :
+'color: black; transition: background-color 2s;  color 3s;'
+};
+`
+const LastCall = styled.p`
+${textstyles}
+`
+
+const NavThemeStyles = css`
+${({ mapState }) => !mapState ?
+'background-color: rgb(89, 89, 89); transition: background-color 3s, color 2s;' :
+'background-color: whitesmoke; transition: background-color 2s;  color 3s;'
+};
+`
+const NavBarProfile = styled.div`
+  ${NavThemeStyles}
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: ${constants.boxShadow};
+  margin-bottom: .5rem;
+  padding: .5rem;
+`;
+const MainHeaderProfile = styled.h1`
+${textstyles}
+  margin: 0;
+`;
 
 const ProfileWrapper = styled.div`
      height: 100vh;
@@ -59,6 +96,10 @@ class Profile extends Component {
     ]
     this.setState({ barHistory: data })
   }
+
+
+
+
   renderBarHistory = () => {
     const { barHistory } = this.state;
     if (barHistory.length) {
@@ -217,22 +258,22 @@ renderLogout = () => {
       return (
         <Wrapper>
           <FixedWrapper>
-            <NavBar>
+            <NavBarProfile mapState={this.props.location.state.theme}>
               <div className="div-flex">
-              <MainHeader>WhatsLit</MainHeader>
+              <MainHeaderProfile mapState={this.props.location.state.theme}>WhatsLit</MainHeaderProfile>
               <div className="split">
               <img src="https://i.imgur.com/fSG9Cdt.png" height="30" width="35" />
               </div>
               </div>
-              <div className="ttlc">
+              <LastCall mapState={this.props.location.state.theme} className="ttlc">
               L a s t - c a l l
-              <FlipClock inverse={this.props.location.state.theme} />
-              </div>  
+              <FlipClock  inverse={this.props.location.state.theme} />
+              </LastCall>  
               <NavButtonWrapper>
                 {this.renderMainButton()}
                 {this.renderLogout()}
               </NavButtonWrapper>
-            </NavBar>
+            </NavBarProfile>
             <ProfileWrapper>
             <div>
               {this.state.editing ? this.renderUserInfoEdit() : this.renderUserInfo()}
