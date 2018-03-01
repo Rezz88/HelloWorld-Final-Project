@@ -60,7 +60,6 @@ export const FixedWrapper = styled.div`
 
 export const NavButton = styled.div`
   cursor: pointer;
-  margin-right: 1rem;
   @media (min-width: ${mediaSizes.sm}px) {
     background-color: lightgrey;
     color: black;

@@ -49,6 +49,7 @@ body, html {
   background-color: grey;
   color: black;
   width: 40%;
+  cursor: pointer;
 }
 
 .button-size:hover {
@@ -99,4 +100,8 @@ body, html {
   padding-top: 0;
   text-align: right;
   font-size: 12px;
+}
+
+.cursor {
+  cursor: pointer;
 }

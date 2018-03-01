@@ -63,7 +63,11 @@ const NavBar = styled.div`
 `;
 
 const NavButton = styled.div`
-${themeStyles};
+    background-color: lightgrey;
+    color: black;
+    font-variant: small-caps;
+    box-shadow: 0px 1px 5px grey;
+    cursor: pointer;
 `;
 
 const NavButtonWrapper = styled.div`
@@ -192,7 +196,7 @@ class Main extends Component {
             : null}
 
           <NavBar>
-            <MainHeader onClick={this.toggleAbout}>about us</MainHeader>
+            <MainHeader className="cursor" onClick={this.toggleAbout}>about us</MainHeader>
           </NavBar>
         </Wrapper>
       )

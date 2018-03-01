@@ -208,7 +208,7 @@ renderUserInfo = () => {
         <div>{"Gender: " + gender}</div>
         <div>{"Age: " + age}</div>
         <div>{"E-mail: " + email}</div>
-        <button onClick={this.toggleEdit}>Edit</button>
+        <button className="cursor" onClick={this.toggleEdit}>Edit</button>
       </div>
     </div>
   )
