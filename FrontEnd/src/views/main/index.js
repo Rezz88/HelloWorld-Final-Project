@@ -85,7 +85,8 @@ const AboutBar = styled.div`
   text-align: center;
   font-size: 15px;
   font-weight: bold;
-  padding-top: 4%;
+  padding-top: 1%;
+  padding-bottom: 1%;
 `;
 const ProfileWrapper = styled.div`
   align-items: center;
