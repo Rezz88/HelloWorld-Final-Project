@@ -119,8 +119,8 @@ app.post('/exists', async (req, res) => {
     res.send(JSON.stringify(blue));
 })
 
-app.get('/populate', (req,res) => {
-    let red = exists.pushNewDb(JSON.parse(req.body.toString()))
+app.get('/populate', async (req,res) => {
+    let red = await mockdata.pushNewDb()
 })
 
 app.listen(4000, console.log("We're a go!"))

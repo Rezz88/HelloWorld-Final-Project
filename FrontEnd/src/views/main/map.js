@@ -76,10 +76,10 @@ const BarCapacity = styled.div`
 // width: ${({averageAge}) => {
 const BarAvgAge = styled.div`
   width: ${({ averageAge }) => {
-    if (averageAge < 20) {
+    if (averageAge <= 20) {
       return '15%'
     }
-    if (averageAge > 21 && averageAge <= 28) {
+    if (averageAge >= 21 && averageAge <= 28) {
       return '30%'
     }
     if (averageAge > 28 && averageAge < 35) {
@@ -234,7 +234,7 @@ const MyMapComponent = compose(
           props.venueData.people !== 0 ?
             <PeopleMetric>
               <BarWrapper>
-                <BarCapacity capacityRatio={props.venueData.people &&  (props.venueData.people / 80) *100} />
+                <BarCapacity capacityRatio={props.venueData.people &&  (props.venueData.people / 150) *100} />
               </BarWrapper>
               <div> People: {props.venueData.people || ''}</div>
               <BarWrapper>
@@ -244,7 +244,7 @@ const MyMapComponent = compose(
               <GenderWrapper>
                 <Ratio genderRatio={props.venueData.ratio.femalePercent} />
               </GenderWrapper>
-              <div> Ratio: {props.venueData.ratio.malePercent || ''}</div>
+              <div> Ratio: {props.venueData.ratio.femalePercent || ''}</div>
             </PeopleMetric>
             :
             <div>*No whatslit users</div>
