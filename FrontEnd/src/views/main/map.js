@@ -1,7 +1,7 @@
 import BarListComponent from './barList'
 import SortComponent from './filter'
 import React from "react";
-import styled from 'styled-components';
+import styled, {css} from 'styled-components';
 import { constants, mediaSizes } from '../styles.js'
 import { compose, withProps, withHandlers, withStateHandlers, lifecycle } from "recompose"
 import {
@@ -15,8 +15,9 @@ import {
 } from "react-google-maps";
 // import { connect } from "tls";
 import heatDot from './images/heatDot.png';
-import notLit from './images/not-lit.png';
 import redFlame from './images/lit.png';
+import notLit from './images/not-lit.png'
+import markerHovered from './images/greenMarker.png';
 import personImage from './images/user.png';
 import darkUser from './images/darkUser.png'
 import testLogo from './images/firecircle.png';
@@ -25,6 +26,13 @@ import lightStyles from "./mapStyle/light.js"
 
 const PLACES_API_KEY = 'AIzaSyBA0wFPUwIo03AHcEf3pFarehPoQLzysCo';
 
+
+const ThemeStyles = css`
+${({ mapState }) => !mapState ?
+'background-color: rgb(30, 30, 30); transition: background-color 3s;' :
+'background-color: whitesmoke; transition: background-color 3s;'
+};
+`
 
 const StyledInfoWindow = styled.div`
   max-width: 200px;
@@ -40,7 +48,6 @@ const Icon = styled.img`
 const PeopleMetric = styled.div`
   padding: .5rem;
   padding-left: 0;
-  font-variant: small-caps
 `;
 
 const BarCapacity = styled.div`
@@ -130,6 +137,7 @@ const TitleWrapper = styled.div`
 `;
 
 const Container = styled.div`
+  ${ThemeStyles};
   display: flex;
   padding-left: 2%;
   flex: 1;
@@ -151,7 +159,7 @@ const MyMapComponent = compose(
   withProps({
     googleMapURL: "https://maps.googleapis.com/maps/api/js?key=" + PLACES_API_KEY + "&v=3.exp&libraries=geometry,drawing,places",
     loadingElement: <div style={{ height: `100%` }} />,
-    containerElement: <div style={{ height: `91%` }} />,
+    containerElement: <div style={{ height: `85%` }} />,
     mapElement: <div id="map" style={{ height: `100%` }} />,
   }),
   lifecycle({
@@ -185,6 +193,7 @@ const MyMapComponent = compose(
         props.setZoom(15);
       }
     },
+
   }),
   withScriptjs,
   withGoogleMap
@@ -198,9 +207,7 @@ const MyMapComponent = compose(
     onZoomChanged={props.onMapZoom}
     options={{
       streetViewControl: false, mapTypeControl: false,
-
-      styles: props.mapState ? lightStyles : darkMapStyles
-
+      styles: props.mapState ? lightStyles : darkMapStyles 
     }}
     onClick={props.onMapClick}
   >
@@ -209,7 +216,7 @@ const MyMapComponent = compose(
       onClick={() => { props.showBars(500); }}
       icon={
         props.mapState ? darkUser : personImage}
-    // Animation={'DROP'}
+    
     >
     </Marker>}
     {props.infoWindow && <InfoWindow
@@ -227,7 +234,7 @@ const MyMapComponent = compose(
           props.venueData.people !== 0 ?
             <PeopleMetric>
               <BarWrapper>
-                <BarCapacity capacityRatio={props.venueData.people && (props.venueData.people / 80) * 100} />
+                <BarCapacity capacityRatio={props.venueData.people &&  (props.venueData.people / 80) *100} />
               </BarWrapper>
               <div> People: {props.venueData.people || ''}</div>
               <BarWrapper>
@@ -261,9 +268,8 @@ const MyMapComponent = compose(
 
             className="bar-marker"
           >
-            <img src={(props.zoom <= 14 ? heatDot : (venue.hover ? heatDot : (!venue.exists ? notLit : redFlame)))} />
-
-            {/* <img src={this.setPhoto()} /> */}
+          {/* <img src={(props.zoom <= 14 || venue.hover) ? markerImage : markerHovered} /> */}
+          <img src={(props.zoom <= 14 ? heatDot : (venue.hover ? heatDot : (!venue.exists ? notLit : redFlame)))} />
           </div>
         </OverlayView>);
     }
@@ -302,7 +308,7 @@ class MyFancyComponent extends React.PureComponent {
     return new Promise((resolve, reject) => {
       navigator.geolocation.getCurrentPosition((e) => {
         let loc = { lat: e.coords.latitude, lng: e.coords.longitude };
-        this.setState({ userLoc: loc })
+        this.setState({userLoc: loc})
         resolve(loc);
       });
     });
@@ -316,7 +322,7 @@ class MyFancyComponent extends React.PureComponent {
       location = await this.getUserLocation();
     }
 
-    if (map) {
+    if(map){
       const google = window.google;
       var service = new google.maps.places.PlacesService(map.context.__SECRET_MAP_DO_NOT_USE_OR_YOU_WILL_BE_FIRED);
       service.nearbySearch({
@@ -364,13 +370,13 @@ class MyFancyComponent extends React.PureComponent {
   };
 
   barClick = () => {
-    this.setState({ clickedBar: true })
+    this.setState({ clickedBar : true })
     this.setState({ marker: null })
-
+    
   }
-
+  
   mapClick = () => {
-    this.setState({ clickedBar: false })
+    this.setState({clickedBar: false})
   }
 
   setCenter = (lat, lng) => {
@@ -388,15 +394,16 @@ class MyFancyComponent extends React.PureComponent {
   setVenues = (venues) => {
     console.log('in venues: ', venues)
     this.setState({ venues });
-
-
+    
+    
     fetch('/exists', {
       method: 'Post',
       body: JSON.stringify(this.state.venues)
-    }).then((response) => response.json())
-      .then(data => {
-        this.setState({ venues: data });
-      })
+    }) .then(( response ) => response.json())
+    .then(data => { this.setState({venues: data} );
+    })
+
+    console.log(this.state.venues)
   }
 
   handleMouseOver = (event, venue, idx) => {
@@ -420,26 +427,26 @@ class MyFancyComponent extends React.PureComponent {
   }
 
   sortVenues = (data) => {
-
+  
     var res = []
 
     for (var i = 0; i < data.length; i++) {
-
+      
       this.state.venues.forEach((item, pos) => {
         if (item.place_id === data[i]) {
           res.push(item);
-        }
+        }  
       });
     }
 
-    this.setState({ venues: res })
+    this.setState({venues: res})
 
   }
 
   render() {
-
+    
     return (
-      <Container>
+      <Container mapState={this.state.mapState}>
         <MapContent>
           <SortComponent
             //state

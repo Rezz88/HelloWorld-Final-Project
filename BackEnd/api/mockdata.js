@@ -8,7 +8,11 @@ const dbMockData = './database/mockdata.json';
 const dbImagesPath = './database/images';
 
 pushNewDb = ()=> {
+<<<<<<< HEAD
     var dbNewUsers = await fs.readFile(dbMockData, { String });
+=======
+    var dbNewUsers = fs.readFile(dbMockData, { String });
+>>>>>>> efcb14cf21dc5f7c5dd7ec4fd266ec1ad2b2d400
     dbNewUsers = JSON.parse(dbNewUsers.toString());
     
 
