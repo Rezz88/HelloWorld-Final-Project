@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router';
-<<<<<<< HEAD
-import FlipClock from '../main/Components/FlipClock';
-import styled from 'styled-components';
-=======
 import FlipClock from '../main/Components/FlipClock'
 import styled, {css} from 'styled-components';
 
->>>>>>> final wash
 import {
   constants,
   MainHeader,
@@ -254,7 +249,7 @@ renderLogout = () => {
     //Props to be passed down from app.js
     console.log('Profile page ', this.props.location.state)
     //For now the state is undefined unless someone logs in
-    if (this.props.location.state.loggedIn === true) {
+    if (this.props.location.state && this.props.location.state.loggedIn === true) {
       return (
         <Wrapper>
           <FixedWrapper>
